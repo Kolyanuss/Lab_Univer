@@ -9,7 +9,6 @@ from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import *
 
-
 df = pd.read_csv("StudentsPerformance.csv")
 
 range_df = list(df.select_dtypes(include=[np.number]).columns.values)
@@ -48,8 +47,8 @@ min_samples_leaf = range(1, 20, 1)
 max_features = ['auto', 'sqrt', 'log2']
 min_samples_split = range(2, 20, 2)
 max_depth = range(2, 10, 1)
-dt = DecisionTreeClassifier(max_depth=3, max_features='auto', min_samples_split='int', random_state=100,
-                            min_samples_leaf=min_samples_leaf)
+dt = DecisionTreeClassifier(max_depth=3, max_features='auto', min_samples_split='int',
+                            random_state=100, min_samples_leaf=min_samples_leaf)
 param_grid = dict(max_depth=max_depth, min_samples_leaf=min_samples_leaf, min_samples_split=min_samples_split,
                   max_features=max_features)
 kfold = StratifiedKFold(n_splits=3, shuffle=True, random_state=100)
