@@ -208,7 +208,8 @@ class App extends React.Component {
             employers_list: [
                 ["Stas", "Shevchenko", 5600, true],
                 ["Nikolay", "Maksymovych", 10500, true],
-                ["Volodymyr", "Zelenskiy", 200500, true]
+                ["Andriy", "Zelenskiy", 200500, true],
+                ["Volodymyr", "Zelenskiy", 0, true]
             ],
             text_list: [
                 ["Hello", true],
@@ -217,7 +218,12 @@ class App extends React.Component {
             ],
             note_list: [],
             state_sort: false,
-            sorted_employers_list: []
+            sorted_employers_list: [],
+            select_state: "Укр",
+            day_weeks: [
+                ["Понеділок", "Вівторок", "Середа", "Четвер", "Пятниця", "Субота", "Неділя"],
+                ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+            ]
         };
         this.state.sorted_employers_list = this.state.employers_list;
     }
@@ -249,25 +255,33 @@ class App extends React.Component {
 
     sortTableByNameOrSurname(byName = true) {
         var by = byName ? 0 : 1;
+        console.log("sort by ", by + 1);
+        this.state.state_sort = !this.state.state_sort;
+        var my_state_sort = this.state.state_sort;
         this.state.sorted_employers_list.sort(function (a, b) {
             if (a[by] < b[by]) {
-                return this.state.state_sort? -1 : 1;
+                return my_state_sort ? -1 : 1;
             }
             if (a[by] > b[by]) {
-                return this.state.state_sort? 1 : -1;
+                return my_state_sort ? 1 : -1;
             }
             return 0;
         });
-        this.state.state_sort = !this.state.state_sort;
         this.setState({state_sort: this.state.state_sort})
     }
 
     sortTableByInt() {
-        this.state.sorted_employers_list.sort(function (a, b) {
-            return this.state.state_sort? a[2] - b[2]: b[2] - a[2];
-        });
+        console.log("sort by 3");
         this.state.state_sort = !this.state.state_sort;
+        var my_state_sort = this.state.state_sort;
+        this.state.sorted_employers_list.sort(function (a, b) {
+            return my_state_sort ? a[2] - b[2] : b[2] - a[2];
+        });
         this.setState({state_sort: this.state.state_sort}) // all broken (через state_sort)
+    }
+
+    handleSelectChange(event) {
+        this.setState({select_state: event.target.value});
     }
 
 
@@ -326,6 +340,12 @@ class App extends React.Component {
             </tr>;
         });
 
+        const option_day_weks = this.state.day_weeks[this.state.select_state == "Укр" ? 0 : 1].map((item, index) => {
+            return <option>
+                {item}
+            </option>;
+        });
+
 
         return (
             <div>
@@ -373,12 +393,24 @@ class App extends React.Component {
                 9
                 <table>
                     <tr>
-                        <td onClick={this.sortTableByNameOrSurname.bind(this)}> Ім'я</td>
-                        <td onClick={this.sortTableByNameOrSurname.bind(this, 1)}> Прізвище</td>
+                        <td onClick={this.sortTableByNameOrSurname.bind(this, true)}> Ім'я</td>
+                        <td onClick={this.sortTableByNameOrSurname.bind(this, false)}> Прізвище</td>
                         <td onClick={this.sortTableByInt.bind(this)}> Зарплата</td>
                     </tr>
                     {table_employes}
                 </table>
+                <hr/>
+
+                10
+                <br/>
+                <select value={this.state.select_state} onChange={this.handleSelectChange.bind(this)}>
+                    <option>Укр</option>
+                    <option>Eng</option>
+                </select>
+
+                <select>
+                    {option_day_weks}
+                </select>
                 <hr/>
             </div>
         );
