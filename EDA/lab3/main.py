@@ -42,7 +42,7 @@ print(accuracy_score(y_test, y_pred_en) * 100)
 
 # ------------------------------------------------------------
 
-label_encoded_Y = LabelEncoder().fit_transform(Y)
+label_encoded_Y = LabelEncoder().fit_transform(y_train)
 min_samples_leaf = range(1, 20, 1)
 max_features = ['auto', 'sqrt', 'log2']
 min_samples_split = range(2, 20, 2)
@@ -53,7 +53,7 @@ param_grid = dict(max_depth=max_depth, min_samples_leaf=min_samples_leaf, min_sa
                   max_features=max_features)
 kfold = StratifiedKFold(n_splits=3, shuffle=True, random_state=100)
 grid_search = GridSearchCV(dt, param_grid, scoring="neg_log_loss", n_jobs=-1, cv=kfold, verbose=1)
-grid_result = grid_search.fit(X, label_encoded_Y)
+grid_result = grid_search.fit(X_train, label_encoded_Y)
 # summarize results
 print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 means = grid_result.cv_results_['mean_test_score']

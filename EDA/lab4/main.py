@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV, train_test_split, StratifiedKFold
 
@@ -12,11 +13,18 @@ y = df.values[:, 0]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
 
-clf = SVC(kernel='linear', C=1000)
-clf1 = clf.fit(X_train, y_train)
 
-y_pred = clf1.predict(X_test)
-print(accuracy_score(y_test, y_pred) * 100)
+def myPredict(kernel='linear', c=1, gamma='scale'):
+    clf = SVC(kernel=kernel, C=c, gamma=gamma)
+    clf1 = clf.fit(X_train, y_train)
+
+    y_pred = clf1.predict(X_test)
+    print("Accuracy: ", accuracy_score(y_test, y_pred) * 100)
+
+    print(confusion_matrix(y_test, y_pred))
+
+
+# myPredict()
 
 
 # plt.scatter(X[:, 0], X[:, 1], c=y, s=30, cmap=plt.cm.Paired)
@@ -83,26 +91,28 @@ def plotSVC(title):
 #     plotSVC('kernel = poly, degree(' + str(degree) + ')')
 
 
-def svc_param_selection(X, y):
+def svc_param_selection():
     kernels = ['linear', 'rbf', 'poly']
     Cs = [0.001, 0.01, 0.1, 1, 10]
     gammas = [0.001, 0.01, 0.1, 1]
     param_grid = {'kernel': kernels, 'C': Cs, 'gamma': gammas}
-    nfolds = StratifiedKFold(n_splits=3, shuffle=True, random_state=100)
-    grid_search = GridSearchCV(SVC(), param_grid, cv=nfolds)
-    # scoring="neg_log_loss",
-    grid_result = grid_search.fit(X, y)
+    param_grid2 = [{'kernel': ['rbf'],
+                    'C': [0.001, 0.01, 0.1, 1, 10, 100],
+                    'gamma': [0.001, 0.01, 0.1, 1, 10, 100]},
+                   {'kernel': ['linear'],
+                    'C': [0.001, 0.01, 0.1, 1, 10, 100]}]
+
+    kfold = StratifiedKFold(n_splits=3, shuffle=True, random_state=100)
+    grid_search = GridSearchCV(SVC(), param_grid2, scoring="accuracy", cv=kfold, verbose=1)
+    grid_result = grid_search.fit(X_train, y_train)
     svc = grid_result.best_params_
     # summarize results
     print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
-    # means = grid_result.cv_results_['mean_test_score']
-    # stds = grid_result.cv_results_['std_test_score']
-    # params = grid_result.cv_results_['params']
-    # for mean, stdev, param in zip(means, stds, params):
-    #     print("%f (%f) with: %r" % (mean, stdev, param))
 
     return svc
 
 
-svc_param_selection(X_train, y_train)
-# plotSVC(str(svc_param_selection(X_train, y_train)))
+rez = svc_param_selection()
+myPredict(rez["kernel"], rez["C"]) # to do: add gamma
+
+# plotSVC(str(rez))

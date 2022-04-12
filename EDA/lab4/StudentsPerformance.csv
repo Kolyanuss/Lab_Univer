@@ -58,7 +58,7 @@
 "female","group E","associate's degree","standard","completed","82","85","86"
 "male","group D","associate's degree","standard","none","52","55","49"
 "male","group D","some college","standard","completed","58","59","58"
-"female","group C","some high school","free/reduced","none","0","17","10"
+"female","group C","some high school","free/reduced","none","1","17","10"
 "male","group E","bachelor's degree","free/reduced","completed","79","74","72"
 "male","group A","some high school","free/reduced","none","39","39","34"
 "male","group A","associate's degree","free/reduced","none","62","61","55"
