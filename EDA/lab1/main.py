@@ -61,10 +61,6 @@ def fix_anomalies():
         lower_limit = Q1 - (1.5 * IQR)
         upper_limit = Q3 + (1.5 * IQR)
         df2[i] = trim(df2[i], (lower_limit, upper_limit))
-        # print("lower_limit")
-        # print(lower_limit)
-        # print("upper_limit")
-        # print(upper_limit)
 
     df2.boxplot(range_df)
     plt.show()
@@ -107,9 +103,6 @@ def ending():
         print(i, end='\t\t')
         print(df2[i].var(), end='\t\t')
         print(df2[i].sum())
-
-    # for i in range_df:
-    #     df2.groupby
 
 
 HeatMap(df2)

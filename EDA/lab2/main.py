@@ -15,17 +15,6 @@ df2 = pd.read_csv("StudentsPerformance.csv")
 range_df = list(df2.select_dtypes(include=[np.number]).columns.values)
 
 
-def zd0():
-    global df2
-    print("-------------------zd0-------------------")
-    for i in df2.columns:
-        print(df2[i].value_counts())
-
-    print("Sorted:")
-    print(df2[df2.columns[0]].value_counts().sort_values())
-    print("-----------------------------------------")
-
-
 def zd1():
     global df2
 
