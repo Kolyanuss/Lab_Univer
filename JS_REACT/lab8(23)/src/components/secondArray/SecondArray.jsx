@@ -40,7 +40,7 @@ const SecondArray = ({ arrayList, deleteItem, ...props }) => {
           className="input__item"
           type={"text"}
           name={"name"}
-          placeholder={"Введіть назву"}
+          placeholder={"Назва"}
           onChange={(event) => {
             props.setSecondArrayName(event.target.value);
           }}
@@ -49,7 +49,7 @@ const SecondArray = ({ arrayList, deleteItem, ...props }) => {
           className="input__item"
           type={"text"}
           name={"price"}
-          placeholder={"Введіть ціну"}
+          placeholder={"Ціна"}
           onChange={(event) => {
             props.setSecondArrayPrice(event.target.value);
           }}
@@ -58,13 +58,13 @@ const SecondArray = ({ arrayList, deleteItem, ...props }) => {
           className="input__item"
           type={"text"}
           name={"count"}
-          placeholder={"Введіть кількість"}
+          placeholder={"Кількість"}
           onChange={(event) => {
             props.setSecondArrayCount(event.target.value);
           }}
         ></input>
 
-        <button> Додати </button>
+        <button> ADD </button>
       </form>
 
       <div className="item">

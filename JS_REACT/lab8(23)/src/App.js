@@ -9,22 +9,22 @@ const App = (props) => {
   const [task2, setTask2] = useState([
     {
       id: 1,
-      name: "Антон",
-      secondName: "Хоміцький",
+      name: "Микола",
+      secondName: "Максимович",
       salary: "20000",
       gender: "Чоловіча",
     },
     {
       id: 2,
-      name: "Роман",
-      secondName: "Попюк",
+      name: "Михайло",
+      secondName: "Гандабура",
       salary: "15000",
       gender: "Чоловіча",
     },
     {
       id: 3,
-      name: "Сергій",
-      secondName: "Вакуров",
+      name: "Володимир",
+      secondName: "Зеленський",
       salary: "10000",
       gender: "Чоловіча",
     },
@@ -33,21 +33,21 @@ const App = (props) => {
   const [secondArray, setSecondArray] = useState([
     {
       id: 1,
-      name: "Молоко",
+      name: "Ковбаса",
       price: "200",
-      count: "60",
+      count: "50",
     },
     {
       id: 2,
-      name: "Сметана",
-      price: "60",
-      count: "90",
+      name: "Йогурт",
+      price: "100",
+      count: "20",
     },
     {
       id: 3,
-      name: "Сік",
+      name: "Печиво",
       price: "48",
-      count: "80",
+      count: "100",
     },
   ]);
 
