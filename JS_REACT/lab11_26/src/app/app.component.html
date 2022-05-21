@@ -1,22 +1,23 @@
 <div class="container center">
-  Помножити на 3
+  + 3
   <div *ngFor="let item of numbers">
-    <span>{{ item }} : {{ item * 3 }}</span>
+    <span>{{ item }} - {{ item + 3 }}</span>
   </div>
   <br />
 
-  Призведення до квадрату
+  до квадрату
   <div *ngFor="let item of numbers">
-    <span>{{ item }} : {{ item * item }} </span>
+    <span>{{ item }} - {{ item * item }} </span>
   </div>
   <br />
 
-  Вивід в зворотному порядку
+  reverse
 
   <ul *ngFor="let item of numbers2">
     <li>{{ item }}</li>
   </ul>
   <button (click)="reverseArray()">reverse</button>
+  <br />
   <br />
 
   <div>
@@ -37,7 +38,7 @@
     <ul *ngFor="let item of names2">
       <li>{{ item }}</li>
     </ul>
-    <button (click)="changeNames()">Change</button>
+    <button (click)="changeNames()">добавити на верх</button>
   </div>
   <br />
 

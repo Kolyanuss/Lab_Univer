@@ -6,26 +6,26 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  name: string = "Петро";
-  surname: string = "Петренко";
-  age: number = 25;
+  name: string = "Микола";
+  surname: string = "Максимович";
+  age: number = 19;
 
   langs = {
-    name: "Petro",
-    surname: "Petrenko",
-    age: 25,
+    name: "Mykola",
+    surname: "Maksymovych",
+    age: 20,
   };
 
   countries = {
-    Варшава: "Poland",
-    Вільнюс: "Litva",
-    Київ: "Ukraine",
+    Варшава: "Польща",
+    Вільнюс: "Литва",
+    Київ: "Україна",
   };
 
   workers = [
-    { name: "Anton", age: 20, salary: 15000 },
-    { name: "Roman", age: 18, salary: 18900 },
-    { name: "Alex", age: 20, salary: 10000 },
+    { name: "Микола", age: 30, salary: 400 },
+    { name: "Василь", age: 31, salary: 500 },
+    { name: "Петро", age: 32, salary: 600 },
   ];
 
   arrLang = ["html", "css", "js", "php"];
@@ -37,9 +37,9 @@ export class AppComponent {
   }
 
   change(el: any) {
-    if (el == 1) this.name = "Ivan";
-    if (el == 2) this.surname = "Ivanov";
-    if (el == 3) this.age = 30;
+    if (el == 1) this.name = "Mykola";
+    if (el == 2) this.surname = "Maksymovych";
+    if (el == 3) this.age = 20;
   }
 
   changeSql() {
@@ -57,11 +57,13 @@ export class AppComponent {
 
   deleteHtml() {
     var myIndex = this.arrLang.indexOf("html");
-    this.arrLang.splice(myIndex, 1);
+    if (this.arrLang[myIndex] == 'html')
+      this.arrLang.splice(myIndex, 1);
   }
 
   deletePhp() {
     var myIndex = this.arrLang.indexOf("php");
-    this.arrLang.splice(myIndex, 1);
+    if (this.arrLang[myIndex] == 'php')
+      this.arrLang.splice(myIndex, 1);
   }
 }
