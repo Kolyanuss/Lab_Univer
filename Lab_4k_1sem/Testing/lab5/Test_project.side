@@ -1,0 +1,391 @@
+{
+  "id": "9fcea2ad-9b35-47f4-8656-5ac7d0ce7678",
+  "version": "2.0",
+  "name": "Test_project",
+  "url": "https://uk.wikipedia.org/wiki/",
+  "tests": [{
+    "id": "9bb197d7-b857-41ad-b6ec-efd5fd25339f",
+    "name": "test1",
+    "commands": [{
+      "id": "0ad42d10-a80b-467f-a375-78968eae02bd",
+      "comment": "",
+      "command": "open",
+      "target": "https://uk.wikipedia.org/wiki/%D0%93%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0_%D1%81%D1%82%D0%BE%D1%80%D1%96%D0%BD%D0%BA%D0%B0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eb7e64c9-c200-4686-819b-d5842c7a3f11",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b47ce608-e082-44d6-96d9-5671fa864d83",
+      "comment": "",
+      "command": "click",
+      "target": "id=searchInput",
+      "targets": [
+        ["id=searchInput", "id"],
+        ["name=search", "name"],
+        ["css=#searchInput", "css:finder"],
+        ["xpath=//input[@id='searchInput']", "xpath:attributes"],
+        ["xpath=//div[@id='simpleSearch']/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "da1ac41c-592d-49a4-b3cc-3438e3f5161d",
+      "comment": "",
+      "command": "type",
+      "target": "id=searchInput",
+      "targets": [
+        ["id=searchInput", "id"],
+        ["name=search", "name"],
+        ["css=#searchInput", "css:finder"],
+        ["xpath=//input[@id='searchInput']", "xpath:attributes"],
+        ["xpath=//div[@id='simpleSearch']/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "Степан бандера"
+    }, {
+      "id": "78e1467c-4990-4898-916e-0d1bcf6a68da",
+      "comment": "",
+      "command": "click",
+      "target": "id=searchButton",
+      "targets": [
+        ["id=searchButton", "id"],
+        ["name=go", "name"],
+        ["css=#searchButton", "css:finder"],
+        ["xpath=//input[@id='searchButton']", "xpath:attributes"],
+        ["xpath=//div[@id='simpleSearch']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9ba4c4d-75cf-490d-b022-a14955eca040",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "id=searchButton",
+      "targets": [
+        ["id=searchButton", "id"],
+        ["name=go", "name"],
+        ["css=#searchButton", "css:finder"],
+        ["xpath=//input[@id='searchButton']", "xpath:attributes"],
+        ["xpath=//div[@id='simpleSearch']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "abb864ec-2eeb-4d78-935f-971f359eda11",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "id=searchButton",
+      "targets": [
+        ["id=searchButton", "id"],
+        ["name=go", "name"],
+        ["css=#searchButton", "css:finder"],
+        ["xpath=//input[@id='searchButton']", "xpath:attributes"],
+        ["xpath=//div[@id='simpleSearch']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fb992848-86bf-48fe-98b8-2c84710890c1",
+    "name": "test2",
+    "commands": [{
+      "id": "5d26e216-5436-4863-bb7d-18f3b8b58fe1",
+      "comment": "",
+      "command": "open",
+      "target": "https://uk.wikipedia.org/wiki/%D0%93%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0_%D1%81%D1%82%D0%BE%D1%80%D1%96%D0%BD%D0%BA%D0%B0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "70a21f28-9c07-4ff7-a3b3-4362f7be0a0f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5afdc8ba-0067-4f7b-a4c3-d55baf28f80f",
+      "comment": "",
+      "command": "click",
+      "target": "css=#n-currentevents span",
+      "targets": [
+        ["css=#n-currentevents span", "css:finder"],
+        ["xpath=//li[@id='n-currentevents']/a/span", "xpath:idRelative"],
+        ["xpath=//div[4]/div[2]/nav/div/ul/li[2]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8068316-0b1c-4475-ad33-028b18a2dce1",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Запорізькій АЕС",
+      "targets": [
+        ["linkText=Запорізькій АЕС", "linkText"],
+        ["css=ul:nth-child(8) > li:nth-child(3) b > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Запорізькій АЕС')]", "xpath:link"],
+        ["xpath=//div[@id='mw-content-text']/div/table/tbody/tr/td/div[4]/ul[2]/li[3]/ul/li/b/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/wiki/%D0%97%D0%B0%D0%BF%D0%BE%D1%80%D1%96%D0%B7%D1%8C%D0%BA%D0%B0_%D0%90%D0%95%D0%A1')]", "xpath:href"],
+        ["xpath=//li[3]/ul/li/b/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Запорізькій АЕС')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2e470381-3b9c-4faf-9b56-d72c8fcacc13",
+    "name": "test3",
+    "commands": [{
+      "id": "01d5bc6d-1a50-48e2-8fa6-a0747bb11c10",
+      "comment": "",
+      "command": "open",
+      "target": "https://uk.wikipedia.org/wiki/%D0%93%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0_%D1%81%D1%82%D0%BE%D1%80%D1%96%D0%BD%D0%BA%D0%B0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b1e08f71-bee5-45e8-a39f-996273c0d558",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d1cd51db-36af-4e61-9db1-f4f00b7146f7",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни",
+      "targets": [
+        ["linkText=Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни", "linkText"],
+        ["css=center > b > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни')]", "xpath:link"],
+        ["xpath=//div[@id='localNotice']/div/div/center/b/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/wiki/%D0%92%D1%96%D0%BA%D1%96%D0%BF%D0%B5%D0%B4%D1%96%D1%8F:%D0%92%D1%96%D0%B9%D0%BD%D0%B0/%D0%A0%D0%B5%D1%81%D1%83%D1%80%D1%81%D0%B8')])[2]", "xpath:href"],
+        ["xpath=//b/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1c0f0bfd-0cb6-4fcf-bbdf-3ca6e1e1ad38",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "linkText=Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни",
+      "targets": [
+        ["linkText=Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни", "linkText"],
+        ["css=b:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни')]", "xpath:link"],
+        ["xpath=//div[@id='localNotice']/div/div/center/b/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/wiki/%D0%92%D1%96%D0%BA%D1%96%D0%BF%D0%B5%D0%B4%D1%96%D1%8F:%D0%92%D1%96%D0%B9%D0%BD%D0%B0/%D0%A0%D0%B5%D1%81%D1%83%D1%80%D1%81%D0%B8')])[2]", "xpath:href"],
+        ["xpath=//b/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2eb1e396-3aab-4ab8-8448-203574266654",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "linkText=Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни",
+      "targets": [
+        ["linkText=Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни", "linkText"],
+        ["css=b:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни')]", "xpath:link"],
+        ["xpath=//div[@id='localNotice']/div/div/center/b/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/wiki/%D0%92%D1%96%D0%BA%D1%96%D0%BF%D0%B5%D0%B4%D1%96%D1%8F:%D0%92%D1%96%D0%B9%D0%BD%D0%B0/%D0%A0%D0%B5%D1%81%D1%83%D1%80%D1%81%D0%B8')])[2]", "xpath:href"],
+        ["xpath=//b/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Російське вторгнення в Україну: як допомогти й отримати допомогу під час війни')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e8c4db22-496e-451b-a95c-18a45b5c6b32",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Спеціальний рахунок Національного банку України",
+      "targets": [
+        ["linkText=Спеціальний рахунок Національного банку України", "linkText"],
+        ["css=li:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > .external:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Спеціальний рахунок Національного банку України')]", "xpath:link"],
+        ["xpath=//div[@id='mw-content-text']/div/div[2]/div/div/ul/li/ul/li/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://bank.gov.ua/ua/news/all/natsionalniy-bank-vidkriv-spetsrahunok-dlya-zboru-koshtiv-na-potrebi-armiyi')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Спеціальний рахунок Національного банку України')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "651434a2-3048-488b-b9c9-3a6151956f37",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Гривня",
+      "targets": [
+        ["linkText=Гривня", "linkText"],
+        ["css=#desktop-menu > li:nth-child(7) > .ripple", "css:finder"],
+        ["xpath=//a[contains(text(),'Гривня')]", "xpath:link"],
+        ["xpath=//ul[@id='desktop-menu']/li[7]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/ua/uah')])[7]", "xpath:href"],
+        ["xpath=//nav/ul/li[7]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Гривня')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "82a01c01-788c-45e6-bd80-622f784a52c7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-lg-2:nth-child(1) img",
+      "targets": [
+        ["css=.col-lg-2:nth-child(1) img", "css:finder"],
+        ["xpath=//img[@alt='Банкнота номіналом 1000 гривень зразка 2019 року (пам`ятна банкнота до 30-річчя незалежності України)']", "xpath:img"],
+        ["xpath=//div[@id='container-808']/div/div[2]/div/div/a/img", "xpath:idRelative"],
+        ["xpath=//div/div[2]/div/div/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "81d3cb57-5e37-4851-b71f-7deb9f27238d",
+      "comment": "",
+      "command": "click",
+      "target": "id=select_date",
+      "targets": [
+        ["id=select_date", "id"],
+        ["css=#select_date", "css:finder"],
+        ["xpath=//select[@id='select_date']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8f9b6bd4-6c6a-4e7e-be28-83f430af2f68",
+      "comment": "",
+      "command": "select",
+      "target": "id=select_date",
+      "targets": [],
+      "value": "label=22.12.2021"
+    }]
+  }, {
+    "id": "b4f152e2-6edc-40bd-ad94-8770d4febb8b",
+    "name": "test4",
+    "commands": [{
+      "id": "36b2d1b5-611e-4de7-9c76-a474b84d187b",
+      "comment": "",
+      "command": "open",
+      "target": "https://uk.wikipedia.org/wiki/%D0%93%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0_%D1%81%D1%82%D0%BE%D1%80%D1%96%D0%BD%D0%BA%D0%B0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f7fab055-9415-4622-9484-343ab5f64627",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d544a9b7-eba8-472a-af69-994a10a305d0",
+      "comment": "",
+      "command": "click",
+      "target": "css=#pt-login span",
+      "targets": [
+        ["css=#pt-login span", "css:finder"],
+        ["xpath=//li[@id='pt-login']/a/span", "xpath:idRelative"],
+        ["xpath=//li[5]/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Увійти')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "423b3658-ba23-4e39-a9fc-23cbe24c9a2e",
+      "comment": "",
+      "command": "click",
+      "target": "id=wpName1",
+      "targets": [
+        ["id=wpName1", "id"],
+        ["name=wpName", "name"],
+        ["css=#wpName1", "css:finder"],
+        ["xpath=//input[@id='wpName1']", "xpath:attributes"],
+        ["xpath=//div[@id='userloginForm']/form/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "445c6969-f3b6-4497-a963-b6bc999dcb37",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mediawiki",
+      "targets": [
+        ["css=.mediawiki", "css:finder"],
+        ["xpath=//body", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6837480-64ee-4536-a123-8ed9c9a1493b",
+      "comment": "",
+      "command": "type",
+      "target": "id=wpName1",
+      "targets": [
+        ["id=wpName1", "id"],
+        ["name=wpName", "name"],
+        ["css=#wpName1", "css:finder"],
+        ["xpath=//input[@id='wpName1']", "xpath:attributes"],
+        ["xpath=//div[@id='userloginForm']/form/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "Nikolay"
+    }, {
+      "id": "cb9afffb-e9d6-4ebc-97ea-835579870849",
+      "comment": "",
+      "command": "click",
+      "target": "id=wpPassword1",
+      "targets": [
+        ["id=wpPassword1", "id"],
+        ["name=wpPassword", "name"],
+        ["css=#wpPassword1", "css:finder"],
+        ["xpath=//input[@id='wpPassword1']", "xpath:attributes"],
+        ["xpath=//div[@id='userloginForm']/form/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa278149-8a55-45d4-adc9-ad4627b518e7",
+      "comment": "",
+      "command": "type",
+      "target": "id=wpPassword1",
+      "targets": [
+        ["id=wpPassword1", "id"],
+        ["name=wpPassword", "name"],
+        ["css=#wpPassword1", "css:finder"],
+        ["xpath=//input[@id='wpPassword1']", "xpath:attributes"],
+        ["xpath=//div[@id='userloginForm']/form/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "123qqq"
+    }, {
+      "id": "e28e6a2a-3ec3-41ac-83ab-3135a596348e",
+      "comment": "",
+      "command": "click",
+      "target": "id=wpLoginAttempt",
+      "targets": [
+        ["id=wpLoginAttempt", "id"],
+        ["name=wploginattempt", "name"],
+        ["css=#wpLoginAttempt", "css:finder"],
+        ["xpath=//button[@id='wpLoginAttempt']", "xpath:attributes"],
+        ["xpath=//div[@id='userloginForm']/form/div/div[4]/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Вхід')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d25d8833-72e5-4eed-b7f3-9754e1c85039",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "093afef4-b72e-4561-9a45-13d25326fb36",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["9bb197d7-b857-41ad-b6ec-efd5fd25339f"]
+  }],
+  "urls": ["https://rozetka.com.ua/", "https://uk.wikipedia.org/wiki/"],
+  "plugins": []
+}
