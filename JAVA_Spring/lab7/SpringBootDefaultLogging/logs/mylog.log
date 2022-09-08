@@ -1,8 +1,0 @@
-2022-03-29 00:25:59.930  WARN 4500 --- [http-nio-8080-exec-1] o.o.sblogging.controller.MainController  : This is WARN
-2022-03-29 00:25:59.935 ERROR 4500 --- [http-nio-8080-exec-1] o.o.sblogging.controller.MainController  : This is ERROR
-2022-03-29 10:10:09.988  WARN 17840 --- [http-nio-8080-exec-1] o.o.sblogging.controller.MainController  : This is WARN
-2022-03-29 10:10:09.990 ERROR 17840 --- [http-nio-8080-exec-1] o.o.sblogging.controller.MainController  : This is ERROR
-2022-Mar-29 10:19:20.799 WARN  [http-nio-8080-exec-2] o.o.s.c.MainController - This is WARN
-2022-Mar-29 10:19:20.801 ERROR [http-nio-8080-exec-2] o.o.s.c.MainController - This is ERROR
-2022-Mar-29 10:39:09.835 WARN  [http-nio-8080-exec-1] o.o.s.c.MainController - This is WARN
-2022-Mar-29 10:39:09.837 ERROR [http-nio-8080-exec-1] o.o.s.c.MainController - This is ERROR
