@@ -40,6 +40,7 @@ class MyThread extends Thread {
         }
     }
 }
+
 interface myint{
     public void increment() throws InterruptedException;
     public void decrement() throws InterruptedException;
