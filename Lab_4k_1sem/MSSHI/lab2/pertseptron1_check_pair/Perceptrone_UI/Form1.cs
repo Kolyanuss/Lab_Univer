@@ -8,22 +8,24 @@ namespace Perceptrone_UI
         public Perceptron myPerc;
         private int[] selected_array;
         private List<CheckBox> listOfCheckBox;
+        private List<Tuple<int[], bool>> listDataToLearn;
+
         public Form1()
         {
             InitializeComponent();
             myPerc = new Perceptron();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button_DeffoltLearn_Click(object sender, EventArgs e)
         {
-            buttonDeffoltLearn.Enabled = false;
+            button_DeffoltLearn.Enabled = false;
             buttonUImode.Enabled = false;
-            buttonDeffoltLearn.Text = "Зачекайте, триває навчання";
+            groupBox_manual_input.Enabled = false;
+            button_DeffoltLearn.Text = "Зачекайте, триває навчання";
             myPerc.LearnBySeveralArr(DataForLearn.NumForLearn);
-            buttonDeffoltLearn.Text = "Готово!";
+            button_DeffoltLearn.Text = "Готово!";
             comboBox1.Enabled = true;
         }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             button1.Enabled = true;
@@ -42,8 +44,10 @@ namespace Perceptrone_UI
 
         private void buttonUImode_Click(object sender, EventArgs e)
         {
-            groupBox1.Visible = true;
+            groupBox_manual_input.Visible = true;
             listOfCheckBox = new List<CheckBox>();
+            listDataToLearn = new List<Tuple<int[], bool>>();
+
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 6; j++)
@@ -51,21 +55,62 @@ namespace Perceptrone_UI
                     var checkBox = new CheckBox();
                     checkBox.AutoSize = true;
                     checkBox.Size = new Size(20, 20);
-                    checkBox.Location = new Point(20 + (j * checkBox.Size.Width), 30 + (i * checkBox.Size.Height));
+                    checkBox.Location = new Point(10 + (j * checkBox.Size.Width), 30 + (i * checkBox.Size.Height));
                     checkBox.Name = "checkBox" + i;
                     checkBox.UseVisualStyleBackColor = true;
 
                     listOfCheckBox.Add(checkBox);
-                    //Controls.Add(checkBox);
-                    groupBox1.Controls.Add(checkBox);
+                    groupBox_manual_input.Controls.Add(checkBox);
                 }
             }
             buttonSupport.Visible = true;
+            button_pair.Visible = true;
+            button_notpair.Visible = true;
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void button_pair_Click(object sender, EventArgs e)
         {
-
+            int[] arr = new int[listOfCheckBox.Count];
+            for (int i = 0; i < listOfCheckBox.Count; i++)
+            {
+                if (listOfCheckBox[i].Checked)
+                {
+                    arr[i] = 1;
+                    listOfCheckBox[i].Checked = false;
+                }
+                else arr[i] = 0;
+            }
+            listDataToLearn.Add(new Tuple<int[], bool>(arr, true));
+            buttonSupport.Enabled = true;
         }
+
+        private void button_notpair_Click(object sender, EventArgs e)
+        {
+            var arr = new int[Perceptron.size];
+            for (int i = 0; i < listOfCheckBox.Count; i++)
+            {
+                if (listOfCheckBox[i].Checked)
+                {
+                    arr[i] = 1;
+                    listOfCheckBox[i].Checked = false;
+                }
+                else arr[i] = 0;
+            }
+            listDataToLearn.Add(new Tuple<int[], bool>(arr, false));
+            buttonSupport.Enabled = true;
+        }
+
+        private void buttonSupport_Click(object sender, EventArgs e)
+        {
+            groupBox_manual_input.Enabled = false;
+            button_DeffoltLearn.Enabled = false;
+            buttonUImode.Enabled = false;
+
+            buttonSupport.Text = "Зачекайте, триває навчання";
+            myPerc.LearnBySeveralArr(this.listDataToLearn);
+            buttonSupport.Text = "Готово!";
+            comboBox1.Enabled = true;
+        }
+
     }
 }
