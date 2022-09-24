@@ -5,112 +5,44 @@ namespace Perceptrone_UI
 {
     public partial class Form1 : Form
     {
-        public Neiron myPerc;
+        public Perceptron myPerc;
+        private List<Tuple<int[], char>> dataToLearn;
         private int[] selected_array;
-        private List<CheckBox> listOfCheckBox;
-        private List<Tuple<int[], bool>> listDataToLearn;
+        private char selected_char;
 
         public Form1()
         {
             InitializeComponent();
-            myPerc = new Neiron();
+            myPerc = new Perceptron();
+            dataToLearn = new List<Tuple<int[], char>>();
         }
 
-        private void button_DeffoltLearn_Click(object sender, EventArgs e)
+        private void toolStripButton_AddToLearn_Click(object sender, EventArgs e)
         {
-            button_DeffoltLearn.Enabled = false;
-            buttonUImode.Enabled = false;
-            groupBox_manual_input.Enabled = false;
-            button_DeffoltLearn.Text = "Зачекайте, триває навчання";
-            myPerc.LearnBySeveralExample(DataForLearn.NumForLearn);
-            button_DeffoltLearn.Text = "Готово!";
-            comboBox1.Enabled = true;
-        }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            button1.Enabled = true;
-            selected_array = DataForLearn.NumForLearn[Convert.ToInt32(comboBox1.Text)].Item1;
-            label3.Text = "";
-            foreach (var item in selected_array)
+            if (selected_array != null)
             {
-                label3.Text += item + " ";
+                dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
+                selected_array = null;
+                selected_char = Convert.ToChar(0);
+                toolStripButton_StartLearn.Enabled = true;
             }
+            else label_rezult.Text = "Відкрийте картинку з буквою";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void toolStripButton_StartLearn_Click(object sender, EventArgs e)
         {
-            label2.Text = myPerc.GetAnswer(selected_array) ? "True" : "False";
+            toolStripButton_AddToLearn.Enabled = false;
+            myPerc.StartLearn(dataToLearn);
+            toolStripButton_Recognize.Enabled = true;
         }
 
-        private void buttonUImode_Click(object sender, EventArgs e)
+        private void toolStripButton_Recognize_Click(object sender, EventArgs e)
         {
-            groupBox_manual_input.Visible = true;
-            listOfCheckBox = new List<CheckBox>();
-            listDataToLearn = new List<Tuple<int[], bool>>();
-
-            for (int i = 0; i < 8; i++)
+            if (selected_array != null)
             {
-                for (int j = 0; j < 6; j++)
-                {
-                    var checkBox = new CheckBox();
-                    checkBox.AutoSize = true;
-                    checkBox.Size = new Size(20, 20);
-                    checkBox.Location = new Point(10 + (j * checkBox.Size.Width), 30 + (i * checkBox.Size.Height));
-                    checkBox.Name = "checkBox" + i;
-                    checkBox.UseVisualStyleBackColor = true;
-
-                    listOfCheckBox.Add(checkBox);
-                    groupBox_manual_input.Controls.Add(checkBox);
-                }
+                label_rezult.Text = myPerc.Guess_letter(selected_array);
             }
-            buttonSupport.Visible = true;
-            button_pair.Visible = true;
-            button_notpair.Visible = true;
+            else label_rezult.Text = "Відкрийте картинку з буквою";
         }
-
-        private void button_pair_Click(object sender, EventArgs e)
-        {
-            int[] arr = new int[listOfCheckBox.Count];
-            for (int i = 0; i < listOfCheckBox.Count; i++)
-            {
-                if (listOfCheckBox[i].Checked)
-                {
-                    arr[i] = 1;
-                    listOfCheckBox[i].Checked = false;
-                }
-                else arr[i] = 0;
-            }
-            listDataToLearn.Add(new Tuple<int[], bool>(arr, true));
-            buttonSupport.Enabled = true;
-        }
-
-        private void button_notpair_Click(object sender, EventArgs e)
-        {
-            int[] arr = new int[listOfCheckBox.Count];
-            for (int i = 0; i < listOfCheckBox.Count; i++)
-            {
-                if (listOfCheckBox[i].Checked)
-                {
-                    arr[i] = 1;
-                    listOfCheckBox[i].Checked = false;
-                }
-                else arr[i] = 0;
-            }
-            listDataToLearn.Add(new Tuple<int[], bool>(arr, false));
-            buttonSupport.Enabled = true;
-        }
-
-        private void buttonSupport_Click(object sender, EventArgs e)
-        {
-            groupBox_manual_input.Enabled = false;
-            button_DeffoltLearn.Enabled = false;
-            buttonUImode.Enabled = false;
-
-            buttonSupport.Text = "Зачекайте, триває навчання";
-            myPerc.LearnBySeveralExample(this.listDataToLearn);
-            buttonSupport.Text = "Готово!";
-            comboBox1.Enabled = true;
-        }
-
     }
 }

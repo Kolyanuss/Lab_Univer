@@ -29,145 +29,157 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button_DeffoltLearn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.buttonUImode = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox_manual_input = new System.Windows.Forms.GroupBox();
-            this.button_notpair = new System.Windows.Forms.Button();
-            this.buttonSupport = new System.Windows.Forms.Button();
-            this.button_pair = new System.Windows.Forms.Button();
-            this.groupBox_manual_input.SuspendLayout();
+            this.label_rezult = new System.Windows.Forms.Label();
+            this.label_SelectedArr = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.відкритиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_AddToLearn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_StartLearn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Recognize = new System.Windows.Forms.ToolStripButton();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // label_rezult
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.label_rezult, "label_rezult");
+            this.label_rezult.Name = "label_rezult";
             // 
-            // label1
+            // label_SelectedArr
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.label_SelectedArr, "label_SelectedArr");
+            this.label_SelectedArr.Name = "label_SelectedArr";
             // 
-            // button_DeffoltLearn
+            // menuStrip1
             // 
-            resources.ApplyResources(this.button_DeffoltLearn, "button_DeffoltLearn");
-            this.button_DeffoltLearn.Name = "button_DeffoltLearn";
-            this.button_DeffoltLearn.UseVisualStyleBackColor = true;
-            this.button_DeffoltLearn.Click += new System.EventHandler(this.button_DeffoltLearn_Click);
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem});
+            this.menuStrip1.Name = "menuStrip1";
             // 
-            // comboBox1
+            // файлToolStripMenuItem
             // 
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2"),
-            resources.GetString("comboBox1.Items3"),
-            resources.GetString("comboBox1.Items4"),
-            resources.GetString("comboBox1.Items5"),
-            resources.GetString("comboBox1.Items6"),
-            resources.GetString("comboBox1.Items7"),
-            resources.GetString("comboBox1.Items8"),
-            resources.GetString("comboBox1.Items9")});
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.відкритиToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             // 
-            // label2
+            // відкритиToolStripMenuItem
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.відкритиToolStripMenuItem, "відкритиToolStripMenuItem");
+            this.відкритиToolStripMenuItem.Name = "відкритиToolStripMenuItem";
             // 
-            // label3
+            // toolStrip1
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_AddToLearn,
+            this.toolStripButton_StartLearn,
+            this.toolStripSeparator1,
+            this.toolStripButton_Recognize});
+            this.toolStrip1.Name = "toolStrip1";
             // 
-            // buttonUImode
+            // toolStripButton_AddToLearn
             // 
-            resources.ApplyResources(this.buttonUImode, "buttonUImode");
-            this.buttonUImode.Name = "buttonUImode";
-            this.buttonUImode.UseVisualStyleBackColor = true;
-            this.buttonUImode.Click += new System.EventHandler(this.buttonUImode_Click);
+            resources.ApplyResources(this.toolStripButton_AddToLearn, "toolStripButton_AddToLearn");
+            this.toolStripButton_AddToLearn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_AddToLearn.Name = "toolStripButton_AddToLearn";
+            this.toolStripButton_AddToLearn.Click += new System.EventHandler(this.toolStripButton_AddToLearn_Click);
             // 
-            // label4
+            // toolStripButton_StartLearn
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.toolStripButton_StartLearn, "toolStripButton_StartLearn");
+            this.toolStripButton_StartLearn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_StartLearn.Name = "toolStripButton_StartLearn";
+            this.toolStripButton_StartLearn.Click += new System.EventHandler(this.toolStripButton_StartLearn_Click);
             // 
-            // groupBox_manual_input
+            // toolStripButton_Recognize
             // 
-            resources.ApplyResources(this.groupBox_manual_input, "groupBox_manual_input");
-            this.groupBox_manual_input.Controls.Add(this.button_notpair);
-            this.groupBox_manual_input.Controls.Add(this.buttonSupport);
-            this.groupBox_manual_input.Controls.Add(this.button_pair);
-            this.groupBox_manual_input.Name = "groupBox_manual_input";
-            this.groupBox_manual_input.TabStop = false;
+            resources.ApplyResources(this.toolStripButton_Recognize, "toolStripButton_Recognize");
+            this.toolStripButton_Recognize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_Recognize.Name = "toolStripButton_Recognize";
+            this.toolStripButton_Recognize.Click += new System.EventHandler(this.toolStripButton_Recognize_Click);
             // 
-            // button_notpair
+            // tableLayoutPanel1
             // 
-            resources.ApplyResources(this.button_notpair, "button_notpair");
-            this.button_notpair.Name = "button_notpair";
-            this.button_notpair.UseVisualStyleBackColor = true;
-            this.button_notpair.Click += new System.EventHandler(this.button_notpair_Click);
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // buttonSupport
+            // groupBox1
             // 
-            resources.ApplyResources(this.buttonSupport, "buttonSupport");
-            this.buttonSupport.Name = "buttonSupport";
-            this.buttonSupport.UseVisualStyleBackColor = true;
-            this.buttonSupport.Click += new System.EventHandler(this.buttonSupport_Click);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.label_rezult);
+            this.groupBox1.Controls.Add(this.label_SelectedArr);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
             // 
-            // button_pair
+            // pictureBox1
             // 
-            resources.ApplyResources(this.button_pair, "button_pair");
-            this.button_pair.Name = "button_pair";
-            this.button_pair.UseVisualStyleBackColor = true;
-            this.button_pair.Click += new System.EventHandler(this.button_pair_Click);
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
+            // 
+            // toolStripSeparator1
+            // 
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox_manual_input);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.buttonUImode);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button_DeffoltLearn);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.groupBox_manual_input.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Button button1;
-        private Label label1;
-        private Button button_DeffoltLearn;
-        private ComboBox comboBox1;
-        private Label label2;
-        private Label label3;
-        private Button buttonUImode;
-        private Label label4;
-        private GroupBox groupBox_manual_input;
-        private Button buttonSupport;
-        private Button button_pair;
-        private Button button_notpair;
+        private Label label_rezult;
+        private Label label_SelectedArr;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem файлToolStripMenuItem;
+        private ToolStripMenuItem відкритиToolStripMenuItem;
+        private ToolStrip toolStrip1;
+        private ToolStripButton toolStripButton_Recognize;
+        private ToolStripButton toolStripButton_AddToLearn;
+        private ToolStripButton toolStripButton_StartLearn;
+        private TableLayoutPanel tableLayoutPanel1;
+        private GroupBox groupBox1;
+        private PictureBox pictureBox1;
+        private OpenFileDialog openFileDialog1;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }
