@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataBlock\DataBlock.csproj" />
+    <ProjectReference Include="..\lab3_Perceptrone2_learn_letters\lab3_Perceptrone2_learn_letters.csproj" />
+  </ItemGroup>
+
+</Project>
