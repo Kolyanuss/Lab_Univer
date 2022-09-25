@@ -11,8 +11,8 @@ namespace Perceptrone_UI
         private char selected_char;
         private string filePath = string.Empty;
 
-        private int sizeX = 5;
-        private int sizeY = 10;
+        private int sizeX = 15;
+        private int sizeY = 15;
 
         public Form1()
         {

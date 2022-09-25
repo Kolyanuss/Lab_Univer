@@ -66,7 +66,7 @@
     <value>Segoe UI, 14.25pt</value>
   </data>
   <data name="label_rezult.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 22</value>
+    <value>288, 0</value>
   </data>
   <data name="label_rezult.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 25</value>
@@ -81,10 +81,10 @@
     <value>Segoe UI, 14.25pt</value>
   </data>
   <data name="label_SelectedArr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 22</value>
+    <value>9, 25</value>
   </data>
   <data name="label_SelectedArr.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>100, 0</value>
+    <value>400, 375</value>
   </data>
   <data name="label_SelectedArr.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 25</value>
@@ -92,20 +92,26 @@
   <data name="label_SelectedArr.Text" xml:space="preserve">
     <value> </value>
   </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>826, 24</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="файлToolStripMenuItem.Text" xml:space="preserve">
+    <value>Файл</value>
+  </data>
   <data name="ToolStripMenuItem_Open.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 22</value>
   </data>
   <data name="ToolStripMenuItem_Open.Text" xml:space="preserve">
     <value>Відкрити</value>
   </data>
-  <data name="файлToolStripMenuItem.Text" xml:space="preserve">
-    <value>Файл</value>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>826, 25</value>
   </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>826, 24</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip1</value>
   </data>
   <data name="toolStripLabel1.Text" xml:space="preserve">
     <value>Назва букви:</value>
@@ -172,12 +178,6 @@
   </data>
   <data name="toolStripButton_Recognize.Text" xml:space="preserve">
     <value>Розпізнати</value>
-  </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>826, 25</value>
-  </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip1</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
