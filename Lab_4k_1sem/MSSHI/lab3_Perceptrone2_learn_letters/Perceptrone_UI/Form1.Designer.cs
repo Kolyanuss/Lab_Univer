@@ -33,16 +33,19 @@
             this.label_SelectedArr = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.відкритиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton_AddToLearn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_StartLearn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Recognize = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -72,23 +75,38 @@
             // 
             resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.відкритиToolStripMenuItem});
+            this.ToolStripMenuItem_Open});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             // 
-            // відкритиToolStripMenuItem
+            // ToolStripMenuItem_Open
             // 
-            resources.ApplyResources(this.відкритиToolStripMenuItem, "відкритиToolStripMenuItem");
-            this.відкритиToolStripMenuItem.Name = "відкритиToolStripMenuItem";
+            resources.ApplyResources(this.ToolStripMenuItem_Open, "ToolStripMenuItem_Open");
+            this.ToolStripMenuItem_Open.Name = "ToolStripMenuItem_Open";
+            this.ToolStripMenuItem_Open.Click += new System.EventHandler(this.ToolStripMenuItem_Open_Click);
             // 
             // toolStrip1
             // 
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.toolStripTextBox1,
             this.toolStripButton_AddToLearn,
+            this.toolStripSeparator2,
             this.toolStripButton_StartLearn,
             this.toolStripSeparator1,
             this.toolStripButton_Recognize});
             this.toolStrip1.Name = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            // 
+            // toolStripTextBox1
+            // 
+            resources.ApplyResources(this.toolStripTextBox1, "toolStripTextBox1");
+            this.toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
             // 
             // toolStripButton_AddToLearn
             // 
@@ -97,12 +115,22 @@
             this.toolStripButton_AddToLearn.Name = "toolStripButton_AddToLearn";
             this.toolStripButton_AddToLearn.Click += new System.EventHandler(this.toolStripButton_AddToLearn_Click);
             // 
+            // toolStripSeparator2
+            // 
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            // 
             // toolStripButton_StartLearn
             // 
             resources.ApplyResources(this.toolStripButton_StartLearn, "toolStripButton_StartLearn");
             this.toolStripButton_StartLearn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton_StartLearn.Name = "toolStripButton_StartLearn";
             this.toolStripButton_StartLearn.Click += new System.EventHandler(this.toolStripButton_StartLearn_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // toolStripButton_Recognize
             // 
@@ -134,13 +162,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
-            // 
-            // toolStripSeparator1
-            // 
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // Form1
             // 
@@ -171,7 +193,7 @@
         private Label label_SelectedArr;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem файлToolStripMenuItem;
-        private ToolStripMenuItem відкритиToolStripMenuItem;
+        private ToolStripMenuItem ToolStripMenuItem_Open;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButton_Recognize;
         private ToolStripButton toolStripButton_AddToLearn;
@@ -181,5 +203,8 @@
         private PictureBox pictureBox1;
         private OpenFileDialog openFileDialog1;
         private ToolStripSeparator toolStripSeparator1;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripTextBox toolStripTextBox1;
+        private ToolStripSeparator toolStripSeparator2;
     }
 }
