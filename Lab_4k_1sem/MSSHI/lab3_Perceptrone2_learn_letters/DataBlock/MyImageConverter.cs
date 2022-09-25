@@ -39,9 +39,9 @@ namespace DataBlock
             Graphics g;
 
             // режем
-            for (int i = 0; i < nx; i++)
+            for (int j = 0; j < ny; j++)
             {
-                for (int j = 0; j < ny; j++)
+                for (int i = 0; i < nx; i++)
                 {
                     // размеры тайла
                     w = x[i + 1] - x[i];
@@ -54,30 +54,39 @@ namespace DataBlock
                     g = Graphics.FromImage(bmp);
                     g.DrawImage(image, new Rectangle(0, 0, w, h), new Rectangle(x[i], y[j], w, h), GraphicsUnit.Pixel);
 
-                    // сохраняем результат
-                    //bmp.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format("image{0}_{1}.png", i, j)), System.Drawing.Imaging.ImageFormat.Png);
+
                     rezult.Add(bmp);
 
-                    // очистка памяти
                     g.Dispose();
-                    bmp.Dispose();
+                    //bmp.Dispose();
                 }
             }
-
             image.Dispose();
 
             return rezult;
         }
 
-        public static int[] GetArrFromImage(string PathToImage, int sizeX = 6, int sizeY = 8)
+        public static int[] GetArrFromImage(string PathToImage, int sizeX, int sizeY)
         {
-            var rezult = new int[sizeX*sizeY];
+            var rezult = new int[sizeX * sizeY];
             var list = SplitImage(PathToImage, sizeX, sizeY);
-            foreach (var item in list)
+            for (int k = 0; k < list.Count; k++)
             {
-
+                rezult[k] = 0;
+                for (int i = 0; i < list[k].Height; i++)
+                {
+                    for (int j = 0; j < list[k].Width; j++)
+                    {
+                        var curPixel = list[k].GetPixel(j, i);
+                        if (curPixel.R <= 30 && curPixel.G <= 30 && curPixel.B <= 30)
+                        {
+                            rezult[k] = 1;
+                            i = list[k].Height; // to break second for
+                            break; // to break first for
+                        }
+                    }
+                }
             }
-
             return rezult;
         }
     }
