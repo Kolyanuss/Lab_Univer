@@ -26,7 +26,7 @@ namespace lab3_Perceptrone2_learn_letters
         {
             get { return arr_entrances[0].weight; }
         }
-        public double Learning_speed = 0.1;
+        public double Learning_speed = 0.05;
         public char Name;
 
 
@@ -46,10 +46,10 @@ namespace lab3_Perceptrone2_learn_letters
         {
             this.Name = name;
             this.size = size + 1;
-            arr_entrances = new entrances[size];
+            arr_entrances = new entrances[this.size];
 
             arr_entrances.SetValue(new entrances(true, new Random().Next(-2, 2)), 0);
-            for (int i = 1; i < size; i++)
+            for (int i = 1; i < this.size; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
             }
