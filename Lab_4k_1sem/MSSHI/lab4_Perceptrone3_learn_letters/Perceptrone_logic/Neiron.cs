@@ -28,6 +28,10 @@ namespace Perceptrone_logic
         }
         public double Learning_speed = 0.05;
         public char Name;
+        /// <summary>
+        /// Поріг активації сигмоїдної функції "y = fo(S)"
+        /// </summary>
+        public double activation_threshold_Y = 0.95;
 
 
         public Neiron(char name)
@@ -65,9 +69,9 @@ namespace Perceptrone_logic
             return S_weight;
         }
 
-        private bool CalcY()
+        private double CalcY()
         {
-            return CalcWeight() >= 0;
+            return 1 / (1 + Math.Exp(-CalcWeight()));
         }
 
         public void ChangeEntrancesState(int[] masState)
@@ -85,19 +89,20 @@ namespace Perceptrone_logic
         public char? GetAnswer(int[] testMas)
         {
             ChangeEntrancesState(testMas);
-            return CalcY() ? Name : null;
+            return CalcY() >= activation_threshold_Y ? Name : null;
         }
 
         private bool LearnByOneExample(int[] masState, bool desire_response)
         {
             ChangeEntrancesState(masState);
-            bool rez_y = this.CalcY();
-            int E = Convert.ToInt32(desire_response) - Convert.ToInt32(rez_y);
-            if (E != 0)
+            var rez_y = this.CalcY();
+            ///neural error \ нейронна помилка
+            var ne = rez_y * (1 - rez_y) * (Convert.ToInt32(desire_response) - rez_y);
+            if (ne != 0)
             {
                 for (int i = 0; i < size; i++)
                 {
-                    arr_entrances[i].weight += Learning_speed * E * Convert.ToInt32(arr_entrances[i].is_active);
+                    arr_entrances[i].weight += Learning_speed * ne * Convert.ToInt32(arr_entrances[i].is_active);
                 }
                 return false;
             }
