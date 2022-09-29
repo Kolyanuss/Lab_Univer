@@ -7,6 +7,27 @@ namespace Perceptrone_UI
 {
     public partial class Form1 : Form
     {
+        private class ArrayPoints
+        {
+            private int index = 0;
+            private Point[] points;
+            public ArrayPoints(int size)
+            {
+                if (size <= 0) { size = 2; }
+            }
+            public void SetPoint(int x, int y)
+            {
+                if (index >= points.Length) { index = 0; }
+                points[index++] = new Point(x, y);
+            }
+            public void ResetPoints()
+            {
+                index = 0;
+            }
+            public int GetCountPoints() { return index; }
+            public Point[] GetPoints() { return points; }
+        }
+
         public Perceptron myPerc;
         private List<Tuple<int[], char>> dataToLearn;
         private int[] selected_array;
@@ -17,6 +38,9 @@ namespace Perceptrone_UI
 
         private int sizeX = 15;
         private int sizeY = 15;
+
+        private bool isMouseDown = false;
+        private ArrayPoints arrayPoints = new ArrayPoints(2);
 
         public Form1()
         {
@@ -129,11 +153,11 @@ namespace Perceptrone_UI
                     return;
                 }
 
-                var btn = sender as Button;                
-                selected_char = btn.Text[0];                
+                var btn = sender as Button;
+                selected_char = btn.Text[0];
 
                 dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
-                label_rezult.Text = "Елемент ("+ selected_char +") додано до масиву. Всього: "+dataToLearn.Count + " ел";
+                label_rezult.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
                 button_StarLearn.Enabled = true;
             }
         }
@@ -157,6 +181,22 @@ namespace Perceptrone_UI
                 }
                 else MessageBox.Show("Помилка читання картинки", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            isMouseDown = true;
+
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDown = false;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
