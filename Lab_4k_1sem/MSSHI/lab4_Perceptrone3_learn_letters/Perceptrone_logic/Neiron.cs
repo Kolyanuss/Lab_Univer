@@ -11,7 +11,7 @@ namespace Perceptrone_logic
             public double weight { get; set; }
             public entrances()
             {
-                this.weight = new Random().NextDouble();
+                this.weight = GetRandNumInRange(-0.5, 0.5);
             }
             public entrances(bool isactive, double weight)
             {
@@ -40,7 +40,7 @@ namespace Perceptrone_logic
             this.size = 48 + 1;
             arr_entrances = new entrances[size];
 
-            arr_entrances.SetValue(new entrances(true, new Random().NextDouble()), 0);
+            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2,2)), 0);
             for (int i = 1; i < size; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
@@ -52,11 +52,16 @@ namespace Perceptrone_logic
             this.size = size + 1;
             arr_entrances = new entrances[this.size];
 
-            arr_entrances.SetValue(new entrances(true, new Random().NextDouble()), 0);
+            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2, 2)), 0);
             for (int i = 1; i < this.size; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
             }
+        }
+
+        public static double GetRandNumInRange(double minNumber, double maxNumber)
+        {
+            return new Random().NextDouble() * (maxNumber - minNumber) + minNumber;
         }
 
         private double CalcWeight()
