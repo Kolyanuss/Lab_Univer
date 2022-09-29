@@ -11,9 +11,9 @@ namespace Perceptrone_logic
             public double weight { get; set; }
             public entrances()
             {
-                this.weight = new Random().Next(-5, 5);
+                this.weight = new Random().NextDouble();
             }
-            public entrances(bool isactive, int weight)
+            public entrances(bool isactive, double weight)
             {
                 this.is_active = isactive;
                 this.weight = weight;
@@ -40,7 +40,7 @@ namespace Perceptrone_logic
             this.size = 48 + 1;
             arr_entrances = new entrances[size];
 
-            arr_entrances.SetValue(new entrances(true, new Random().Next(-2, 2)), 0);
+            arr_entrances.SetValue(new entrances(true, new Random().NextDouble()), 0);
             for (int i = 1; i < size; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
@@ -52,7 +52,7 @@ namespace Perceptrone_logic
             this.size = size + 1;
             arr_entrances = new entrances[this.size];
 
-            arr_entrances.SetValue(new entrances(true, new Random().Next(-2, 2)), 0);
+            arr_entrances.SetValue(new entrances(true, new Random().NextDouble()), 0);
             for (int i = 1; i < this.size; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
@@ -94,6 +94,12 @@ namespace Perceptrone_logic
             ChangeEntrancesState(testMas);
             return CalcY() >= activation_threshold_Y ? Name : null;
         }
+        public Tuple<char,double>? GetAnswerWithPercent(int[] testMas)
+        {
+            ChangeEntrancesState(testMas);
+            var y = CalcY();
+            return y >= activation_threshold_Y ? new Tuple<char,double>(Name,y) : null;
+        }
 
         private bool LearnByOneExample(int[] masState, bool desire_response)
         {
@@ -104,9 +110,10 @@ namespace Perceptrone_logic
             {
                 return true;
             }
-            ///neural error \ нейронна помилка
             var e = (Convert.ToInt32(desire_response) - rez_y);
+            ///neural error \ нейронна помилка
             var ne = Learning_speed * e * (rez_y * (1 - rez_y));
+            //var ne = Learning_speed * e;
             for (int i = 0; i < size; i++)
             {
                 arr_entrances[i].weight += ne * Convert.ToInt32(arr_entrances[i].is_active);

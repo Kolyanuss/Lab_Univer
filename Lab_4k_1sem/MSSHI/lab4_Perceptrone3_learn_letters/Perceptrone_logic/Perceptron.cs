@@ -64,7 +64,7 @@
         {
             for (int i = 0; i < neirons.Length; i++)
             {
-                var x = neirons[i].GetAnswer(arrWithState);
+                var x = neirons[i].GetAnswerWithPercent(arrWithState);
                 if (x != null)
                 {
                     return "Це " + x;
