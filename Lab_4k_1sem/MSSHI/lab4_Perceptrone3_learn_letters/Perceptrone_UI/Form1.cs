@@ -2,6 +2,7 @@ using Perceptrone_logic;
 using DataBlock;
 using System.Resources;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Perceptrone_UI
 {
@@ -14,6 +15,7 @@ namespace Perceptrone_UI
             public ArrayPoints(int size)
             {
                 if (size <= 0) { size = 2; }
+                points = new Point[size];
             }
             public void SetPoint(int x, int y)
             {
@@ -41,6 +43,9 @@ namespace Perceptrone_UI
 
         private bool isMouseDown = false;
         private ArrayPoints arrayPoints = new ArrayPoints(2);
+        Bitmap map = new Bitmap(100, 100);
+        Graphics graphics;
+        Pen pen = new Pen(Color.Black, 3f);
 
         public Form1()
         {
@@ -48,6 +53,7 @@ namespace Perceptrone_UI
             myPerc = new Perceptron(sizeX, sizeY);
             dataToLearn = new List<Tuple<int[], char>>();
             InitializeMyLetterButton();
+            SetSizeBitmap();
         }
 
         private void InitializeMyLetterButton()
@@ -140,6 +146,11 @@ namespace Perceptrone_UI
             filePath = string.Empty;
             selected_array = new int[myPerc.generalSize];
             label_SelectedArr.Text = "";
+
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+
         }
 
         private void AddToLearn(object sender, EventArgs e)
@@ -186,17 +197,32 @@ namespace Perceptrone_UI
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             isMouseDown = true;
-
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
+            arrayPoints.ResetPoints();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-
+            if (!isMouseDown) { return; }
+            arrayPoints.SetPoint(e.X, e.Y);
+            if (arrayPoints.GetCountPoints() >= 2)
+            {
+                graphics.DrawLines(pen, arrayPoints.GetPoints());
+                pictureBox1.Image = map;
+                arrayPoints.SetPoint(e.X, e.Y);
+            }
+        }
+        private void SetSizeBitmap()
+        {
+            Rectangle rectangle = Screen.PrimaryScreen.Bounds;
+            map = new Bitmap(rectangle.Width, rectangle.Height);
+            graphics = Graphics.FromImage(map);
+            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
         }
     }
 }
