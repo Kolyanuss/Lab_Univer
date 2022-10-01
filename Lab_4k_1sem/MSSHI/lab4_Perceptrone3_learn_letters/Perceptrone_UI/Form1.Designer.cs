@@ -33,6 +33,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_restart = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -43,7 +44,7 @@
             this.button_resetImage = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.ToolStripMenuItem_restart = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_AutoClear = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -68,6 +69,7 @@
             resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_Open,
+            this.ToolStripMenuItem_AutoClear,
             this.ToolStripMenuItem_restart});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             // 
@@ -76,6 +78,12 @@
             resources.ApplyResources(this.ToolStripMenuItem_Open, "ToolStripMenuItem_Open");
             this.ToolStripMenuItem_Open.Name = "ToolStripMenuItem_Open";
             this.ToolStripMenuItem_Open.Click += new System.EventHandler(this.ToolStripMenuItem_Open_Click);
+            // 
+            // ToolStripMenuItem_restart
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_restart, "ToolStripMenuItem_restart");
+            this.ToolStripMenuItem_restart.Name = "ToolStripMenuItem_restart";
+            this.ToolStripMenuItem_restart.Click += new System.EventHandler(this.ToolStripMenuItem_restart_Click);
             // 
             // pictureBox1
             // 
@@ -139,11 +147,11 @@
             this.panel2.Controls.Add(this.button_resetImage);
             this.panel2.Name = "panel2";
             // 
-            // ToolStripMenuItem_restart
+            // ToolStripMenuItem_AutoClear
             // 
-            resources.ApplyResources(this.ToolStripMenuItem_restart, "ToolStripMenuItem_restart");
-            this.ToolStripMenuItem_restart.Name = "ToolStripMenuItem_restart";
-            this.ToolStripMenuItem_restart.Click += new System.EventHandler(this.ToolStripMenuItem_restart_Click);
+            resources.ApplyResources(this.ToolStripMenuItem_AutoClear, "ToolStripMenuItem_AutoClear");
+            this.ToolStripMenuItem_AutoClear.Name = "ToolStripMenuItem_AutoClear";
+            this.ToolStripMenuItem_AutoClear.Click += new System.EventHandler(this.ToolStripMenuItem_AutoClear_Click);
             // 
             // Form1
             // 
@@ -185,5 +193,6 @@
         private Panel panel1;
         private Panel panel2;
         private ToolStripMenuItem ToolStripMenuItem_restart;
+        private ToolStripMenuItem ToolStripMenuItem_AutoClear;
     }
 }

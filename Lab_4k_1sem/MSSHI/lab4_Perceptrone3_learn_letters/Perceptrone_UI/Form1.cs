@@ -50,6 +50,11 @@ namespace Perceptrone_UI
         private int[]? selected_array = null;
         private char selected_char;
 
+        /// <summary>
+        /// змінна яка вказує на те чи картинка та масив активних вхідів будуть очщатись після їх використання
+        /// </summary>
+        private bool isAutoClear = false;
+
         #region variable for drawing
         private bool isMouseDown = false;
         private ArrayPoints arrayPoints = new ArrayPoints(2);
@@ -135,8 +140,16 @@ namespace Perceptrone_UI
                 if (i % sizeX == sizeX - 1)
                 {
                     label_SelectedArr.Text += "\n";
-                }else label_SelectedArr.Text += "  ";
+                }
+                else label_SelectedArr.Text += "  ";
             }
+        }
+        private void ClearUI()
+        {
+            graphics.Clear(pictureBox1.BackColor);
+            pictureBox1.Image = map;
+            selected_array = null;
+            label_SelectedArr.Text = "";
         }
 
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
@@ -144,15 +157,33 @@ namespace Perceptrone_UI
             DialogResult res = openFileDialog1.ShowDialog();
             if (res == DialogResult.OK)
             {
-                map = new Bitmap(Image.FromFile(openFileDialog1.FileName),pictureBox1.Width,pictureBox1.Height);
+                map = new Bitmap(Image.FromFile(openFileDialog1.FileName), pictureBox1.Width, pictureBox1.Height);
                 graphics = Graphics.FromImage(map);
                 pictureBox1.Image = map;
                 DrawEntrances();
             }
             else
             {
-                MessageBox.Show("Картинка не вибрана", "Потрібно вибрати картинку", 
+                MessageBox.Show("Картинка не вибрана", "Потрібно вибрати картинку",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void ToolStripMenuItem_restart_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void ToolStripMenuItem_AutoClear_Click(object sender, EventArgs e)
+        {
+            isAutoClear = !isAutoClear;
+            if (isAutoClear)
+            {
+                ToolStripMenuItem_AutoClear.Text = "Виключити Автоочищення";
+            }
+            else
+            {
+                ToolStripMenuItem_AutoClear.Text = "Включити Автоочищення";
             }
         }
 
@@ -171,7 +202,7 @@ namespace Perceptrone_UI
             dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
             label_rezult.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
             button_StarLearn.Enabled = true;
-
+            if (isAutoClear) { ClearUI(); }
         }
 
         private void button_StarLearn_Click(object sender, EventArgs e)
@@ -188,8 +219,9 @@ namespace Perceptrone_UI
             if (selected_array != null)
             {
                 label_rezult.Text = myPerc.Guess_letter(selected_array);
+                if (isAutoClear) { ClearUI(); }
             }
-            else MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка", 
+            else MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
@@ -219,15 +251,7 @@ namespace Perceptrone_UI
 
         private void button_resetImage_Click(object sender, EventArgs e)
         {
-            graphics.Clear(pictureBox1.BackColor);
-            pictureBox1.Image = map;
-            selected_array = null;
-            label_SelectedArr.Text = "";
-        }
-
-        private void ToolStripMenuItem_restart_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
+            ClearUI();
         }
     }
 }

@@ -78,11 +78,20 @@
   <data name="label_rezult.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 25</value>
   </data>
+  <data name="ToolStripMenuItem_Open.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 22</value>
+  </data>
   <data name="ToolStripMenuItem_Open.Text" xml:space="preserve">
     <value>Відкрити</value>
   </data>
+  <data name="ToolStripMenuItem_AutoClear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 22</value>
+  </data>
+  <data name="ToolStripMenuItem_AutoClear.Text" xml:space="preserve">
+    <value>Включити Автоочищення</value>
+  </data>
   <data name="ToolStripMenuItem_restart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>217, 22</value>
   </data>
   <data name="ToolStripMenuItem_restart.Text" xml:space="preserve">
     <value>Перезапуск</value>
