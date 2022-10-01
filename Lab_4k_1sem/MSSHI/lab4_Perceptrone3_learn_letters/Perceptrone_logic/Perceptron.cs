@@ -67,7 +67,7 @@
                 var x = neirons[i].GetAnswerWithPercent(arrWithState);
                 if (x != null)
                 {
-                    return "Це " + x.Item1 + " з вірогідністю в "+ String.Format("{0:0.00}", x.Item2);
+                    return "Це " + x.Item1 + " з вірогідністю в "+ String.Format("{0:0.0000}", x.Item2*100) + "%";
                 }
             }
             return "Не вдається впізнати літеру!";
