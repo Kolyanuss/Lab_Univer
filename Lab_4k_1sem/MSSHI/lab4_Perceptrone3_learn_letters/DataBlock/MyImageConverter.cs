@@ -9,11 +9,11 @@ namespace DataBlock
         /// <param name="filename"> шлях до  файлу </param>
         /// <param name="nx"> кількість частин по X </param>
         /// <param name="ny"> кількість частин по Y </param>
-        private static List<Bitmap> SplitImage(string filename, int nx, int ny)
+        private static List<Bitmap> SplitImage(Image img, int nx, int ny)
         {
-            List<Bitmap> rezult = new List<Bitmap>();
+            Image image = (Image)img.Clone();
 
-            Image image = Image.FromFile(filename);
+            List <Bitmap> rezult = new List<Bitmap>();
 
             int w = image.Width;
             int h = image.Height;
@@ -66,10 +66,10 @@ namespace DataBlock
             return rezult;
         }
 
-        public static int[] GetArrFromImage(string PathToImage, int sizeX, int sizeY)
+        public static int[] GetArrFromImage(Image image, int sizeX, int sizeY)
         {
             var rezult = new int[sizeX * sizeY];
-            var list = SplitImage(PathToImage, sizeX, sizeY);
+            var list = SplitImage(image, sizeX, sizeY);
             for (int k = 0; k < list.Count; k++)
             {
                 rezult[k] = 0;
