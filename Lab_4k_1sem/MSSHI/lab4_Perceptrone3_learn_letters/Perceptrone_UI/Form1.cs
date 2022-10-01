@@ -8,6 +8,9 @@ namespace Perceptrone_UI
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// additional class for drawing
+        /// </summary>
         private class ArrayPoints
         {
             private int index = 0;
@@ -30,32 +33,41 @@ namespace Perceptrone_UI
             public Point[] GetPoints() { return points; }
         }
 
+        #region variable
         public Perceptron myPerc;
-        private List<Tuple<int[], char>> dataToLearn;
-        private int[] selected_array;
-        private char selected_char;
-        private string filePath = string.Empty;
+        /// <summary>
+        /// розмір вхідних даних по X
+        /// </summary>
+        private int sizeX = 13;
+        /// <summary>
+        /// розмір вхідних даних по Y
+        /// </summary>
+        private int sizeY = 13;
 
+        private List<Tuple<int[], char>> dataToLearn;
         private List<Button> buttonListWithLetter;
 
-        private int sizeX = 15;
-        private int sizeY = 15;
+        private int[]? selected_array = null;
+        private char selected_char;
 
+        #region variable for drawing
         private bool isMouseDown = false;
         private ArrayPoints arrayPoints = new ArrayPoints(2);
-        Bitmap map = new Bitmap(100, 100);
+        Bitmap map = new Bitmap(10, 10);
         Graphics graphics;
         Pen pen = new Pen(Color.Black, 3f);
+        #endregion
+        #endregion
 
+        #region ctor
         public Form1()
         {
             InitializeComponent();
             myPerc = new Perceptron(sizeX, sizeY);
             dataToLearn = new List<Tuple<int[], char>>();
             InitializeMyLetterButton();
-            SetSizeBitmap();
+            InitializeSizeBitmap();
         }
-
         private void InitializeMyLetterButton()
         {
             char A_letter = Convert.ToChar(1040);
@@ -103,74 +115,63 @@ namespace Perceptrone_UI
                 buttonListWithLetter.Add(temp);
             }
         }
-
-        private bool checkFilePath()
+        private void InitializeSizeBitmap()
         {
-            if (string.IsNullOrEmpty(filePath) || string.IsNullOrWhiteSpace(filePath))
+            map = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            graphics = Graphics.FromImage(map);
+            graphics.Clear(pictureBox1.BackColor);
+            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+        }
+        #endregion
+
+        private void DrawEntrances()
+        {
+            selected_array = MyImageConverter.GetArrFromImage(pictureBox1.Image, myPerc.sizeX, myPerc.sizeY);
+            label_SelectedArr.Text = "";
+            for (int i = 0; i < selected_array.Length; i++)
             {
-                MessageBox.Show("Картинка не вибрана", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                label_SelectedArr.Text += selected_array[i];
+                if (i % sizeX == sizeX - 1)
+                {
+                    label_SelectedArr.Text += "\n";
+                }else label_SelectedArr.Text += "  ";
             }
-            return true;
         }
 
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
         {
             DialogResult res = openFileDialog1.ShowDialog();
-
             if (res == DialogResult.OK)
             {
-                filePath = openFileDialog1.FileName;
-                pictureBox1.Image = Image.FromFile(filePath);
-                selected_array = MyImageConverter.GetArrFromImage(filePath, myPerc.sizeX, myPerc.sizeY);
-
-                label_SelectedArr.Text = "";
-                for (int i = 0; i < selected_array.Length; i++)
-                {
-                    label_SelectedArr.Text += selected_array[i] + " ";
-                    if (i % sizeX == sizeX - 1)
-                    {
-                        label_SelectedArr.Text += "\n";
-                    }
-                }
+                map = new Bitmap(Image.FromFile(openFileDialog1.FileName),pictureBox1.Width,pictureBox1.Height);
+                graphics = Graphics.FromImage(map);
+                pictureBox1.Image = map;
+                DrawEntrances();
             }
             else
             {
-                MessageBox.Show("Картинка не вибрана", "Потрібно вибрати картинку", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Картинка не вибрана", "Потрібно вибрати картинку", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-        }
-
-        private void ToolStripMenuItem_draw_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Image = null;
-            filePath = string.Empty;
-            selected_array = new int[myPerc.generalSize];
-            label_SelectedArr.Text = "";
-
-            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
-            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
-            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
-
         }
 
         private void AddToLearn(object sender, EventArgs e)
         {
-            if (checkFilePath())
+            if (selected_array == null)
             {
-                if (selected_array == null)
-                {
-                    MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                var btn = sender as Button;
-                selected_char = btn.Text[0];
-
-                dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
-                label_rezult.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
-                button_StarLearn.Enabled = true;
+                MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            var btn = sender as Button;
+            selected_char = btn.Text[0];
+
+            dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
+            label_rezult.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
+            button_StarLearn.Enabled = true;
+
         }
 
         private void button_StarLearn_Click(object sender, EventArgs e)
@@ -184,14 +185,12 @@ namespace Perceptrone_UI
 
         private void button_Recognize_Click(object sender, EventArgs e)
         {
-            if (checkFilePath())
+            if (selected_array != null)
             {
-                if (selected_array != null)
-                {
-                    label_rezult.Text = myPerc.Guess_letter(selected_array);
-                }
-                else MessageBox.Show("Помилка читання картинки", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                label_rezult.Text = myPerc.Guess_letter(selected_array);
             }
+            else MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка", 
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -203,6 +202,7 @@ namespace Perceptrone_UI
         {
             isMouseDown = false;
             arrayPoints.ResetPoints();
+            DrawEntrances();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -216,13 +216,18 @@ namespace Perceptrone_UI
                 arrayPoints.SetPoint(e.X, e.Y);
             }
         }
-        private void SetSizeBitmap()
+
+        private void button_resetImage_Click(object sender, EventArgs e)
         {
-            Rectangle rectangle = Screen.PrimaryScreen.Bounds;
-            map = new Bitmap(rectangle.Width, rectangle.Height);
-            graphics = Graphics.FromImage(map);
-            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            graphics.Clear(pictureBox1.BackColor);
+            pictureBox1.Image = map;
+            selected_array = null;
+            label_SelectedArr.Text = "";
+        }
+
+        private void ToolStripMenuItem_restart_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }
