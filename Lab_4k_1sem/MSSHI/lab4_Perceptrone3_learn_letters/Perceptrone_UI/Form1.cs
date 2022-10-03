@@ -201,16 +201,16 @@ namespace Perceptrone_UI
 
             dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
             label_rezult.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
-            button_StarLearn.Enabled = true;
+            ToolStripMenuItem_startLearn.Enabled = true;
             if (isAutoClear) { ClearUI(); }
         }
 
         private void button_StarLearn_Click(object sender, EventArgs e)
         {
             groupBox_comands.Enabled = false;
-            button_StarLearn.Enabled = false;
+            ToolStripMenuItem_startLearn.Enabled = false;
             myPerc.StartLearn(dataToLearn);
-            button_Recognize.Enabled = true;
+            ToolStripMenuItem_recognize.Enabled = true;
             label_rezult.Text = "Навчання завершено!";
         }
 
@@ -219,6 +219,15 @@ namespace Perceptrone_UI
             if (selected_array != null)
             {
                 label_rezult.Text = myPerc.Guess_letter(selected_array);
+
+                var text = "";
+                var rez = myPerc.Guess_letter_and_return_all_percent(selected_array);
+                foreach (var item in rez)
+                {
+                    text += item + "\n";
+                }
+                label_percent_from_letter.Text = text;
+
                 if (isAutoClear) { ClearUI(); }
             }
             else MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка",

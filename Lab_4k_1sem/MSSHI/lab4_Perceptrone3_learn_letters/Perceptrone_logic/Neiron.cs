@@ -99,11 +99,17 @@ namespace Perceptrone_logic
             ChangeEntrancesState(testMas);
             return CalcY() >= activation_threshold_Y ? Name : null;
         }
-        public Tuple<char,double>? GetAnswerWithPercent(int[] testMas)
+        public Tuple<char, double>? GetAnswerWithPercent(int[] testMas)
         {
             ChangeEntrancesState(testMas);
             var y = CalcY();
-            return y >= activation_threshold_Y ? new Tuple<char,double>(Name,y) : null;
+            return y >= activation_threshold_Y ? new Tuple<char, double>(Name, y) : null;
+        }
+        public Tuple<char, double> GetAllAnswerWithPercent(int[] testMas)
+        {
+            ChangeEntrancesState(testMas);
+            var y = CalcY();
+            return new Tuple<char, double>(Name, y);
         }
 
         private bool LearnByOneExample(int[] masState, bool desire_response)

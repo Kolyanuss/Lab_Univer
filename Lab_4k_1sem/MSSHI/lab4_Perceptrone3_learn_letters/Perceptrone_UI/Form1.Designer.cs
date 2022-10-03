@@ -33,18 +33,19 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_AutoClear = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_restart = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_resetImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_startLearn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_recognize = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox_comands = new System.Windows.Forms.GroupBox();
-            this.button_Recognize = new System.Windows.Forms.Button();
-            this.button_StarLearn = new System.Windows.Forms.Button();
             this.label_SelectedArr = new System.Windows.Forms.Label();
-            this.button_resetImage = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.ToolStripMenuItem_AutoClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.label_percent_from_letter = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -61,7 +62,10 @@
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem});
+            this.файлToolStripMenuItem,
+            this.ToolStripMenuItem_resetImage,
+            this.ToolStripMenuItem_startLearn,
+            this.ToolStripMenuItem_recognize});
             this.menuStrip1.Name = "menuStrip1";
             // 
             // файлToolStripMenuItem
@@ -79,11 +83,35 @@
             this.ToolStripMenuItem_Open.Name = "ToolStripMenuItem_Open";
             this.ToolStripMenuItem_Open.Click += new System.EventHandler(this.ToolStripMenuItem_Open_Click);
             // 
+            // ToolStripMenuItem_AutoClear
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_AutoClear, "ToolStripMenuItem_AutoClear");
+            this.ToolStripMenuItem_AutoClear.Name = "ToolStripMenuItem_AutoClear";
+            this.ToolStripMenuItem_AutoClear.Click += new System.EventHandler(this.ToolStripMenuItem_AutoClear_Click);
+            // 
             // ToolStripMenuItem_restart
             // 
             resources.ApplyResources(this.ToolStripMenuItem_restart, "ToolStripMenuItem_restart");
             this.ToolStripMenuItem_restart.Name = "ToolStripMenuItem_restart";
             this.ToolStripMenuItem_restart.Click += new System.EventHandler(this.ToolStripMenuItem_restart_Click);
+            // 
+            // ToolStripMenuItem_resetImage
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_resetImage, "ToolStripMenuItem_resetImage");
+            this.ToolStripMenuItem_resetImage.Name = "ToolStripMenuItem_resetImage";
+            this.ToolStripMenuItem_resetImage.Click += new System.EventHandler(this.button_resetImage_Click);
+            // 
+            // ToolStripMenuItem_startLearn
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_startLearn, "ToolStripMenuItem_startLearn");
+            this.ToolStripMenuItem_startLearn.Name = "ToolStripMenuItem_startLearn";
+            this.ToolStripMenuItem_startLearn.Click += new System.EventHandler(this.button_StarLearn_Click);
+            // 
+            // ToolStripMenuItem_recognize
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_recognize, "ToolStripMenuItem_recognize");
+            this.ToolStripMenuItem_recognize.Name = "ToolStripMenuItem_recognize";
+            this.ToolStripMenuItem_recognize.Click += new System.EventHandler(this.button_Recognize_Click);
             // 
             // pictureBox1
             // 
@@ -105,61 +133,37 @@
             this.groupBox_comands.Name = "groupBox_comands";
             this.groupBox_comands.TabStop = false;
             // 
-            // button_Recognize
-            // 
-            resources.ApplyResources(this.button_Recognize, "button_Recognize");
-            this.button_Recognize.Name = "button_Recognize";
-            this.button_Recognize.UseVisualStyleBackColor = true;
-            this.button_Recognize.Click += new System.EventHandler(this.button_Recognize_Click);
-            // 
-            // button_StarLearn
-            // 
-            resources.ApplyResources(this.button_StarLearn, "button_StarLearn");
-            this.button_StarLearn.Name = "button_StarLearn";
-            this.button_StarLearn.UseVisualStyleBackColor = true;
-            this.button_StarLearn.Click += new System.EventHandler(this.button_StarLearn_Click);
-            // 
             // label_SelectedArr
             // 
             resources.ApplyResources(this.label_SelectedArr, "label_SelectedArr");
             this.label_SelectedArr.Name = "label_SelectedArr";
             // 
-            // button_resetImage
-            // 
-            resources.ApplyResources(this.button_resetImage, "button_resetImage");
-            this.button_resetImage.Name = "button_resetImage";
-            this.button_resetImage.UseVisualStyleBackColor = true;
-            this.button_resetImage.Click += new System.EventHandler(this.button_resetImage_Click);
-            // 
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.groupBox_comands);
-            this.panel1.Controls.Add(this.label_rezult);
-            this.panel1.Controls.Add(this.button_StarLearn);
-            this.panel1.Controls.Add(this.button_Recognize);
             this.panel1.Name = "panel1";
             // 
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.label_percent_from_letter);
             this.panel2.Controls.Add(this.label_SelectedArr);
-            this.panel2.Controls.Add(this.button_resetImage);
+            this.panel2.Controls.Add(this.label_rezult);
             this.panel2.Name = "panel2";
             // 
-            // ToolStripMenuItem_AutoClear
+            // label_percent_from_letter
             // 
-            resources.ApplyResources(this.ToolStripMenuItem_AutoClear, "ToolStripMenuItem_AutoClear");
-            this.ToolStripMenuItem_AutoClear.Name = "ToolStripMenuItem_AutoClear";
-            this.ToolStripMenuItem_AutoClear.Click += new System.EventHandler(this.ToolStripMenuItem_AutoClear_Click);
+            resources.ApplyResources(this.label_percent_from_letter, "label_percent_from_letter");
+            this.label_percent_from_letter.Name = "label_percent_from_letter";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
@@ -169,7 +173,6 @@
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -186,13 +189,14 @@
         private OpenFileDialog openFileDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private GroupBox groupBox_comands;
-        private Button button_StarLearn;
-        private Button button_Recognize;
         private Label label_SelectedArr;
-        private Button button_resetImage;
         private Panel panel1;
         private Panel panel2;
         private ToolStripMenuItem ToolStripMenuItem_restart;
         private ToolStripMenuItem ToolStripMenuItem_AutoClear;
+        private ToolStripMenuItem ToolStripMenuItem_resetImage;
+        private ToolStripMenuItem ToolStripMenuItem_startLearn;
+        private ToolStripMenuItem ToolStripMenuItem_recognize;
+        private Label label_percent_from_letter;
     }
 }

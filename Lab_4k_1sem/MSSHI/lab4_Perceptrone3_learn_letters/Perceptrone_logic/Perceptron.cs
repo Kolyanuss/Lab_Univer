@@ -67,10 +67,21 @@
                 var x = neirons[i].GetAnswerWithPercent(arrWithState);
                 if (x != null)
                 {
-                    return "Це " + x.Item1 + " з вірогідністю в "+ String.Format("{0:0.0000}", x.Item2*100) + "%";
+                    return "Це " + x.Item1 + " з вірогідністю в " + String.Format("{0:0.0000}", x.Item2 * 100) + "%";
                 }
             }
             return "Не вдається впізнати літеру!";
+        }
+
+        public List<string> Guess_letter_and_return_all_percent(int[] arrWithState)
+        {
+            List<string> list = new List<string>();
+            for (int i = 0; i < neirons.Length; i++)
+            {
+                var x = neirons[i].GetAllAnswerWithPercent(arrWithState);
+                list.Add("" + x.Item1 + "\t " + String.Format("{0:0.0000}", x.Item2 * 100) + "%");
+            }
+            return list;
         }
     }
 }
