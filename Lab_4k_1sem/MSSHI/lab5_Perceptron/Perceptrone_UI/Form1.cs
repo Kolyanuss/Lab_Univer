@@ -1,8 +1,8 @@
 using Perceptrone_logic;
 using DataBlock;
-using System.Resources;
-using System.Windows.Forms;
-using System.Drawing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Xml.Linq;
 
 namespace Perceptrone_UI
 {
@@ -154,6 +154,7 @@ namespace Perceptrone_UI
 
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "JPG and PNG|*.jpg;*.png";
             DialogResult res = openFileDialog1.ShowDialog();
             if (res == DialogResult.OK)
             {
@@ -210,7 +211,6 @@ namespace Perceptrone_UI
             groupBox_comands.Enabled = false;
             ToolStripMenuItem_startLearn.Enabled = false;
             myPerc.StartLearn(dataToLearn);
-            ToolStripMenuItem_recognize.Enabled = true;
             label_rezult.Text = "Навчання завершено!";
         }
 
@@ -261,6 +261,40 @@ namespace Perceptrone_UI
         private void button_resetImage_Click(object sender, EventArgs e)
         {
             ClearUI();
+        }
+
+        private void ToolStripMenuItem_Save_AI_Click(object sender, EventArgs e)
+        {
+            var rez = myPerc.GetWeightToSave();
+            string json = JsonSerializer.Serialize(rez);
+
+            DialogResult res = saveFileDialog1.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialog1.FileName, json);
+                MessageBox.Show("Файл збережено в: " + saveFileDialog1.FileName, "Файл збережено!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Помилка вибору шляху!", "Не вибрано шлях!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void ToolStripMenuItem_Load_AI_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "JSON|*.json";
+            DialogResult res = openFileDialog1.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                string json = File.ReadAllText(openFileDialog1.FileName);
+                myPerc.SetWeight(JsonSerializer.Deserialize<Dictionary<char, List<double>>>(json));
+            }
+            else
+            {
+                MessageBox.Show("Помилка вибору шляху!", "Не вибрано файл!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

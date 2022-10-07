@@ -33,6 +33,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Save_AI = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Load_AI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_AutoClear = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_restart = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_resetImage = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +48,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label_percent_from_letter = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -73,6 +76,8 @@
             resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_Open,
+            this.ToolStripMenuItem_Save_AI,
+            this.ToolStripMenuItem_Load_AI,
             this.ToolStripMenuItem_AutoClear,
             this.ToolStripMenuItem_restart});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
@@ -82,6 +87,18 @@
             resources.ApplyResources(this.ToolStripMenuItem_Open, "ToolStripMenuItem_Open");
             this.ToolStripMenuItem_Open.Name = "ToolStripMenuItem_Open";
             this.ToolStripMenuItem_Open.Click += new System.EventHandler(this.ToolStripMenuItem_Open_Click);
+            // 
+            // ToolStripMenuItem_Save_AI
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_Save_AI, "ToolStripMenuItem_Save_AI");
+            this.ToolStripMenuItem_Save_AI.Name = "ToolStripMenuItem_Save_AI";
+            this.ToolStripMenuItem_Save_AI.Click += new System.EventHandler(this.ToolStripMenuItem_Save_AI_Click);
+            // 
+            // ToolStripMenuItem_Load_AI
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_Load_AI, "ToolStripMenuItem_Load_AI");
+            this.ToolStripMenuItem_Load_AI.Name = "ToolStripMenuItem_Load_AI";
+            this.ToolStripMenuItem_Load_AI.Click += new System.EventHandler(this.ToolStripMenuItem_Load_AI_Click);
             // 
             // ToolStripMenuItem_AutoClear
             // 
@@ -157,6 +174,10 @@
             resources.ApplyResources(this.label_percent_from_letter, "label_percent_from_letter");
             this.label_percent_from_letter.Name = "label_percent_from_letter";
             // 
+            // saveFileDialog1
+            // 
+            resources.ApplyResources(this.saveFileDialog1, "saveFileDialog1");
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -198,5 +219,8 @@
         private ToolStripMenuItem ToolStripMenuItem_startLearn;
         private ToolStripMenuItem ToolStripMenuItem_recognize;
         private Label label_percent_from_letter;
+        private ToolStripMenuItem ToolStripMenuItem_Save_AI;
+        private ToolStripMenuItem ToolStripMenuItem_Load_AI;
+        private SaveFileDialog saveFileDialog1;
     }
 }

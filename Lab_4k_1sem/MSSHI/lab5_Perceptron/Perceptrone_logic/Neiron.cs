@@ -82,7 +82,7 @@ namespace Perceptrone_logic
             return 1 / (1 + Math.Exp(0-CalcWeight()));
         }
 
-        public void ChangeEntrancesState(int[] masState)
+        public void SetEntrancesState(int[] masState)
         {
             if (masState.Length != size - 1)
             {
@@ -96,25 +96,25 @@ namespace Perceptrone_logic
 
         public char? GetAnswer(int[] testMas)
         {
-            ChangeEntrancesState(testMas);
+            SetEntrancesState(testMas);
             return CalcY() >= activation_threshold_Y ? Name : null;
         }
         public Tuple<char, double>? GetAnswerWithPercent(int[] testMas)
         {
-            ChangeEntrancesState(testMas);
+            SetEntrancesState(testMas);
             var y = CalcY();
             return y >= activation_threshold_Y ? new Tuple<char, double>(Name, y) : null;
         }
         public Tuple<char, double> GetAllAnswerWithPercent(int[] testMas)
         {
-            ChangeEntrancesState(testMas);
+            SetEntrancesState(testMas);
             var y = CalcY();
             return new Tuple<char, double>(Name, y);
         }
 
         private bool LearnByOneExample(int[] masState, bool desire_response)
         {
-            ChangeEntrancesState(masState);
+            SetEntrancesState(masState);
             var rez_y = this.CalcY();
             if ((Convert.ToInt32(desire_response) == 1 && rez_y >= activation_threshold_Y) ||
                 (Convert.ToInt32(desire_response) == 0 && rez_y <= 1 - activation_threshold_Y))
@@ -145,6 +145,25 @@ namespace Perceptrone_logic
                         rez = false;
                     }
                 }
+            }
+        }
+
+        public Tuple<char, List<double>> GetWeightToSave()
+        {            
+            var list = new List<double>();
+            foreach (var item in arr_entrances)
+            {
+                list.Add(item.weight);
+            }
+            return new Tuple<char, List<double>>(Name, list);
+            
+        }
+
+        public void SetEntrancesWeight(List<double> list)
+        {
+            for (int i = 0; i < arr_entrances.Length; i++)
+            {
+                arr_entrances[i].weight = list[i];
             }
         }
     }

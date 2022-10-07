@@ -83,5 +83,24 @@
             }
             return list;
         }
+
+        public Dictionary<char, List<double>> GetWeightToSave()
+        {
+            var rez = new Dictionary<char, List<double>>();
+            foreach (var item in neirons)
+            {
+                var x = item.GetWeightToSave();
+                rez.Add(x.Item1, x.Item2);
+            }
+            return rez;
+        }
+
+        public void SetWeight(Dictionary<char, List<double>> items)
+        {
+            for (int i = 0; i < neirons.Length; i++)
+            {
+                neirons[i].SetEntrancesWeight(items[neirons[i].Name]);
+            }
+        }
     }
 }
