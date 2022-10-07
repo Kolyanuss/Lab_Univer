@@ -33,7 +33,17 @@ namespace Perceptrone_logic
         /// </summary>
         public double activation_threshold_Y = 0.98;
 
+        public Neiron(int CountOfEntrances)
+        {
+            this.CountOfEntrances = CountOfEntrances + 1;
+            arr_entrances = new entrances[this.CountOfEntrances];
 
+            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2, 2)), 0);
+            for (int i = 1; i < this.CountOfEntrances; i++)
+            {
+                arr_entrances.SetValue(new entrances(), i);
+            }
+        }
         public Neiron(char name)
         {
             this.Name = name;
@@ -46,10 +56,10 @@ namespace Perceptrone_logic
                 arr_entrances.SetValue(new entrances(), i);
             }
         }
-        public Neiron(char name, int size)
+        public Neiron(char name, int CountOfEntrances)
         {
             this.Name = name;
-            this.CountOfEntrances = size + 1;
+            this.CountOfEntrances = CountOfEntrances + 1;
             arr_entrances = new entrances[this.CountOfEntrances];
 
             arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2, 2)), 0);
@@ -81,12 +91,12 @@ namespace Perceptrone_logic
         {
             return 1 / (1 + Math.Exp(0 - CalcWeight()));
         }
-
-        public char? GetAnswer(int[] testMas)
+        public int GetAnswer(int[] testMas)
         {
             SetEntrancesState(testMas);
-            return CalcY() >= activation_threshold_Y ? Name : null;
+            return CalcY() >= activation_threshold_Y ? 1 : 0;
         }
+
         public Tuple<char, double>? GetAnswerWithPercent(int[] testMas)
         {
             SetEntrancesState(testMas);
@@ -131,7 +141,7 @@ namespace Perceptrone_logic
         public void SetEntrancesWeight(int id_of_entrance, double weight)
         {
             arr_entrances[id_of_entrance].weight = weight;
-        }        
+        }
         public void SetEntrancesState(int[] masState)
         {
             if (masState.Length != CountOfEntrances - 1)
