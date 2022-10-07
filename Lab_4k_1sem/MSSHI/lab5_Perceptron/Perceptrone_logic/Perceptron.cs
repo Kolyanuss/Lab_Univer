@@ -56,7 +56,7 @@
         {
             for (int i = 0; i < numOfLetter; i++)
             {
-                neirons[i].LearnBySeveralExample(data);
+                Teacher.Learn_Derivation_of_the_delta_rule(neirons[i],data);
             }
         }
 
@@ -89,7 +89,7 @@
             var rez = new Dictionary<char, List<double>>();
             foreach (var item in neirons)
             {
-                var x = item.GetWeightToSave();
+                var x = item.GetEntranceWeight();
                 rez.Add(x.Item1, x.Item2);
             }
             return rez;

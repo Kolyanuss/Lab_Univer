@@ -20,7 +20,7 @@ namespace Perceptrone_logic
             }
         }
 
-        public int size { get; }
+        public int CountOfEntrances { get; }
         private entrances[] arr_entrances; // всі входи в перцептрона
         public double Tetta // sensitivity threshold || поріг чутливості
         {
@@ -37,11 +37,11 @@ namespace Perceptrone_logic
         public Neiron(char name)
         {
             this.Name = name;
-            this.size = 48 + 1;
-            arr_entrances = new entrances[size];
+            this.CountOfEntrances = 48 + 1;
+            arr_entrances = new entrances[CountOfEntrances];
 
-            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2,2)), 0);
-            for (int i = 1; i < size; i++)
+            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2, 2)), 0);
+            for (int i = 1; i < CountOfEntrances; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
             }
@@ -49,11 +49,11 @@ namespace Perceptrone_logic
         public Neiron(char name, int size)
         {
             this.Name = name;
-            this.size = size + 1;
-            arr_entrances = new entrances[this.size];
+            this.CountOfEntrances = size + 1;
+            arr_entrances = new entrances[this.CountOfEntrances];
 
             arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2, 2)), 0);
-            for (int i = 1; i < this.size; i++)
+            for (int i = 1; i < this.CountOfEntrances; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
             }
@@ -67,7 +67,7 @@ namespace Perceptrone_logic
         private double CalcWeight()
         {
             double S_weight = 0;
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < CountOfEntrances; i++)
             {
                 S_weight += Convert.ToInt32(arr_entrances[i].is_active) * arr_entrances[i].weight;
             }
@@ -77,21 +77,9 @@ namespace Perceptrone_logic
         /// <summary>
         /// Сигмоїдна функція активації
         /// </summary>
-        private double CalcY()
+        public double CalcY()
         {
-            return 1 / (1 + Math.Exp(0-CalcWeight()));
-        }
-
-        public void SetEntrancesState(int[] masState)
-        {
-            if (masState.Length != size - 1)
-            {
-                throw new Exception("Error with size dimension");
-            }
-            for (int i = 1; i < size; i++)
-            {
-                arr_entrances[i].is_active = Convert.ToBoolean(masState[i - 1]);
-            }
+            return 1 / (1 + Math.Exp(0 - CalcWeight()));
         }
 
         public char? GetAnswer(int[] testMas)
@@ -112,51 +100,25 @@ namespace Perceptrone_logic
             return new Tuple<char, double>(Name, y);
         }
 
-        private bool LearnByOneExample(int[] masState, bool desire_response)
-        {
-            SetEntrancesState(masState);
-            var rez_y = this.CalcY();
-            if ((Convert.ToInt32(desire_response) == 1 && rez_y >= activation_threshold_Y) ||
-                (Convert.ToInt32(desire_response) == 0 && rez_y <= 1 - activation_threshold_Y))
-            {
-                return true;
-            }
-            var e = (Convert.ToInt32(desire_response) - rez_y);
-            ///neural error \ нейронна помилка
-            var ne = Learning_speed * e * (rez_y * (1 - rez_y));
-            //var ne = Learning_speed * e;
-            for (int i = 0; i < size; i++)
-            {
-                arr_entrances[i].weight += ne * Convert.ToInt32(arr_entrances[i].is_active);
-            }
-            return false;
-        }
 
-        public void LearnBySeveralExample(List<Tuple<int[], char>> ArrWithExample)
+        #region get\set
+        public Tuple<char, List<double>> GetEntranceWeight()
         {
-            bool rez = false;
-            while (!rez)
-            {
-                rez = true;
-                foreach (var item in ArrWithExample)
-                {
-                    if (!LearnByOneExample(item.Item1, (item.Item2 == this.Name) ? true : false))
-                    {
-                        rez = false;
-                    }
-                }
-            }
-        }
-
-        public Tuple<char, List<double>> GetWeightToSave()
-        {            
             var list = new List<double>();
             foreach (var item in arr_entrances)
             {
                 list.Add(item.weight);
             }
             return new Tuple<char, List<double>>(Name, list);
-            
+
+        }
+        public double GetEntranceWeight(int id_of_entrance)
+        {
+            return arr_entrances[id_of_entrance].weight;
+        }
+        public bool GetEntranceState(int id_of_entrance)
+        {
+            return arr_entrances[id_of_entrance].is_active;
         }
 
         public void SetEntrancesWeight(List<double> list)
@@ -166,5 +128,21 @@ namespace Perceptrone_logic
                 arr_entrances[i].weight = list[i];
             }
         }
+        public void SetEntrancesWeight(int id_of_entrance, double weight)
+        {
+            arr_entrances[id_of_entrance].weight = weight;
+        }        
+        public void SetEntrancesState(int[] masState)
+        {
+            if (masState.Length != CountOfEntrances - 1)
+            {
+                throw new Exception("Error with size dimension");
+            }
+            for (int i = 1; i < CountOfEntrances; i++)
+            {
+                arr_entrances[i].is_active = Convert.ToBoolean(masState[i - 1]);
+            }
+        }
+        #endregion
     }
 }
