@@ -202,16 +202,22 @@ namespace Perceptrone_UI
 
             dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
             label_rezult.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
-            ToolStripMenuItem_startLearn.Enabled = true;
+
             if (isAutoClear) { ClearUI(); }
         }
 
         private void button_StarLearn_Click(object sender, EventArgs e)
         {
-            groupBox_comands.Enabled = false;
-            ToolStripMenuItem_startLearn.Enabled = false;
-            myPerc.StartLearn(dataToLearn);
-            label_rezult.Text = "Навчання завершено!";
+            if (dataToLearn.Count > 0)
+            {
+                myPerc.StartLearn(dataToLearn);
+                label_rezult.Text = "Навчання завершено!";
+                dataToLearn.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Список навчальних даних пустий!","Інфо", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void button_Recognize_Click(object sender, EventArgs e)

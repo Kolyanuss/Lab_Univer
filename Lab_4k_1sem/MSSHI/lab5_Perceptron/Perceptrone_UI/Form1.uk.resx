@@ -105,9 +105,6 @@
   <data name="ToolStripMenuItem_resetImage.Text" xml:space="preserve">
     <value>Очистити</value>
   </data>
-  <data name="ToolStripMenuItem_startLearn.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ToolStripMenuItem_startLearn.Text" xml:space="preserve">
     <value>Почати навчання</value>
   </data>
