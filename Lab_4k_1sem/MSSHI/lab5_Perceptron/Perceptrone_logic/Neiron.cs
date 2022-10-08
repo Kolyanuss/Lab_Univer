@@ -93,6 +93,16 @@
             SetEntrancesState(testMas);
             return CalcY() >= activation_threshold_Y ? 1 : 0;
         }
+        public bool GetAnswerBool(int[] testMas)
+        {
+            SetEntrancesState(testMas);
+            return CalcY() >= activation_threshold_Y ? true : false;
+        }
+        public double GetAnswerDouble(int[] testMas)
+        {
+            SetEntrancesState(testMas);
+            return CalcY();
+        }
 
         public Tuple<char, double>? GetAnswerWithPercent(int[] testMas)
         {

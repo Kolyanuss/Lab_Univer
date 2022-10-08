@@ -35,6 +35,7 @@
 
         public void StartLearn(List<Tuple<int[], bool>> data)
         {
+            Teacher.Learn_xor_backpropagation(layers, data);
         }
 
         /// <summary>
@@ -49,18 +50,22 @@
                 return "Неправильна довжина вхідного масиву даних!";
             }
 
-            var inputData = arrWithState;
-            for (int j = 0; j < countOfHidenLayers + 1; j++)
+            var inputData = arrWithState;            
+            for (int j = 0; j < layers.Count; j++)
             {
-                int[] outputData = new int[layers[j].Length];
+                double[] outputData = new double[layers[j].Length];
                 for (int i = 0; i < outputData.Length; i++)
                 {
-                    outputData[i] = layers[j][i].GetAnswer(inputData);
+                    outputData[i] = layers[j][i].GetAnswerDouble(inputData);
                 }
-                inputData = outputData;
+                inputData = new int[outputData.Length];
+                for (int i = 0; i < inputData.Length; i++)
+                {
+                    inputData[i] = (outputData[i] >= layers[j][i].activation_threshold_Y) ? 1 : 0;
+                }
             }
 
-            var res = "";
+            string res = "";
             foreach (var item in inputData)
             {
                 res += item + " ";

@@ -54,10 +54,8 @@
 
         public void StartLearn(List<Tuple<int[], char>> data)
         {
-            for (int i = 0; i < numOfLetter; i++)
-            {
-                Teacher.Learn_letter_DerivationOfTheDeltaRule(neirons[i],data);
-            }
+            Teacher.Learn_letter_DerivationOfTheDeltaRule(neirons, data);
+
         }
 
         public string Guess_letter(int[] arrWithState)
