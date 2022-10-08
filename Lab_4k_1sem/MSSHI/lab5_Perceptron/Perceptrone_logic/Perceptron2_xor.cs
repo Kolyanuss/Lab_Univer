@@ -1,47 +1,71 @@
-﻿using System.Reflection.Emit;
-
-namespace Perceptrone_logic
+﻿namespace Perceptrone_logic
 {
     public class Perceptron2_xor
     {
-        private Neiron[] hiden_layer;
-        private Neiron[] output_layer;
+        public const int countOfInputEntrances = 2;
+        public const int countOfHidenLayers = 1;
+        public const int countOfNeuronInHidenLayer = 2;
+        public const int countOfNeuronInOutputLayer = 1;
+        private List<Neiron[]> layers;
 
         public Perceptron2_xor()
         {
-            hiden_layer = new Neiron[2];
-            for (int i = 0; i < hiden_layer.Length; i++)
+            layers = new List<Neiron[]>();
+
+            int countOfEntrancesInPreviousLayer = countOfInputEntrances;
+            for (int j = 0; j < countOfHidenLayers; j++)
             {
-                hiden_layer[i] = new Neiron(2);
+                Neiron[] hiden_layer = new Neiron[countOfNeuronInHidenLayer];
+                for (int i = 0; i < hiden_layer.Length; i++)
+                {
+                    hiden_layer[i] = new Neiron(countOfEntrancesInPreviousLayer);
+                }
+                layers.Add(hiden_layer);
+                countOfEntrancesInPreviousLayer = countOfNeuronInHidenLayer;
+                // countOfEntrancesInPreviousLayer = layers[layers.Count - 1].Length; // same
             }
 
-            output_layer = new Neiron[1];
+            Neiron[] output_layer = new Neiron[countOfNeuronInOutputLayer];
             for (int i = 0; i < output_layer.Length; i++)
             {
-                output_layer[i] = new Neiron(hiden_layer.Length);
+                output_layer[i] = new Neiron(countOfEntrancesInPreviousLayer);
             }
+            layers.Add(output_layer);
         }
 
         public void StartLearn(List<Tuple<int[], bool>> data)
         {
         }
 
+        /// <summary>
+        /// Видає результат роботи навченої моделі
+        /// </summary>
+        /// <param name="arrWithState">Довжина arrWithState повинна дорівнювати "countOfEntrances"</param>
+        /// <returns></returns>
         public string Get_result(int[] arrWithState)
         {
-            var inputData = arrWithState;
-            int[] outputData = new int[hiden_layer.Length];
-            for (int i = 0; i < hiden_layer.Length; i++)
+            if (arrWithState.Length != countOfInputEntrances)
             {
-                outputData[i] = hiden_layer[i].GetAnswer(inputData);
+                return "Неправильна довжина вхідного масиву даних!";
             }
 
-            inputData = outputData;
-            outputData = new int[output_layer.Length];
-            for (int i = 0; i < output_layer.Length; i++)
+            var inputData = arrWithState;
+            for (int j = 0; j < countOfHidenLayers + 1; j++)
             {
-                outputData[i] = output_layer[i].GetAnswer(inputData);
+                int[] outputData = new int[layers[j].Length];
+                for (int i = 0; i < outputData.Length; i++)
+                {
+                    outputData[i] = layers[j][i].GetAnswer(inputData);
+                }
+                inputData = outputData;
             }
-            return "" + outputData;
+
+            var res = "";
+            foreach (var item in inputData)
+            {
+                res += item + " ";
+            }
+            return res;
         }
     }
 }

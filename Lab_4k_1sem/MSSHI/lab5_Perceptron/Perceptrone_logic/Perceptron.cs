@@ -56,7 +56,7 @@
         {
             for (int i = 0; i < numOfLetter; i++)
             {
-                Teacher.Learn_Derivation_of_the_delta_rule(neirons[i],data);
+                Teacher.Learn_letter_DerivationOfTheDeltaRule(neirons[i],data);
             }
         }
 

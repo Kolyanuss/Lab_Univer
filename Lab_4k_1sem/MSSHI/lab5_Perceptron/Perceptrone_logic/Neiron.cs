@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Perceptrone_logic
+﻿namespace Perceptrone_logic
 {
     public class Neiron
     {
