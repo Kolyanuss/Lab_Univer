@@ -1,25 +1,29 @@
 ﻿using Perceptrone_logic;
 
-var examples = new List<Tuple<int[], bool>>();
+var examples = new List<Tuple<int[], double[]>>();
 examples.Add(
-    new Tuple<int[], bool>(
-        new int[] { 0, 0 }, false)
+    new Tuple<int[], double[]>(
+        new int[] { 0, 0 },
+        new double[] { 0 })
     );
 examples.Add(
-    new Tuple<int[], bool>(
-        new int[] { 0, 1 }, true)
+    new Tuple<int[], double[]>(
+        new int[] { 0, 1 },
+        new double[] { 1 })
     );
 examples.Add(
-    new Tuple<int[], bool>(
-        new int[] { 1, 0 }, true)
+    new Tuple<int[], double[]>(
+        new int[] { 1, 0 },
+        new double[] { 1 })
     );
 examples.Add(
-    new Tuple<int[], bool>(
-        new int[] { 1, 1 }, false)
+    new Tuple<int[], double[]>(
+        new int[] { 1, 1 },
+        new double[] { 0 })
     );
 
 
 var perc = new Perceptron2_xor();
-perc.StartLearn(examples);
+perc.StartLearn(examples,100);
 var res = perc.Get_result(new int[] { 1, 0 });
-Console.WriteLine(res);
+Console.WriteLine("Результат: " + res);

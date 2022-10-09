@@ -4,7 +4,7 @@
     {
         private class entrances // вхід
         {
-            public bool is_active { get; set; }
+            public double entrance { get; set; }
             public double weight { get; set; }
             public entrances()
             {
@@ -12,7 +12,12 @@
             }
             public entrances(bool isactive, double weight)
             {
-                this.is_active = isactive;
+                this.entrance = Convert.ToDouble(isactive);
+                this.weight = weight;
+            }
+            public entrances(double isactive, double weight)
+            {
+                this.entrance = isactive;
                 this.weight = weight;
             }
         }
@@ -35,7 +40,7 @@
             this.CountOfEntrances = CountOfEntrances + 1;
             arr_entrances = new entrances[this.CountOfEntrances];
 
-            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2, 2)), 0);
+            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-1, 1)), 0);
             for (int i = 1; i < this.CountOfEntrances; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
@@ -47,7 +52,7 @@
             this.CountOfEntrances = 48 + 1;
             arr_entrances = new entrances[CountOfEntrances];
 
-            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2, 2)), 0);
+            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-1, 1)), 0);
             for (int i = 1; i < CountOfEntrances; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
@@ -59,7 +64,7 @@
             this.CountOfEntrances = CountOfEntrances + 1;
             arr_entrances = new entrances[this.CountOfEntrances];
 
-            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-2, 2)), 0);
+            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-1, 1)), 0);
             for (int i = 1; i < this.CountOfEntrances; i++)
             {
                 arr_entrances.SetValue(new entrances(), i);
@@ -76,7 +81,7 @@
             double S_weight = 0;
             for (int i = 0; i < CountOfEntrances; i++)
             {
-                S_weight += Convert.ToInt32(arr_entrances[i].is_active) * arr_entrances[i].weight;
+                S_weight += arr_entrances[i].entrance * arr_entrances[i].weight;
             }
             return S_weight;
         }
@@ -84,36 +89,47 @@
         /// <summary>
         /// Сигмоїдна функція активації
         /// </summary>
-        public double CalcY()
+        public double CalcY_SigmoidFunc()
         {
             return 1 / (1 + Math.Exp(0 - CalcWeight()));
         }
-        public int GetAnswer(int[] testMas)
+
+        public double GetNeuralErrorBySigmoidFunc(double desire_response)
+        {
+            var Y = CalcY_SigmoidFunc();
+            return Y * (1 - Y) * (desire_response - Y);
+        }
+
+        public int GetAnswerInt(int[] testMas)
         {
             SetEntrancesState(testMas);
-            return CalcY() >= activation_threshold_Y ? 1 : 0;
+            return CalcY_SigmoidFunc() >= activation_threshold_Y ? 1 : 0;
         }
         public bool GetAnswerBool(int[] testMas)
         {
             SetEntrancesState(testMas);
-            return CalcY() >= activation_threshold_Y ? true : false;
+            return CalcY_SigmoidFunc() >= activation_threshold_Y ? true : false;
         }
         public double GetAnswerDouble(int[] testMas)
         {
             SetEntrancesState(testMas);
-            return CalcY();
+            return CalcY_SigmoidFunc();
         }
-
+        public double GetAnswerDouble(double[] testMas)
+        {
+            SetEntrancesState(testMas);
+            return CalcY_SigmoidFunc();
+        }
         public Tuple<char, double>? GetAnswerWithPercent(int[] testMas)
         {
             SetEntrancesState(testMas);
-            var y = CalcY();
+            var y = CalcY_SigmoidFunc();
             return y >= activation_threshold_Y ? new Tuple<char, double>(Name, y) : null;
         }
         public Tuple<char, double> GetAllAnswerWithPercent(int[] testMas)
         {
             SetEntrancesState(testMas);
-            var y = CalcY();
+            var y = CalcY_SigmoidFunc();
             return new Tuple<char, double>(Name, y);
         }
 
@@ -133,9 +149,23 @@
         {
             return arr_entrances[id_of_entrance].weight;
         }
-        public bool GetEntranceState(int id_of_entrance)
+        /// <summary>
+        /// parametr id_of_entrance always be +1 for ignore displacement entrance
+        /// </summary>
+        public double GetEntranceWeightWithRelationToNeuron(int id_of_entrance)
         {
-            return arr_entrances[id_of_entrance].is_active;
+            return arr_entrances[id_of_entrance+1].weight;
+        }
+        public double GetEntranceState(int id_of_entrance)
+        {
+            return arr_entrances[id_of_entrance].entrance;
+        }
+        /// <summary>
+        /// parametr id_of_entrance always be +1 for ignore displacement entrance
+        /// </summary>
+        public double GetEntranceStateWithRelationToNeuron(int id_of_entrance)
+        {
+            return arr_entrances[id_of_entrance+1].entrance;
         }
 
         public void SetEntrancesWeight(List<double> list)
@@ -157,7 +187,18 @@
             }
             for (int i = 1; i < CountOfEntrances; i++)
             {
-                arr_entrances[i].is_active = Convert.ToBoolean(masState[i - 1]);
+                arr_entrances[i].entrance = Convert.ToDouble(masState[i - 1]);
+            }
+        }
+        public void SetEntrancesState(double[] masState)
+        {
+            if (masState.Length != CountOfEntrances - 1)
+            {
+                throw new Exception("Error with size dimension");
+            }
+            for (int i = 1; i < CountOfEntrances; i++)
+            {
+                arr_entrances[i].entrance = masState[i - 1];
             }
         }
         #endregion

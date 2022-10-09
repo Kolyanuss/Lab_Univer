@@ -6,6 +6,7 @@
         public const int countOfHidenLayers = 1;
         public const int countOfNeuronInHidenLayer = 2;
         public const int countOfNeuronInOutputLayer = 1;
+        public int countOfEpochs = 100;
         private List<Neiron[]> layers;
 
         public Perceptron2_xor()
@@ -33,9 +34,11 @@
             layers.Add(output_layer);
         }
 
-        public void StartLearn(List<Tuple<int[], bool>> data)
+        public void StartLearn(List<Tuple<int[], double[]>> data, int countOfEpochs = 100)
         {
-            Teacher.Learn_xor_backpropagation(layers, data);
+            this.countOfEpochs = countOfEpochs;
+            var res = Teacher.Learn_xor_backpropagation(layers, data, this.countOfEpochs);
+            Console.WriteLine("Кількість пройдених епох: {0}. Середньоквадратична помилка: {1}", res.Item1, res.Item2);
         }
 
         /// <summary>
@@ -50,7 +53,7 @@
                 return "Неправильна довжина вхідного масиву даних!";
             }
 
-            var inputData = arrWithState;            
+            var inputData = arrWithState;
             for (int j = 0; j < layers.Count; j++)
             {
                 double[] outputData = new double[layers[j].Length];
