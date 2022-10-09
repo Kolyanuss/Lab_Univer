@@ -1,4 +1,5 @@
-﻿namespace Perceptrone_logic
+﻿using DataBlock;
+namespace Perceptrone_logic
 {
     public static class Teacher
     {
@@ -157,6 +158,7 @@
                     #endregion
                     #endregion
                 }
+                ArrWithExamples.Shuffle();
                 exist_epochs_of_learning += 1;
                 root_mean_squared_error = 1 / (ArrWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error;
             }

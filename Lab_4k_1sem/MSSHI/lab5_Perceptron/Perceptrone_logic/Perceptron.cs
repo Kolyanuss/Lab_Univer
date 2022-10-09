@@ -18,25 +18,16 @@
 
         public Perceptron()
         {
-            neirons = new Neiron[numOfLetter];
-
-            char A_letter = Convert.ToChar(1040);
-            char[] additionalVal = new char[7] { 'Ґ', 'Є', 'І', 'Ї', 'Ь', 'Ю', 'Я' };
-
-            for (int i = 0; i < neirons.Length - 7; i++)
-            {
-                neirons[i] = new Neiron(A_letter++);
-            }
-            for (int i = 0; i < additionalVal.Length; i++)
-            {
-                neirons[neirons.Length - 7 + i] = new Neiron(additionalVal[i]);
-            }
+            BasicInit();
         }
-
         public Perceptron(int sizeX, int sizeY)
         {
             this.sizeX = sizeX;
             this.sizeY = sizeY;
+            BasicInit();
+        }
+        private void BasicInit()
+        {
             neirons = new Neiron[numOfLetter];
 
             char A_letter = Convert.ToChar(1040);
@@ -55,7 +46,6 @@
         public void StartLearn(List<Tuple<int[], char>> data)
         {
             Teacher.Learn_letter_DerivationOfTheDeltaRule(neirons, data);
-
         }
 
         public string Guess_letter(int[] arrWithState)

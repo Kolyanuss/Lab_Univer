@@ -38,30 +38,11 @@
         public Neiron(int CountOfEntrances)
         {
             this.CountOfEntrances = CountOfEntrances + 1;
-            arr_entrances = new entrances[this.CountOfEntrances];
-
-            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-1, 1)), 0);
-            for (int i = 1; i < this.CountOfEntrances; i++)
-            {
-                arr_entrances.SetValue(new entrances(), i);
-            }
+            BasicInit();
         }
-        public Neiron(char name)
+        public Neiron(char name, int CountOfEntrances) : this(CountOfEntrances) => this.Name = name;
+        private void BasicInit()
         {
-            this.Name = name;
-            this.CountOfEntrances = 48 + 1;
-            arr_entrances = new entrances[CountOfEntrances];
-
-            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-1, 1)), 0);
-            for (int i = 1; i < CountOfEntrances; i++)
-            {
-                arr_entrances.SetValue(new entrances(), i);
-            }
-        }
-        public Neiron(char name, int CountOfEntrances)
-        {
-            this.Name = name;
-            this.CountOfEntrances = CountOfEntrances + 1;
             arr_entrances = new entrances[this.CountOfEntrances];
 
             arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-1, 1)), 0);
