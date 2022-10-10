@@ -28,12 +28,13 @@
         {
             get { return arr_entrances[0].weight; }
         }
-        public double Learning_speed = 0.05;
+        public double Learning_speed = 0.8;
         public char Name;
         /// <summary>
         /// Поріг активації сигмоїдної функції "y = fo(S)"
         /// </summary>
         public double activation_threshold_Y = 0.98;
+        private Tuple<double, double> rangeOfEntraceWeight = new Tuple<double, double>(-0.5, 0.5);
 
         public Neiron(int CountOfEntrances)
         {
@@ -44,11 +45,10 @@
         private void BasicInit()
         {
             arr_entrances = new entrances[this.CountOfEntrances];
-
-            arr_entrances.SetValue(new entrances(true, GetRandNumInRange(-1, 1)), 0);
-            for (int i = 1; i < this.CountOfEntrances; i++)
+            //arr_entrances.SetValue(new entrances(true, GetRandNumInRange(rangeOfEntraceWeight.Item1, rangeOfEntraceWeight.Item2)), 0);
+            for (int i = 0; i < this.CountOfEntrances; i++)
             {
-                arr_entrances.SetValue(new entrances(), i);
+                arr_entrances.SetValue(new entrances(true, GetRandNumInRange(rangeOfEntraceWeight.Item1, rangeOfEntraceWeight.Item2)), i);
             }
         }
 
@@ -135,7 +135,7 @@
         /// </summary>
         public double GetEntranceWeightWithRelationToNeuron(int id_of_entrance)
         {
-            return arr_entrances[id_of_entrance+1].weight;
+            return arr_entrances[id_of_entrance + 1].weight;
         }
         public double GetEntranceState(int id_of_entrance)
         {
@@ -146,7 +146,7 @@
         /// </summary>
         public double GetEntranceStateWithRelationToNeuron(int id_of_entrance)
         {
-            return arr_entrances[id_of_entrance+1].entrance;
+            return arr_entrances[id_of_entrance + 1].entrance;
         }
 
         public void SetEntrancesWeight(List<double> list)

@@ -22,8 +22,10 @@ examples.Add(
         new double[] { 0 })
     );
 
-
-var perc = new Perceptron2_xor();
-perc.StartLearn(examples,100);
-var res = perc.Get_result(new int[] { 1, 0 });
-Console.WriteLine("Результат: " + res);
+for (int i = 0; i < 20; i++)
+{
+    var perc = new Perceptron2_xor_Copy();
+    perc.StartLearn(examples, 300);
+    var res = perc.Get_result(new int[] { 1, 1 });
+    Console.WriteLine("res: " + res);
+}
