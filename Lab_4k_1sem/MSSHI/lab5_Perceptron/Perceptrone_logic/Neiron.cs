@@ -28,13 +28,13 @@
         {
             get { return arr_entrances[0].weight; }
         }
-        public double Learning_speed = 0.8;
+        public double Learning_speed = 0.1;
         public char Name;
         /// <summary>
         /// Поріг активації сигмоїдної функції "y = fo(S)"
         /// </summary>
         public double activation_threshold_Y = 0.98;
-        private Tuple<double, double> rangeOfEntraceWeight = new Tuple<double, double>(-0.5, 0.5);
+        private Tuple<double, double> rangeOfEntraceWeight = new Tuple<double, double>(-2, 2);
 
         public Neiron(int CountOfEntrances)
         {
@@ -66,19 +66,37 @@
             }
             return S_weight;
         }
+        private double CalcWeight_WithoutTetta()
+        {
+            double S_weight = 0;
+            for (int i = 1; i < CountOfEntrances; i++)
+            {
+                S_weight += arr_entrances[i].entrance * arr_entrances[i].weight;
+            }
+            return S_weight;
+        }
 
         /// <summary>
         /// Сигмоїдна функція активації
         /// </summary>
         public double CalcY_SigmoidFunc()
         {
-            return 1 / (1 + Math.Exp(0 - CalcWeight()));
+            return (1.0 / (1.0 + Math.Exp(0 - CalcWeight()))) /*+ this.Tetta*/;
+        }
+        public double CalcY_StepFunc()
+        {
+            return CalcWeight() >= 0 ? 1 : 0;
         }
 
         public double GetNeuralErrorBySigmoidFunc(double desire_response)
         {
             var Y = CalcY_SigmoidFunc();
-            return Y * (1 - Y) * (desire_response - Y);
+            return Y * (1.0 - Y) * (desire_response - Y);
+        }
+        public double GetNeuralErrorByStepFunc(double desire_response)
+        {
+            var Y = CalcY_StepFunc();
+            return Y * (1.0 - Y) * (desire_response - Y);
         }
 
         public int GetAnswerInt(int[] testMas)
@@ -100,6 +118,16 @@
         {
             SetEntrancesState(testMas);
             return CalcY_SigmoidFunc();
+        }
+        public double GetAnswerDouble_StepFunc(int[] testMas)
+        {
+            SetEntrancesState(testMas);
+            return CalcY_StepFunc();
+        }
+        public double GetAnswerDouble_StepFunc(double[] testMas)
+        {
+            SetEntrancesState(testMas);
+            return CalcY_StepFunc();
         }
         public Tuple<char, double>? GetAnswerWithPercent(int[] testMas)
         {

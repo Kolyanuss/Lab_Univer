@@ -77,7 +77,7 @@ namespace Perceptrone_logic
             int exist_epochs_of_learning = 0;
             double root_mean_squared_error = 1;
             var counOfNeuronInLastLayer = layers[layers.Count - 1].Length;
-            while (exist_epochs_of_learning < epochs_of_learning /*&& root_mean_squared_error >= 0.1*/)
+            while (exist_epochs_of_learning < epochs_of_learning /*&& root_mean_squared_error >= 0.01*/)
             {
                 Console.WriteLine("Епоха: " + exist_epochs_of_learning);
                 double sum_squared_error = 0;
@@ -160,7 +160,7 @@ namespace Perceptrone_logic
                 }
                 ArrWithExamples.Shuffle();
                 exist_epochs_of_learning += 1;
-                root_mean_squared_error = 1 / (ArrWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error;
+                root_mean_squared_error = 1.0 / (ArrWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error;
             }
 
             return new Tuple<int, double>(exist_epochs_of_learning, root_mean_squared_error);
@@ -172,9 +172,8 @@ namespace Perceptrone_logic
             int exist_epochs_of_learning = 0;
             List<double> root_mean_squared_error = new List<double>();
             var counOfNeuronInLastLayer = 1;
-            while (exist_epochs_of_learning < epochs_of_learning /*&& root_mean_squared_error >= 0.1*/)
+            do
             {
-                double sum_squared_error_example = 0;
                 double sum_squared_error = 0;
                 foreach (var example in ArrWithExamples)
                 {
@@ -217,8 +216,8 @@ namespace Perceptrone_logic
 
                     double sumOfNeuralErrorNextLayer = NeuralError * perc.neuron_out.GetEntranceWeightWithRelationToNeuron(0);
                     ///neural error \ нейронна помилка
-                    e = rez_y * (1 - rez_y) * sumOfNeuralErrorNextLayer;
-                    ne = /*neuron.Learning_speed * */ e;
+                    e = rez_y * (1.0 - rez_y) * sumOfNeuralErrorNextLayer;
+                    ne = neuron.Learning_speed * e;
                     for (int i = 0; i < neuron.CountOfEntrances; i++)
                     {
                         var x = neuron.GetEntranceWeight(i) + ne * neuron.GetEntranceState(i);
@@ -232,8 +231,8 @@ namespace Perceptrone_logic
 
                     sumOfNeuralErrorNextLayer = NeuralError * perc.neuron_out.GetEntranceWeightWithRelationToNeuron(1);
                     ///neural error \ нейронна помилка
-                    e = rez_y * (1 - rez_y) * sumOfNeuralErrorNextLayer;
-                    ne = /*neuron.Learning_speed * */ e;
+                    e = rez_y * (1.0 - rez_y) * sumOfNeuralErrorNextLayer;
+                    ne = neuron.Learning_speed * e;
                     for (int i = 0; i < neuron.CountOfEntrances; i++)
                     {
                         var x = neuron.GetEntranceWeight(i) + ne * neuron.GetEntranceState(i);
@@ -246,8 +245,8 @@ namespace Perceptrone_logic
                 }
                 ArrWithExamples.Shuffle();
                 exist_epochs_of_learning += 1;
-                root_mean_squared_error.Add(1 / (ArrWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error);
-            }
+                root_mean_squared_error.Add(1.0 / (ArrWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error);
+            } while (exist_epochs_of_learning < epochs_of_learning && root_mean_squared_error[root_mean_squared_error.Count - 1] >= 0.005);
             return new Tuple<int, List<double>>(exist_epochs_of_learning, root_mean_squared_error);
         }
     }
