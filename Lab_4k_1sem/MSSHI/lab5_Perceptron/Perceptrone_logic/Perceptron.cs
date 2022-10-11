@@ -35,11 +35,11 @@
 
             for (int i = 0; i < neirons.Length - 7; i++)
             {
-                neirons[i] = new Neiron(A_letter++, generalSize);
+                neirons[i] = new Neiron(generalSize, A_letter++);
             }
             for (int i = 0; i < additionalVal.Length; i++)
             {
-                neirons[neirons.Length - 7 + i] = new Neiron(additionalVal[i], generalSize);
+                neirons[neirons.Length - 7 + i] = new Neiron(generalSize, additionalVal[i]);
             }
         }
 

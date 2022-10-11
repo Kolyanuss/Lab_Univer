@@ -30,5 +30,5 @@ for (int i = 0; i < 1; i++)
 
     var example = new int[] { 1, 0 };
     var res = perc.Get_result(example);
-    Console.WriteLine("for ({0};{1}), res: {2}", example[0], example[1], res);
+    Console.WriteLine("for ({0};{1}), res: {2}", example[0], example[1], res[0]);
 }

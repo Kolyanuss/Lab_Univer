@@ -41,7 +41,7 @@
             this.CountOfEntrances = CountOfEntrances + 1;
             BasicInit();
         }
-        public Neiron(char name, int CountOfEntrances) : this(CountOfEntrances) => this.Name = name;
+        public Neiron(int CountOfEntrances, char name) : this(CountOfEntrances) => this.Name = name;
         private void BasicInit()
         {
             arr_entrances = new entrances[this.CountOfEntrances];

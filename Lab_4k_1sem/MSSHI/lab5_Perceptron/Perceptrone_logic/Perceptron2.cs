@@ -8,6 +8,16 @@
         public int countOfNeuronInOutputLayer { get; } = 1;
         public int countOfEpochs { get; set; } = 100;
         public double Learning_speed { get; set; } = 0.8;
+        /// <summary>
+        /// How many parts will the picture be divided into on the X axis.
+        /// На скільки частин буде поділятись картинка по осі Х
+        /// </summary>
+        public int sizeX { get; }
+        /// <summary>
+        /// How many parts will the picture be divided into on the Y axis.
+        /// На скільки частин буде поділятись картинка по осі Y
+        /// </summary>
+        public int sizeY { get; }
 
         private List<Neiron[]> layers;
 
@@ -15,15 +25,17 @@
         {
             BasicInit();
         }
-        public Perceptron2(int countOfInputEntrances, int countOfHidenLayers, int countOfNeuronInHidenLayer, int countOfNeuronInOutputLayer)
+        public Perceptron2(int countOfInputEntrances_X, int countOfInputEntrances_Y,
+            int countOfHidenLayers, int countOfNeuronInHidenLayer, int countOfNeuronInOutputLayer)
         {
-            this.countOfInputEntrances = countOfInputEntrances;
+            sizeX = countOfInputEntrances_X;
+            sizeY = countOfInputEntrances_Y;
+            this.countOfInputEntrances = sizeX * sizeY;
             this.countOfHidenLayers = countOfHidenLayers;
             this.countOfNeuronInHidenLayer = countOfNeuronInHidenLayer;
             this.countOfNeuronInOutputLayer = countOfNeuronInOutputLayer;
             BasicInit();
         }
-
         public void BasicInit()
         {
             layers = new List<Neiron[]>();
@@ -41,17 +53,25 @@
                 // countOfEntrancesInPreviousLayer = layers[layers.Count - 1].Length; // same
             }
 
+            char A_letter = Convert.ToChar(1040);
+            string additionalVal = "ҐЄІЇЬЮЯ";
+            string allLetter = "";
+            for (int i = 0; i < 33 - additionalVal.Length; i++)
+            {
+                allLetter.Append(A_letter++);
+            }
+            allLetter += additionalVal;
+
             Neiron[] output_layer = new Neiron[countOfNeuronInOutputLayer];
             for (int i = 0; i < output_layer.Length; i++)
             {
-                output_layer[i] = new Neiron(countOfEntrancesInPreviousLayer);
+                output_layer[i] = new Neiron(countOfEntrancesInPreviousLayer, allLetter[i]);
             }
             layers.Add(output_layer);
         }
 
         public void StartLearn(List<Tuple<int[], double[]>> data)
         {
-            this.countOfEpochs = countOfEpochs;
             var res = Teacher.Learn_backpropagation(layers, data, countOfEpochs, Learning_speed);
             Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
         }
@@ -61,11 +81,11 @@
         /// </summary>
         /// <param name="arrWithState">Довжина arrWithState повинна дорівнювати "countOfEntrances"</param>
         /// <returns></returns>
-        public string Get_result(int[] arrWithState)
+        public double[] Get_result(int[] arrWithState)
         {
             if (arrWithState.Length != countOfInputEntrances)
             {
-                return "Неправильна довжина вхідного масиву даних!";
+                throw new Exception("Неправильна довжина вхідного масиву даних!");
             }
 
             double[] inputData = new double[arrWithState.Length];
@@ -83,13 +103,58 @@
                 }
                 inputData = outputData;
             }
-
+            return inputData;
+            /*
             string res = "";
             foreach (var item in inputData)
             {
                 res += item + " ";
             }
+            return res;*/
+        }
+
+        public List<string> Guess_letter_and_return_all_percent(int[] arrWithState)
+        {
+            List<string> list = new List<string>();
+            var resY = Get_result(arrWithState);
+            var lastLayer = layers[layers.Count - 1];
+            for (int i = 0; i < lastLayer.Length; i++)
+            {
+                var neuron = lastLayer[i];
+                list.Add("" + neuron.Name + "\t " + String.Format("{0:0.0000}", resY[i] * 100) + "%");
+            }
+            return list;
+        }
+
+        public List<Dictionary<char, List<double>>> GetWeightToSave()
+        {
+            var res = new List<Dictionary<char, List<double>>>();
+            foreach (var layer in layers)
+            {
+                var res_layer = new Dictionary<char, List<double>>();
+                foreach (var neuron in layer)
+                {
+                    var x = neuron.GetEntranceWeight();
+                    res_layer.Add(x.Item1, x.Item2);
+                }
+                res.Add(res_layer);
+            }
             return res;
+        }
+
+        public void SetWeight(List<Dictionary<char, List<double>>> items)
+        {
+            int i = 0;
+            foreach (var dict in items)
+            {
+                int j = 0;
+                foreach (var oneExample in dict)
+                {
+                    layers[i][j].SetEntrancesWeight(oneExample.Value);
+                    j++;
+                }
+                i++;
+            }
         }
     }
 }
