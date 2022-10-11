@@ -49,6 +49,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label_percent_from_letter = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ToolStripMenuItem_perceptronSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -66,6 +67,7 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
+            this.ToolStripMenuItem_perceptronSettings,
             this.ToolStripMenuItem_resetImage,
             this.ToolStripMenuItem_startLearn,
             this.ToolStripMenuItem_recognize});
@@ -178,6 +180,12 @@
             // 
             resources.ApplyResources(this.saveFileDialog1, "saveFileDialog1");
             // 
+            // ToolStripMenuItem_perceptronSettings
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_perceptronSettings, "ToolStripMenuItem_perceptronSettings");
+            this.ToolStripMenuItem_perceptronSettings.Name = "ToolStripMenuItem_perceptronSettings";
+            this.ToolStripMenuItem_perceptronSettings.Click += new System.EventHandler(this.ToolStripMenuItem_perceptronSettings_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -222,5 +230,6 @@
         private ToolStripMenuItem ToolStripMenuItem_Save_AI;
         private ToolStripMenuItem ToolStripMenuItem_Load_AI;
         private SaveFileDialog saveFileDialog1;
+        private ToolStripMenuItem ToolStripMenuItem_perceptronSettings;
     }
 }

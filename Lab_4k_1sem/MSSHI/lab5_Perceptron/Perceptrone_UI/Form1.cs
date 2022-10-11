@@ -150,6 +150,7 @@ namespace Perceptrone_UI
             pictureBox1.Image = map;
             selected_array = null;
             label_SelectedArr.Text = "";
+            label_rezult.Text = "";
         }
 
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
@@ -300,6 +301,30 @@ namespace Perceptrone_UI
                 MessageBox.Show("Помилка вибору шляху!", "Не вибрано файл!",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void ToolStripMenuItem_perceptronSettings_Click(object sender, EventArgs e)
+        {
+            ClearUI();
+            this.Enabled = false;
+            var dialog = new Form2();
+            dialog.textBox_countOfHidenLayers.Text += myPerc.countOfHidenLayers;
+            dialog.textBox_countOfNeuronInHidenLayer.Text += myPerc.countOfNeuronInHidenLayer;
+            dialog.textBox_countOfNeuronInOutputLayer.Text += myPerc.countOfNeuronInOutputLayer;
+            dialog.textBox_maxCountOfEpochs.Text += myPerc.countOfEpochs;
+            dialog.textBox_Learning_speed.Text += myPerc.Learning_speed;
+            dialog.ShowDialog();
+            if(dialog.DialogResult == DialogResult.OK)
+            {
+                myPerc = new Perceptron2(13,13, 
+                    Convert.ToInt32(dialog.textBox_countOfHidenLayers.Text),
+                    Convert.ToInt32(dialog.textBox_countOfNeuronInHidenLayer.Text),
+                    Convert.ToInt32(dialog.textBox_countOfNeuronInOutputLayer.Text));
+                myPerc.countOfEpochs = Convert.ToInt32(dialog.textBox_maxCountOfEpochs.Text);
+                myPerc.Learning_speed = Convert.ToDouble(dialog.textBox_Learning_speed.Text);
+            }
+            dialog.Dispose();
+            this.Enabled = true;
         }
     }
 }
