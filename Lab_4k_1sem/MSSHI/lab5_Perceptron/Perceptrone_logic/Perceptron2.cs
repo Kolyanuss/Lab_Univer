@@ -2,14 +2,29 @@
 {
     public class Perceptron2
     {
-        public const int countOfInputEntrances = 2;
-        public const int countOfHidenLayers = 1;
-        public const int countOfNeuronInHidenLayer = 2;
-        public const int countOfNeuronInOutputLayer = 1;
-        public int countOfEpochs = 100;
+        public int countOfInputEntrances { get; } = 2;
+        public int countOfHidenLayers { get; } = 1;
+        public int countOfNeuronInHidenLayer { get; } = 2;
+        public int countOfNeuronInOutputLayer { get; } = 1;
+        public int countOfEpochs { get; set; } = 100;
+        public double Learning_speed { get; set; } = 0.8;
+
         private List<Neiron[]> layers;
 
         public Perceptron2()
+        {
+            BasicInit();
+        }
+        public Perceptron2(int countOfInputEntrances, int countOfHidenLayers, int countOfNeuronInHidenLayer, int countOfNeuronInOutputLayer)
+        {
+            this.countOfInputEntrances = countOfInputEntrances;
+            this.countOfHidenLayers = countOfHidenLayers;
+            this.countOfNeuronInHidenLayer = countOfNeuronInHidenLayer;
+            this.countOfNeuronInOutputLayer = countOfNeuronInOutputLayer;
+            BasicInit();
+        }
+
+        public void BasicInit()
         {
             layers = new List<Neiron[]>();
 
@@ -34,11 +49,11 @@
             layers.Add(output_layer);
         }
 
-        public void StartLearn(List<Tuple<int[], double[]>> data, int countOfEpochs = 100)
+        public void StartLearn(List<Tuple<int[], double[]>> data)
         {
             this.countOfEpochs = countOfEpochs;
-            var res = Teacher.Learn_xor_backpropagation(layers, data, this.countOfEpochs);
-            Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
+            var res = Teacher.Learn_backpropagation(layers, data, countOfEpochs, Learning_speed);
+            Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
         }
 
         /// <summary>
@@ -66,7 +81,7 @@
                 {
                     outputData[i] = layers[j][i].GetAnswerDouble(inputData);
                 }
-                inputData = outputData;                
+                inputData = outputData;
             }
 
             string res = "";

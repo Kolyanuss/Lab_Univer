@@ -25,7 +25,10 @@ examples.Add(
 for (int i = 0; i < 1; i++)
 {
     var perc = new Perceptron2();
-    perc.StartLearn(examples, 10000);
-    var res = perc.Get_result(new int[] { 1, 0 });
-    Console.WriteLine("res: " + res);
+    perc.countOfEpochs = 10000;
+    perc.StartLearn(examples);
+
+    var example = new int[] { 1, 0 };
+    var res = perc.Get_result(example);
+    Console.WriteLine("for ({0};{1}), res: {2}", example[0], example[1], res);
 }

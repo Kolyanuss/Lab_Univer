@@ -72,11 +72,11 @@ namespace Perceptrone_logic
             }
         }
 
-        public static Tuple<int, List<double>> Learn_xor_backpropagation(List<Neiron[]> layers,
-            List<Tuple<int[], double[]>> ListWithExamples, int epochs_of_learning)
+        public static Tuple<int, List<double>> Learn_backpropagation(List<Neiron[]> layers,
+            List<Tuple<int[], double[]>> ListWithExamples, int epochs_of_learning, double Learning_speed)
         {
             int current_epochs_of_learning = 0;
-            List<double> root_mean_squared_error = new List<double>();
+            List<double> list_root_mean_squared_error = new List<double>();
             var counOfNeuronInLastLayer = layers[layers.Count - 1].Length;
             do
             {
@@ -117,7 +117,7 @@ namespace Perceptrone_logic
                         var neuron = layers[layers.Count - 1][j];
                         ///neural error \ нейронна помилка
                         var e = neuron.GetNeuralErrorBySigmoidFunc(desire_response[j]);
-                        var ne = neuron.Learning_speed * e;
+                        var ne = Learning_speed * e;
                         for (int i = 0; i < neuron.CountOfEntrances; i++)
                         {
                             var x = neuron.GetEntranceWeight(i) + ne * neuron.GetEntranceState(i);
@@ -145,7 +145,7 @@ namespace Perceptrone_logic
                             }
                             ///neural error \ нейронна помилка
                             var e = rez_y * (1 - rez_y) * sumOfNeuralErrorNextLayer;
-                            var ne = neuron.Learning_speed * e;
+                            var ne = Learning_speed * e;
                             for (int i = 0; i < neuron.CountOfEntrances; i++)
                             {
                                 var x = neuron.GetEntranceWeight(i) + ne * neuron.GetEntranceState(i);
@@ -160,10 +160,10 @@ namespace Perceptrone_logic
                 }
                 ListWithExamples.Shuffle();
                 current_epochs_of_learning += 1;
-                root_mean_squared_error.Add(1.0 / (ListWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error);
-            } while (current_epochs_of_learning < epochs_of_learning && root_mean_squared_error[root_mean_squared_error.Count - 1] >= 0.005);
+                list_root_mean_squared_error.Add(1.0 / (ListWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error);
+            } while (current_epochs_of_learning < epochs_of_learning && list_root_mean_squared_error[list_root_mean_squared_error.Count - 1] >= 0.005);
 
-            return new Tuple<int, List<double>>(current_epochs_of_learning, root_mean_squared_error);
+            return new Tuple<int, List<double>>(current_epochs_of_learning, list_root_mean_squared_error);
         }
     }
 }

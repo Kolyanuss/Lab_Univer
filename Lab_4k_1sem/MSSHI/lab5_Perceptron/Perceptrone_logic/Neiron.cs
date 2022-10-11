@@ -34,7 +34,7 @@
         /// Поріг активації сигмоїдної функції "y = fo(S)"
         /// </summary>
         public double activation_threshold_Y = 0.98;
-        private Tuple<double, double> rangeOfEntraceWeight = new Tuple<double, double>(-2, 2);
+        private Tuple<double, double> rangeOfEntraceWeight = new Tuple<double, double>(-1, 1);
 
         public Neiron(int CountOfEntrances)
         {
