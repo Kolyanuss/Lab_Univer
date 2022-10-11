@@ -1,6 +1,6 @@
 ﻿namespace Perceptrone_logic
 {
-    public class Perceptron2_xor
+    public class Perceptron2
     {
         public const int countOfInputEntrances = 2;
         public const int countOfHidenLayers = 1;
@@ -9,7 +9,7 @@
         public int countOfEpochs = 100;
         private List<Neiron[]> layers;
 
-        public Perceptron2_xor()
+        public Perceptron2()
         {
             layers = new List<Neiron[]>();
 
@@ -38,7 +38,7 @@
         {
             this.countOfEpochs = countOfEpochs;
             var res = Teacher.Learn_xor_backpropagation(layers, data, this.countOfEpochs);
-            Console.WriteLine("Кількість пройдених епох: {0}. Середньоквадратична помилка: {1}", res.Item1, res.Item2);
+            Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
         }
 
         /// <summary>
@@ -53,7 +53,12 @@
                 return "Неправильна довжина вхідного масиву даних!";
             }
 
-            var inputData = arrWithState;
+            double[] inputData = new double[arrWithState.Length];
+            for (int i = 0; i < arrWithState.Length; i++)
+            {
+                inputData[i] = arrWithState[i];
+            }
+
             for (int j = 0; j < layers.Count; j++)
             {
                 double[] outputData = new double[layers[j].Length];
@@ -61,11 +66,7 @@
                 {
                     outputData[i] = layers[j][i].GetAnswerDouble(inputData);
                 }
-                inputData = new int[outputData.Length];
-                for (int i = 0; i < inputData.Length; i++)
-                {
-                    inputData[i] = (outputData[i] >= layers[j][i].activation_threshold_Y) ? 1 : 0;
-                }
+                inputData = outputData;                
             }
 
             string res = "";

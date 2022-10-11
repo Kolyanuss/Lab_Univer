@@ -24,8 +24,8 @@ examples.Add(
 
 for (int i = 0; i < 1; i++)
 {
-    var perc = new Perceptron2_xor_Copy();
-    //perc.StartLearn(examples, 10000);
+    var perc = new Perceptron2();
+    perc.StartLearn(examples, 10000);
     var res = perc.Get_result(new int[] { 1, 0 });
     Console.WriteLine("res: " + res);
 }
