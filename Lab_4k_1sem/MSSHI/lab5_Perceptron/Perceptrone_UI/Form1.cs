@@ -34,7 +34,7 @@ namespace Perceptrone_UI
         }
 
         #region variable
-        public Perceptron myPerc;
+        public Perceptron2 myPerc;
         /// <summary>
         /// розмір вхідних даних по X
         /// </summary>
@@ -68,7 +68,7 @@ namespace Perceptrone_UI
         public Form1()
         {
             InitializeComponent();
-            myPerc = new Perceptron(sizeX, sizeY);
+            myPerc = new Perceptron2(sizeX, sizeY, 1, 10, 33);
             dataToLearn = new List<Tuple<int[], char>>();
             InitializeMyLetterButton();
             InitializeSizeBitmap();
@@ -210,13 +210,13 @@ namespace Perceptrone_UI
         {
             if (dataToLearn.Count > 0)
             {
-                myPerc.StartLearn(dataToLearn);
-                label_rezult.Text = "Навчання завершено!";
+                var res = myPerc.StartLearn(dataToLearn);
+                label_rezult.Text = "Навчання завершено! Пройдено " + res.Item1 + " епох, середньоквадратична помилка - " + res.Item2;
                 dataToLearn.Clear();
             }
             else
             {
-                MessageBox.Show("Список навчальних даних пустий!","Інфо", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Список навчальних даних пустий!", "Інфо", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -224,8 +224,7 @@ namespace Perceptrone_UI
         {
             if (selected_array != null)
             {
-                label_rezult.Text = myPerc.Guess_letter(selected_array);
-
+                //label_rezult.Text = myPerc.Guess_letter(selected_array);
                 var text = "";
                 var rez = myPerc.Guess_letter_and_return_all_percent(selected_array);
                 foreach (var item in rez)
@@ -294,7 +293,7 @@ namespace Perceptrone_UI
             if (res == DialogResult.OK)
             {
                 string json = File.ReadAllText(openFileDialog1.FileName);
-                myPerc.SetWeight(JsonSerializer.Deserialize<Dictionary<char, List<double>>>(json));
+                myPerc.SetWeight(JsonSerializer.Deserialize<List<Dictionary<char, List<double>>>>(json));
             }
             else
             {

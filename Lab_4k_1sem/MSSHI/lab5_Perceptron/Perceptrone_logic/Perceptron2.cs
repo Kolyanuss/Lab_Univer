@@ -1,4 +1,6 @@
-﻿namespace Perceptrone_logic
+﻿using System.Collections.Generic;
+
+namespace Perceptrone_logic
 {
     public class Perceptron2
     {
@@ -18,6 +20,7 @@
         /// На скільки частин буде поділятись картинка по осі Y
         /// </summary>
         public int sizeY { get; }
+        private string allLetter = "";
 
         private List<Neiron[]> layers;
 
@@ -55,10 +58,9 @@
 
             char A_letter = Convert.ToChar(1040);
             string additionalVal = "ҐЄІЇЬЮЯ";
-            string allLetter = "";
             for (int i = 0; i < 33 - additionalVal.Length; i++)
             {
-                allLetter.Append(A_letter++);
+                allLetter += A_letter++;
             }
             allLetter += additionalVal;
 
@@ -70,10 +72,29 @@
             layers.Add(output_layer);
         }
 
-        public void StartLearn(List<Tuple<int[], double[]>> data)
+        public Tuple<int,double> StartLearn(List<Tuple<int[], double[]>> data)
         {
             var res = Teacher.Learn_backpropagation(layers, data, countOfEpochs, Learning_speed);
             Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
+            return new Tuple<int, double>(res.Item1, res.Item2[res.Item2.Count-1]);
+        }
+        public Tuple<int, double> StartLearn(List<Tuple<int[], char>> data)
+        {
+            var transform = new List<Tuple<int[], double[]>>();
+            foreach (var item in data)
+            {
+                var answer = new double[this.countOfNeuronInOutputLayer];
+                for (int i = 0; i < allLetter.Length; i++)
+                {
+                    if (allLetter[i] == item.Item2)
+                    {
+                        answer[i] = 1;
+                        break;
+                    }
+                }
+                transform.Add(new Tuple<int[], double[]>(item.Item1, answer));
+            }
+            return StartLearn(transform);
         }
 
         /// <summary>
