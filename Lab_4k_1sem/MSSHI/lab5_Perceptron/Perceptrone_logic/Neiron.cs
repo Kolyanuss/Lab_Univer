@@ -26,7 +26,7 @@
         private entrances[] arr_entrances; // всі входи в перцептрона
         public double Tetta // sensitivity threshold || поріг чутливості
         {
-            get { return arr_entrances[0].weight; }
+            get { return -arr_entrances[0].weight; }
         }
         public double Learning_speed = 0.1;
         public char Name;
@@ -66,23 +66,17 @@
             }
             return S_weight;
         }
-        private double CalcWeight_WithoutTetta()
-        {
-            double S_weight = 0;
-            for (int i = 1; i < CountOfEntrances; i++)
-            {
-                S_weight += arr_entrances[i].entrance * arr_entrances[i].weight;
-            }
-            return S_weight;
-        }
 
         /// <summary>
         /// Сигмоїдна функція активації
         /// </summary>
         public double CalcY_SigmoidFunc()
         {
-            return (1.0 / (1.0 + Math.Exp(0 - CalcWeight()))) /*+ this.Tetta*/;
+            return (1.0 / (1.0 + Math.Exp(0 - CalcWeight())));
         }
+        /// <summary>
+        /// активізаційна функція сходинки
+        /// </summary>
         public double CalcY_StepFunc()
         {
             return CalcWeight() >= 0 ? 1 : 0;
@@ -91,11 +85,6 @@
         public double GetNeuralErrorBySigmoidFunc(double desire_response)
         {
             var Y = CalcY_SigmoidFunc();
-            return Y * (1.0 - Y) * (desire_response - Y);
-        }
-        public double GetNeuralErrorByStepFunc(double desire_response)
-        {
-            var Y = CalcY_StepFunc();
             return Y * (1.0 - Y) * (desire_response - Y);
         }
 
