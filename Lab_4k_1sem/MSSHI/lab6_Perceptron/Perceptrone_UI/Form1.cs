@@ -11,28 +11,7 @@ namespace Perceptrone_UI
         /// <summary>
         /// additional class for drawing
         /// </summary>
-        private class ArrayPoints
-        {
-            private int index = 0;
-            private Point[] points;
-            public ArrayPoints(int size)
-            {
-                if (size <= 0) { size = 2; }
-                points = new Point[size];
-            }
-            public void SetPoint(int x, int y)
-            {
-                if (index >= points.Length) { index = 0; }
-                points[index++] = new Point(x, y);
-            }
-            public void ResetPoints()
-            {
-                index = 0;
-            }
-            public int GetCountPoints() { return index; }
-            public Point[] GetPoints() { return points; }
-        }
-
+        
         #region variable
         public Perceptron myPerc;
         /// <summary>
@@ -50,18 +29,6 @@ namespace Perceptrone_UI
         private int[]? selected_array = null;
         private char selected_char;
 
-        /// <summary>
-        /// змінна яка вказує на те чи картинка та масив активних вхідів будуть очщатись після їх використання
-        /// </summary>
-        private bool isAutoClear = false;
-
-        #region variable for drawing
-        private bool isMouseDown = false;
-        private ArrayPoints arrayPoints = new ArrayPoints(2);
-        Bitmap map = new Bitmap(10, 10);
-        Graphics graphics;
-        Pen pen = new Pen(Color.Black, 3f);
-        #endregion
         #endregion
 
         #region ctor
@@ -71,7 +38,6 @@ namespace Perceptrone_UI
             myPerc = new Perceptron(sizeX, sizeY, 1, 10, 33);
             dataToLearn = new List<Tuple<int[], char>>();
             InitializeMyLetterButton();
-            InitializeSizeBitmap();
         }
         private void InitializeMyLetterButton()
         {
@@ -101,7 +67,7 @@ namespace Perceptrone_UI
                 temp.Font = new Font("Arial", 12);
                 temp.Click += new EventHandler(AddToLearn);
 
-                groupBox_comands.Controls.Add(temp);
+                groupBox_inputs.Controls.Add(temp);
                 buttonListWithLetter.Add(temp);
             }
 
@@ -116,77 +82,16 @@ namespace Perceptrone_UI
                 temp.Font = new Font("Arial", 12);
                 temp.Click += new EventHandler(AddToLearn);
 
-                groupBox_comands.Controls.Add(temp);
+                groupBox_inputs.Controls.Add(temp);
                 buttonListWithLetter.Add(temp);
             }
         }
-        private void InitializeSizeBitmap()
-        {
-            map = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            graphics = Graphics.FromImage(map);
-            graphics.Clear(pictureBox1.BackColor);
-            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-        }
         #endregion
 
-        private void DrawEntrances()
-        {
-            selected_array = MyImageConverter.GetArrFromImage(pictureBox1.Image, myPerc.sizeX, myPerc.sizeY);
-            label_SelectedArr.Text = "";
-            for (int i = 0; i < selected_array.Length; i++)
-            {
-                label_SelectedArr.Text += selected_array[i];
-                if (i % sizeX == sizeX - 1)
-                {
-                    label_SelectedArr.Text += "\n";
-                }
-                else label_SelectedArr.Text += "  ";
-            }
-        }
-        private void ClearUI()
-        {
-            graphics.Clear(pictureBox1.BackColor);
-            pictureBox1.Image = map;
-            selected_array = null;
-            label_SelectedArr.Text = "";
-            label_rezult.Text = "";
-        }
-
-        private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Filter = "JPG and PNG|*.jpg;*.png";
-            DialogResult res = openFileDialog1.ShowDialog();
-            if (res == DialogResult.OK)
-            {
-                map = new Bitmap(Image.FromFile(openFileDialog1.FileName), pictureBox1.Width, pictureBox1.Height);
-                graphics = Graphics.FromImage(map);
-                pictureBox1.Image = map;
-                DrawEntrances();
-            }
-            else
-            {
-                MessageBox.Show("Картинка не вибрана", "Потрібно вибрати картинку",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-        }
 
         private void ToolStripMenuItem_restart_Click(object sender, EventArgs e)
         {
             Application.Restart();
-        }
-
-        private void ToolStripMenuItem_AutoClear_Click(object sender, EventArgs e)
-        {
-            isAutoClear = !isAutoClear;
-            if (isAutoClear)
-            {
-                ToolStripMenuItem_AutoClear.Text = "Виключити Автоочищення";
-            }
-            else
-            {
-                ToolStripMenuItem_AutoClear.Text = "Включити Автоочищення";
-            }
         }
 
         private void AddToLearn(object sender, EventArgs e)
@@ -202,9 +107,7 @@ namespace Perceptrone_UI
             selected_char = btn.Text[0];
 
             dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
-            label_rezult.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
-
-            if (isAutoClear) { ClearUI(); }
+            label_result.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
         }
 
         private void button_StarLearn_Click(object sender, EventArgs e)
@@ -212,7 +115,7 @@ namespace Perceptrone_UI
             if (dataToLearn.Count > 0)
             {
                 var res = myPerc.StartLearn(dataToLearn);
-                label_rezult.Text = "Навчання завершено! Пройдено " + res.Item1 + " епох, середньоквадратична помилка - " + res.Item2;
+                label_result.Text = "Навчання завершено! Пройдено " + res.Item1 + " епох, середньоквадратична помилка - " + res.Item2;
                 dataToLearn.Clear();
             }
             else
@@ -232,41 +135,10 @@ namespace Perceptrone_UI
                 {
                     text += item + "\n";
                 }
-                label_percent_from_letter.Text = text;
-
-                if (isAutoClear) { ClearUI(); }
+                label_result.Text = text;
             }
             else MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            isMouseDown = true;
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            isMouseDown = false;
-            arrayPoints.ResetPoints();
-            DrawEntrances();
-        }
-
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!isMouseDown) { return; }
-            arrayPoints.SetPoint(e.X, e.Y);
-            if (arrayPoints.GetCountPoints() >= 2)
-            {
-                graphics.DrawLines(pen, arrayPoints.GetPoints());
-                pictureBox1.Image = map;
-                arrayPoints.SetPoint(e.X, e.Y);
-            }
-        }
-
-        private void button_resetImage_Click(object sender, EventArgs e)
-        {
-            ClearUI();
         }
 
         private void ToolStripMenuItem_Save_AI_Click(object sender, EventArgs e)
@@ -305,7 +177,6 @@ namespace Perceptrone_UI
 
         private void ToolStripMenuItem_perceptronSettings_Click(object sender, EventArgs e)
         {
-            ClearUI();
             this.Enabled = false;
             var dialog = new Form2();
             dialog.textBox_countOfHidenLayers.Text += myPerc.countOfHidenLayers;

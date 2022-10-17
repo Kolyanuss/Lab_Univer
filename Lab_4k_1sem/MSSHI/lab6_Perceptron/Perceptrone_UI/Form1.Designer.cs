@@ -29,66 +29,44 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label_rezult = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_File = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Save_AI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Load_AI = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_AutoClear = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_restart = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_resetImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_perceptronSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_startLearn = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_recognize = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.groupBox_comands = new System.Windows.Forms.GroupBox();
-            this.label_SelectedArr = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label_percent_from_letter = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.ToolStripMenuItem_perceptronSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox_inputs = new System.Windows.Forms.GroupBox();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.groupBox_examples = new System.Windows.Forms.GroupBox();
+            this.groupBox_result = new System.Windows.Forms.GroupBox();
+            this.label_result = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label_rezult
-            // 
-            resources.ApplyResources(this.label_rezult, "label_rezult");
-            this.label_rezult.Name = "label_rezult";
             // 
             // menuStrip1
             // 
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem,
+            this.ToolStripMenuItem_File,
             this.ToolStripMenuItem_perceptronSettings,
-            this.ToolStripMenuItem_resetImage,
             this.ToolStripMenuItem_startLearn,
             this.ToolStripMenuItem_recognize});
             this.menuStrip1.Name = "menuStrip1";
             // 
-            // файлToolStripMenuItem
+            // ToolStripMenuItem_File
             // 
-            resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
-            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItem_Open,
+            resources.ApplyResources(this.ToolStripMenuItem_File, "ToolStripMenuItem_File");
+            this.ToolStripMenuItem_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_Save_AI,
             this.ToolStripMenuItem_Load_AI,
-            this.ToolStripMenuItem_AutoClear,
             this.ToolStripMenuItem_restart});
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            // 
-            // ToolStripMenuItem_Open
-            // 
-            resources.ApplyResources(this.ToolStripMenuItem_Open, "ToolStripMenuItem_Open");
-            this.ToolStripMenuItem_Open.Name = "ToolStripMenuItem_Open";
-            this.ToolStripMenuItem_Open.Click += new System.EventHandler(this.ToolStripMenuItem_Open_Click);
+            this.ToolStripMenuItem_File.Name = "ToolStripMenuItem_File";
             // 
             // ToolStripMenuItem_Save_AI
             // 
@@ -102,23 +80,17 @@
             this.ToolStripMenuItem_Load_AI.Name = "ToolStripMenuItem_Load_AI";
             this.ToolStripMenuItem_Load_AI.Click += new System.EventHandler(this.ToolStripMenuItem_Load_AI_Click);
             // 
-            // ToolStripMenuItem_AutoClear
-            // 
-            resources.ApplyResources(this.ToolStripMenuItem_AutoClear, "ToolStripMenuItem_AutoClear");
-            this.ToolStripMenuItem_AutoClear.Name = "ToolStripMenuItem_AutoClear";
-            this.ToolStripMenuItem_AutoClear.Click += new System.EventHandler(this.ToolStripMenuItem_AutoClear_Click);
-            // 
             // ToolStripMenuItem_restart
             // 
             resources.ApplyResources(this.ToolStripMenuItem_restart, "ToolStripMenuItem_restart");
             this.ToolStripMenuItem_restart.Name = "ToolStripMenuItem_restart";
             this.ToolStripMenuItem_restart.Click += new System.EventHandler(this.ToolStripMenuItem_restart_Click);
             // 
-            // ToolStripMenuItem_resetImage
+            // ToolStripMenuItem_perceptronSettings
             // 
-            resources.ApplyResources(this.ToolStripMenuItem_resetImage, "ToolStripMenuItem_resetImage");
-            this.ToolStripMenuItem_resetImage.Name = "ToolStripMenuItem_resetImage";
-            this.ToolStripMenuItem_resetImage.Click += new System.EventHandler(this.button_resetImage_Click);
+            resources.ApplyResources(this.ToolStripMenuItem_perceptronSettings, "ToolStripMenuItem_perceptronSettings");
+            this.ToolStripMenuItem_perceptronSettings.Name = "ToolStripMenuItem_perceptronSettings";
+            this.ToolStripMenuItem_perceptronSettings.Click += new System.EventHandler(this.ToolStripMenuItem_perceptronSettings_Click);
             // 
             // ToolStripMenuItem_startLearn
             // 
@@ -132,67 +104,45 @@
             this.ToolStripMenuItem_recognize.Name = "ToolStripMenuItem_recognize";
             this.ToolStripMenuItem_recognize.Click += new System.EventHandler(this.button_Recognize_Click);
             // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
-            // 
             // openFileDialog1
             // 
             resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
-            // 
-            // groupBox_comands
-            // 
-            resources.ApplyResources(this.groupBox_comands, "groupBox_comands");
-            this.groupBox_comands.Name = "groupBox_comands";
-            this.groupBox_comands.TabStop = false;
-            // 
-            // label_SelectedArr
-            // 
-            resources.ApplyResources(this.label_SelectedArr, "label_SelectedArr");
-            this.label_SelectedArr.Name = "label_SelectedArr";
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.groupBox_comands);
-            this.panel1.Name = "panel1";
-            // 
-            // panel2
-            // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.label_percent_from_letter);
-            this.panel2.Controls.Add(this.label_SelectedArr);
-            this.panel2.Controls.Add(this.label_rezult);
-            this.panel2.Name = "panel2";
-            // 
-            // label_percent_from_letter
-            // 
-            resources.ApplyResources(this.label_percent_from_letter, "label_percent_from_letter");
-            this.label_percent_from_letter.Name = "label_percent_from_letter";
             // 
             // saveFileDialog1
             // 
             resources.ApplyResources(this.saveFileDialog1, "saveFileDialog1");
             // 
-            // ToolStripMenuItem_perceptronSettings
+            // groupBox_inputs
             // 
-            resources.ApplyResources(this.ToolStripMenuItem_perceptronSettings, "ToolStripMenuItem_perceptronSettings");
-            this.ToolStripMenuItem_perceptronSettings.Name = "ToolStripMenuItem_perceptronSettings";
-            this.ToolStripMenuItem_perceptronSettings.Click += new System.EventHandler(this.ToolStripMenuItem_perceptronSettings_Click);
+            resources.ApplyResources(this.groupBox_inputs, "groupBox_inputs");
+            this.groupBox_inputs.Name = "groupBox_inputs";
+            this.groupBox_inputs.TabStop = false;
+            // 
+            // groupBox_examples
+            // 
+            resources.ApplyResources(this.groupBox_examples, "groupBox_examples");
+            this.groupBox_examples.Name = "groupBox_examples";
+            this.groupBox_examples.TabStop = false;
+            // 
+            // groupBox_result
+            // 
+            resources.ApplyResources(this.groupBox_result, "groupBox_result");
+            this.groupBox_result.Name = "groupBox_result";
+            this.groupBox_result.TabStop = false;
+            // 
+            // label_result
+            // 
+            resources.ApplyResources(this.label_result, "label_result");
+            this.label_result.Name = "label_result";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.label_result);
+            this.Controls.Add(this.groupBox_result);
+            this.Controls.Add(this.groupBox_examples);
+            this.Controls.Add(this.groupBox_inputs);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
@@ -200,36 +150,27 @@
             this.Name = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private Label label_rezult;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem файлToolStripMenuItem;
-        private ToolStripMenuItem ToolStripMenuItem_Open;
-        private PictureBox pictureBox1;
+        private ToolStripMenuItem ToolStripMenuItem_File;
         private OpenFileDialog openFileDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private GroupBox groupBox_comands;
-        private Label label_SelectedArr;
-        private Panel panel1;
-        private Panel panel2;
         private ToolStripMenuItem ToolStripMenuItem_restart;
-        private ToolStripMenuItem ToolStripMenuItem_AutoClear;
-        private ToolStripMenuItem ToolStripMenuItem_resetImage;
         private ToolStripMenuItem ToolStripMenuItem_startLearn;
         private ToolStripMenuItem ToolStripMenuItem_recognize;
-        private Label label_percent_from_letter;
         private ToolStripMenuItem ToolStripMenuItem_Save_AI;
         private ToolStripMenuItem ToolStripMenuItem_Load_AI;
         private SaveFileDialog saveFileDialog1;
         private ToolStripMenuItem ToolStripMenuItem_perceptronSettings;
+        private GroupBox groupBox_inputs;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private GroupBox groupBox_examples;
+        private GroupBox groupBox_result;
+        private Label label_result;
     }
 }
