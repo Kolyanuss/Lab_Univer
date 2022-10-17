@@ -35,17 +35,21 @@
             this.ToolStripMenuItem_Load_AI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_restart = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_perceptronSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_confirmInput = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_startLearn = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_recognize = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.groupBox_inputs = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.groupBox_examples = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button_deleteExample = new System.Windows.Forms.Button();
+            this.button_addExample = new System.Windows.Forms.Button();
             this.groupBox_result = new System.Windows.Forms.GroupBox();
             this.label_result = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
+            this.groupBox_examples.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -55,6 +59,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_File,
             this.ToolStripMenuItem_perceptronSettings,
+            this.ToolStripMenuItem_confirmInput,
             this.ToolStripMenuItem_startLearn,
             this.ToolStripMenuItem_recognize});
             this.menuStrip1.Name = "menuStrip1";
@@ -92,6 +97,12 @@
             this.ToolStripMenuItem_perceptronSettings.Name = "ToolStripMenuItem_perceptronSettings";
             this.ToolStripMenuItem_perceptronSettings.Click += new System.EventHandler(this.ToolStripMenuItem_perceptronSettings_Click);
             // 
+            // ToolStripMenuItem_confirmInput
+            // 
+            resources.ApplyResources(this.ToolStripMenuItem_confirmInput, "ToolStripMenuItem_confirmInput");
+            this.ToolStripMenuItem_confirmInput.Name = "ToolStripMenuItem_confirmInput";
+            this.ToolStripMenuItem_confirmInput.Click += new System.EventHandler(this.ToolStripMenuItem_confirmInput_Click);
+            // 
             // ToolStripMenuItem_startLearn
             // 
             resources.ApplyResources(this.ToolStripMenuItem_startLearn, "ToolStripMenuItem_startLearn");
@@ -121,8 +132,31 @@
             // groupBox_examples
             // 
             resources.ApplyResources(this.groupBox_examples, "groupBox_examples");
+            this.groupBox_examples.Controls.Add(this.dataGridView1);
+            this.groupBox_examples.Controls.Add(this.button_deleteExample);
+            this.groupBox_examples.Controls.Add(this.button_addExample);
             this.groupBox_examples.Name = "groupBox_examples";
             this.groupBox_examples.TabStop = false;
+            // 
+            // dataGridView1
+            // 
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            // 
+            // button_deleteExample
+            // 
+            resources.ApplyResources(this.button_deleteExample, "button_deleteExample");
+            this.button_deleteExample.Name = "button_deleteExample";
+            this.button_deleteExample.UseVisualStyleBackColor = true;
+            // 
+            // button_addExample
+            // 
+            resources.ApplyResources(this.button_addExample, "button_addExample");
+            this.button_addExample.Name = "button_addExample";
+            this.button_addExample.UseVisualStyleBackColor = true;
             // 
             // groupBox_result
             // 
@@ -150,6 +184,8 @@
             this.Name = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox_examples.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,7 +195,6 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem ToolStripMenuItem_File;
         private OpenFileDialog openFileDialog1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private ToolStripMenuItem ToolStripMenuItem_restart;
         private ToolStripMenuItem ToolStripMenuItem_startLearn;
         private ToolStripMenuItem ToolStripMenuItem_recognize;
@@ -168,9 +203,12 @@
         private SaveFileDialog saveFileDialog1;
         private ToolStripMenuItem ToolStripMenuItem_perceptronSettings;
         private GroupBox groupBox_inputs;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private GroupBox groupBox_examples;
         private GroupBox groupBox_result;
         private Label label_result;
+        private ToolStripMenuItem ToolStripMenuItem_confirmInput;
+        private Button button_deleteExample;
+        private Button button_addExample;
+        private DataGridView dataGridView1;
     }
 }

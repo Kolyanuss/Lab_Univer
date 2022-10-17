@@ -57,39 +57,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ToolStripMenuItem_Save_AI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="ToolStripMenuItem_Save_AI.Text" xml:space="preserve">
-    <value>Зберегти ШІ</value>
-  </data>
-  <data name="ToolStripMenuItem_Load_AI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="ToolStripMenuItem_Load_AI.Text" xml:space="preserve">
-    <value>Загрузити ШІ</value>
-  </data>
-  <data name="ToolStripMenuItem_restart.Text" xml:space="preserve">
-    <value>Перезапуск</value>
-  </data>
   <data name="ToolStripMenuItem_File.Text" xml:space="preserve">
     <value>Файл</value>
   </data>
   <data name="ToolStripMenuItem_perceptronSettings.Text" xml:space="preserve">
     <value>Налаштування перцептрона</value>
   </data>
+  <data name="ToolStripMenuItem_confirmInput.Text" xml:space="preserve">
+    <value>Підтвердити вхідні параметри</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ToolStripMenuItem_startLearn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="ToolStripMenuItem_startLearn.Text" xml:space="preserve">
     <value>Почати навчання</value>
+  </data>
+  <data name="ToolStripMenuItem_recognize.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ToolStripMenuItem_recognize.Text" xml:space="preserve">
     <value>Розпізнати</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>980, 24</value>
   </data>
   <data name="menuStrip1.Text" xml:space="preserve">
     <value>menuStrip1</value>
+  </data>
+  <data name="ToolStripMenuItem_Save_AI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="ToolStripMenuItem_Save_AI.Text" xml:space="preserve">
+    <value>Зберегти ШІ</value>
+  </data>
+  <data name="ToolStripMenuItem_Load_AI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="ToolStripMenuItem_Load_AI.Text" xml:space="preserve">
+    <value>Загрузити ШІ</value>
+  </data>
+  <data name="ToolStripMenuItem_restart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="ToolStripMenuItem_restart.Text" xml:space="preserve">
+    <value>Перезапуск</value>
   </data>
   <data name="saveFileDialog1.Filter" xml:space="preserve">
     <value>JSON|*.json</value>
@@ -102,16 +115,40 @@
     <value>Segoe UI, 18pt</value>
   </data>
   <data name="groupBox_inputs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 150</value>
+    <value>980, 155</value>
   </data>
   <data name="groupBox_inputs.Text" xml:space="preserve">
     <value>Вхід мережі</value>
+  </data>
+  <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>918, 162</value>
+  </data>
+  <data name="button_deleteExample.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 120</value>
+  </data>
+  <data name="button_deleteExample.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 50</value>
+  </data>
+  <data name="button_deleteExample.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="button_addExample.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 46</value>
+  </data>
+  <data name="button_addExample.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 50</value>
+  </data>
+  <data name="button_addExample.Text" xml:space="preserve">
+    <value>+</value>
   </data>
   <data name="groupBox_examples.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="groupBox_examples.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 18pt</value>
+  </data>
+  <data name="groupBox_examples.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 179</value>
   </data>
   <data name="groupBox_examples.Size" type="System.Drawing.Size, System.Drawing">
     <value>980, 200</value>
@@ -125,13 +162,15 @@
   <data name="groupBox_result.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 18pt</value>
   </data>
+  <data name="groupBox_result.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 379</value>
+  </data>
   <data name="groupBox_result.Size" type="System.Drawing.Size, System.Drawing">
     <value>980, 172</value>
   </data>
   <data name="groupBox_result.Text" xml:space="preserve">
     <value>Постановка діагнозу</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label_result.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -141,14 +180,14 @@
   <data name="label_result.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 20.25pt</value>
   </data>
+  <data name="label_result.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 551</value>
+  </data>
   <data name="label_result.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>990, 75</value>
   </data>
   <data name="label_result.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 37</value>
-  </data>
-  <data name="label_result.Text" xml:space="preserve">
-    <value>Масив на вхід для перевірки:</value>
+    <value>0, 37</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 17</value>

@@ -3,6 +3,7 @@ using DataBlock;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
+using System.Data;
 
 namespace Perceptrone_UI
 {
@@ -11,20 +12,13 @@ namespace Perceptrone_UI
         /// <summary>
         /// additional class for drawing
         /// </summary>
-        
+
         #region variable
         public Perceptron myPerc;
-        /// <summary>
-        /// розмір вхідних даних по X
-        /// </summary>
-        private int sizeX = 13;
-        /// <summary>
-        /// розмір вхідних даних по Y
-        /// </summary>
-        private int sizeY = 13;
 
         private List<Tuple<int[], char>> dataToLearn;
-        private List<Button> buttonListWithLetter;
+        private List<CheckBox> listOfCheckBox;
+        private List<string> listOfActiveCheckBox;
 
         private int[]? selected_array = null;
         private char selected_char;
@@ -35,55 +29,33 @@ namespace Perceptrone_UI
         public Form1()
         {
             InitializeComponent();
-            myPerc = new Perceptron(sizeX, sizeY, 1, 10, 33);
             dataToLearn = new List<Tuple<int[], char>>();
-            InitializeMyLetterButton();
+            InitializeMyCheckBoxes();
         }
-        private void InitializeMyLetterButton()
+        private void InitializeMyCheckBoxes()
         {
-            char A_letter = Convert.ToChar(1040);
-            char[] additionalVal = new char[7] { 'Ґ', 'Є', 'І', 'Ї', 'Ь', 'Ю', 'Я' };
-            var massletter = new char[33];
-            for (int i = 0; i < massletter.Length - 7; i++)
+            listOfActiveCheckBox = new List<string>();
+            List<string> nameOfDiseases = new List<string> {
+                "Насморк", "Тошнота", "Біль в горлі", "Розлад кишечника",
+                "Кашель", "Сухість в горлі", "Головні болі", "Слабкість",
+                "Хрипи", "Болі в животі", "Відсутність апетиту", "Втрата пам'яті",
+                "Чихання", "Температура", "Порушення сну", "Біль в м'язах" };
+            listOfCheckBox = new List<CheckBox>();
+
+            for (int j = 0; j < 4; j++)
             {
-                massletter[i] = A_letter++;
-            }
-            for (int i = 0; i < additionalVal.Length; i++)
-            {
-                massletter[massletter.Length - 7 + i] = additionalVal[i];
-            }
-
-            // create а-я button on screan
-            buttonListWithLetter = new List<Button>();
-
-            for (int i = 0; i < 33 / 2; i++)
-            {
-                var temp = new Button();
-                temp.Name = "button_letter_" + massletter[i];
-                temp.Text = "" + massletter[i];
-                temp.UseVisualStyleBackColor = true;
-                temp.Size = new Size(32, 30);
-                temp.Location = new Point(3 + (i * temp.Size.Width), 10);
-                temp.Font = new Font("Arial", 12);
-                temp.Click += new EventHandler(AddToLearn);
-
-                groupBox_inputs.Controls.Add(temp);
-                buttonListWithLetter.Add(temp);
-            }
-
-            for (int i = 0; i < 33 / 2 + 1; i++)
-            {
-                var temp = new Button();
-                temp.Name = "button_letter_" + massletter[i + 33 / 2];
-                temp.Text = "" + massletter[i + 33 / 2];
-                temp.UseVisualStyleBackColor = true;
-                temp.Size = new Size(32, 30);
-                temp.Location = new Point(3 + (i * temp.Size.Width), 10 + temp.Size.Height);
-                temp.Font = new Font("Arial", 12);
-                temp.Click += new EventHandler(AddToLearn);
-
-                groupBox_inputs.Controls.Add(temp);
-                buttonListWithLetter.Add(temp);
+                for (int i = 0; i < 4; i++)
+                {
+                    var temp = new CheckBox();
+                    temp.Name = "checkBox_" + (j * 4 + i);
+                    temp.Text = "" + nameOfDiseases[j * 4 + i];
+                    temp.Size = new Size(150, 30);
+                    temp.Location = new Point(10 + (i * temp.Size.Width), 30 + (j * temp.Size.Height));
+                    temp.Font = new Font("Arial", 12);
+                    //temp.Click += new EventHandler(some func);
+                    listOfCheckBox.Add(temp);
+                    groupBox_inputs.Controls.Add(temp);
+                }
             }
         }
         #endregion
@@ -185,9 +157,9 @@ namespace Perceptrone_UI
             dialog.textBox_maxCountOfEpochs.Text += myPerc.countOfEpochs;
             dialog.textBox_Learning_speed.Text += myPerc.Learning_speed;
             dialog.ShowDialog();
-            if(dialog.DialogResult == DialogResult.OK)
+            if (dialog.DialogResult == DialogResult.OK)
             {
-                myPerc = new Perceptron(13,13, 
+                myPerc = new Perceptron(listOfActiveCheckBox.Count,
                     Convert.ToInt32(dialog.textBox_countOfHidenLayers.Text),
                     Convert.ToInt32(dialog.textBox_countOfNeuronInHidenLayer.Text),
                     Convert.ToInt32(dialog.textBox_countOfNeuronInOutputLayer.Text));
@@ -196,6 +168,27 @@ namespace Perceptrone_UI
             }
             dialog.Dispose();
             this.Enabled = true;
+        }
+
+        private void ToolStripMenuItem_confirmInput_Click(object sender, EventArgs e)
+        {
+            groupBox_inputs.Enabled = false;
+            ToolStripMenuItem_confirmInput.Enabled = false;
+
+            foreach (var item in listOfCheckBox)
+            {
+                if (item.Checked)
+                {
+                    listOfActiveCheckBox.Add(item.Text);                    
+                    var i = dataGridView1.Columns.Add(item.Text, item.Text);
+                    dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                    dataGridView1.Columns[i].ValueType = typeof(CheckBox);
+                    // todo: add: column.type = checkbox
+                }
+            }
+            myPerc = new Perceptron(listOfActiveCheckBox.Count, 1, 1, 1);
+
+            ToolStripMenuItem_startLearn.Enabled = true;
         }
     }
 }
