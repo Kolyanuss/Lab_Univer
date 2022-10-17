@@ -294,7 +294,7 @@ namespace Perceptrone_UI
             if (res == DialogResult.OK)
             {
                 string json = File.ReadAllText(openFileDialog1.FileName);
-                myPerc.SetWeight(JsonSerializer.Deserialize<List<Dictionary<char, List<double>>>>(json));
+                myPerc.SetWeight(JsonSerializer.Deserialize<List<List<Tuple<char, List<double>>>>>(json));
             }
             else
             {

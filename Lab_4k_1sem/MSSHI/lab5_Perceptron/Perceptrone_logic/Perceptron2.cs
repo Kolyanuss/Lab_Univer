@@ -147,23 +147,22 @@ namespace Perceptrone_logic
             return list;
         }
 
-        public List<Dictionary<char, List<double>>> GetWeightToSave()
+        public List<List<Tuple<char, List<double>>>> GetWeightToSave()
         {
-            var res = new List<Dictionary<char, List<double>>>();
+            var res = new List<List<Tuple<char, List<double>>>>();
             foreach (var layer in layers)
             {
-                var res_layer = new Dictionary<char, List<double>>();
+                var res_layer = new List<Tuple<char, List<double>>>();
                 foreach (var neuron in layer)
                 {
-                    var x = neuron.GetEntranceWeight();
-                    res_layer.Add(x.Item1, x.Item2);
+                    res_layer.Add(neuron.GetEntranceWeight());
                 }
                 res.Add(res_layer);
             }
             return res;
         }
 
-        public void SetWeight(List<Dictionary<char, List<double>>> items)
+        public void SetWeight(List<List<Tuple<char, List<double>>>> items)
         {
             int i = 0;
             foreach (var dict in items)
@@ -171,7 +170,7 @@ namespace Perceptrone_logic
                 int j = 0;
                 foreach (var oneExample in dict)
                 {
-                    layers[i][j].SetEntrancesWeight(oneExample.Value);
+                    layers[i][j].SetEntrancesWeight(oneExample.Item2);
                     j++;
                 }
                 i++;
