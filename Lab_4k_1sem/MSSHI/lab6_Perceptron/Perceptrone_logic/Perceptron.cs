@@ -10,16 +10,7 @@ namespace Perceptrone_logic
         public int countOfNeuronInOutputLayer { get; } = 1;
         public int countOfEpochs { get; set; } = 100;
         public double Learning_speed { get; set; } = 0.8;
-        /// <summary>
-        /// How many parts will the picture be divided into on the X axis.
-        /// На скільки частин буде поділятись картинка по осі Х
-        /// </summary>
-        public int sizeX { get; }
-        /// <summary>
-        /// How many parts will the picture be divided into on the Y axis.
-        /// На скільки частин буде поділятись картинка по осі Y
-        /// </summary>
-        public int sizeY { get; }
+
         private string allLetter = "";
 
         private List<Neiron[]> layers;
@@ -28,12 +19,10 @@ namespace Perceptrone_logic
         {
             BasicInit();
         }
-        public Perceptron(int countOfInputEntrances_X, int countOfInputEntrances_Y,
-            int countOfHidenLayers, int countOfNeuronInHidenLayer, int countOfNeuronInOutputLayer)
+        public Perceptron(int countOfInputEntrances, int countOfHidenLayers, 
+            int countOfNeuronInHidenLayer, int countOfNeuronInOutputLayer)
         {
-            sizeX = countOfInputEntrances_X;
-            sizeY = countOfInputEntrances_Y;
-            this.countOfInputEntrances = sizeX * sizeY;
+            this.countOfInputEntrances = countOfInputEntrances;
             this.countOfHidenLayers = countOfHidenLayers;
             this.countOfNeuronInHidenLayer = countOfNeuronInHidenLayer;
             this.countOfNeuronInOutputLayer = countOfNeuronInOutputLayer;
