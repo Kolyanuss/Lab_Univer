@@ -46,10 +46,13 @@
             this.button_deleteExample = new System.Windows.Forms.Button();
             this.button_addExample = new System.Windows.Forms.Button();
             this.groupBox_result = new System.Windows.Forms.GroupBox();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label_result = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox_examples.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox_result.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -141,9 +144,11 @@
             // dataGridView1
             // 
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 25;
             // 
             // button_deleteExample
@@ -151,18 +156,32 @@
             resources.ApplyResources(this.button_deleteExample, "button_deleteExample");
             this.button_deleteExample.Name = "button_deleteExample";
             this.button_deleteExample.UseVisualStyleBackColor = true;
+            this.button_deleteExample.Click += new System.EventHandler(this.button_deleteExample_Click);
             // 
             // button_addExample
             // 
             resources.ApplyResources(this.button_addExample, "button_addExample");
             this.button_addExample.Name = "button_addExample";
             this.button_addExample.UseVisualStyleBackColor = true;
+            this.button_addExample.Click += new System.EventHandler(this.button_addExample_Click);
             // 
             // groupBox_result
             // 
             resources.ApplyResources(this.groupBox_result, "groupBox_result");
+            this.groupBox_result.Controls.Add(this.dataGridView2);
             this.groupBox_result.Name = "groupBox_result";
             this.groupBox_result.TabStop = false;
+            // 
+            // dataGridView2
+            // 
+            resources.ApplyResources(this.dataGridView2, "dataGridView2");
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowTemplate.Height = 25;
             // 
             // label_result
             // 
@@ -186,6 +205,8 @@
             this.menuStrip1.PerformLayout();
             this.groupBox_examples.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox_result.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,5 +231,6 @@
         private Button button_deleteExample;
         private Button button_addExample;
         private DataGridView dataGridView1;
+        private DataGridView dataGridView2;
     }
 }

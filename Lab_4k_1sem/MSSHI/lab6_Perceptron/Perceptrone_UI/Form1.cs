@@ -4,6 +4,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
 using System.Data;
+using System.Windows.Forms;
+using System.Data.Common;
 
 namespace Perceptrone_UI
 {
@@ -172,23 +174,64 @@ namespace Perceptrone_UI
 
         private void ToolStripMenuItem_confirmInput_Click(object sender, EventArgs e)
         {
-            groupBox_inputs.Enabled = false;
-            ToolStripMenuItem_confirmInput.Enabled = false;
-
             foreach (var item in listOfCheckBox)
             {
                 if (item.Checked)
                 {
-                    listOfActiveCheckBox.Add(item.Text);                    
-                    var i = dataGridView1.Columns.Add(item.Text, item.Text);
-                    dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                    dataGridView1.Columns[i].ValueType = typeof(CheckBox);
-                    // todo: add: column.type = checkbox
+                    listOfActiveCheckBox.Add(item.Text);
+                    dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn()
+                    {
+                        Name = item.Text,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
+                    });
+                    dataGridView2.Columns.Add(new DataGridViewCheckBoxColumn()
+                    {
+                        Name = item.Text,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
+                    });
                 }
+            }
+            if (listOfActiveCheckBox.Count <= 0)
+            {
+                return;
             }
             myPerc = new Perceptron(listOfActiveCheckBox.Count, 1, 1, 1);
 
+            dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn()
+            {
+                Name = "Хворий грипом?",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
+            });
+
+            dataGridView2.Rows.Add();
+            dataGridView2.Rows[0].Selected = false;
+
+            groupBox_inputs.Enabled = false;
+            ToolStripMenuItem_confirmInput.Enabled = false;
             ToolStripMenuItem_startLearn.Enabled = true;
+            button_addExample.Enabled = true;
+            button_deleteExample.Enabled = true;
+        }
+
+        private void button_addExample_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Add();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.Selected = false;
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    // some code
+                }
+            }
+        }
+
+        private void button_deleteExample_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count > 0)
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 1);
+            }
         }
     }
 }

@@ -57,6 +57,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ToolStripMenuItem_Save_AI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="ToolStripMenuItem_Save_AI.Text" xml:space="preserve">
+    <value>Зберегти ШІ</value>
+  </data>
+  <data name="ToolStripMenuItem_Load_AI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="ToolStripMenuItem_Load_AI.Text" xml:space="preserve">
+    <value>Загрузити ШІ</value>
+  </data>
+  <data name="ToolStripMenuItem_restart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="ToolStripMenuItem_restart.Text" xml:space="preserve">
+    <value>Перезапуск</value>
+  </data>
   <data name="ToolStripMenuItem_File.Text" xml:space="preserve">
     <value>Файл</value>
   </data>
@@ -79,30 +98,11 @@
   <data name="ToolStripMenuItem_recognize.Text" xml:space="preserve">
     <value>Розпізнати</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>980, 24</value>
   </data>
   <data name="menuStrip1.Text" xml:space="preserve">
     <value>menuStrip1</value>
-  </data>
-  <data name="ToolStripMenuItem_Save_AI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="ToolStripMenuItem_Save_AI.Text" xml:space="preserve">
-    <value>Зберегти ШІ</value>
-  </data>
-  <data name="ToolStripMenuItem_Load_AI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="ToolStripMenuItem_Load_AI.Text" xml:space="preserve">
-    <value>Загрузити ШІ</value>
-  </data>
-  <data name="ToolStripMenuItem_restart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="ToolStripMenuItem_restart.Text" xml:space="preserve">
-    <value>Перезапуск</value>
   </data>
   <data name="saveFileDialog1.Filter" xml:space="preserve">
     <value>JSON|*.json</value>
@@ -121,10 +121,16 @@
     <value>Вхід мережі</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>918, 162</value>
+    <value>912, 212</value>
+  </data>
+  <data name="button_deleteExample.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="button_deleteExample.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 27.75pt</value>
   </data>
   <data name="button_deleteExample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 120</value>
+    <value>6, 117</value>
   </data>
   <data name="button_deleteExample.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 50</value>
@@ -132,8 +138,14 @@
   <data name="button_deleteExample.Text" xml:space="preserve">
     <value>-</value>
   </data>
+  <data name="button_addExample.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="button_addExample.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 27.75pt</value>
+  </data>
   <data name="button_addExample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 46</value>
+    <value>6, 61</value>
   </data>
   <data name="button_addExample.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 50</value>
@@ -151,10 +163,13 @@
     <value>0, 179</value>
   </data>
   <data name="groupBox_examples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 200</value>
+    <value>980, 250</value>
   </data>
   <data name="groupBox_examples.Text" xml:space="preserve">
     <value>Навчальні приклади</value>
+  </data>
+  <data name="dataGridView2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>968, 100</value>
   </data>
   <data name="groupBox_result.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -163,10 +178,10 @@
     <value>Segoe UI, 18pt</value>
   </data>
   <data name="groupBox_result.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 379</value>
+    <value>0, 429</value>
   </data>
   <data name="groupBox_result.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 172</value>
+    <value>980, 145</value>
   </data>
   <data name="groupBox_result.Text" xml:space="preserve">
     <value>Постановка діагнозу</value>
@@ -181,7 +196,7 @@
     <value>Segoe UI, 20.25pt</value>
   </data>
   <data name="label_result.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 551</value>
+    <value>0, 574</value>
   </data>
   <data name="label_result.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>990, 75</value>
@@ -193,7 +208,7 @@
     <value>7, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>980, 622</value>
+    <value>980, 624</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9.75pt</value>
@@ -205,6 +220,6 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Розпізнавання букв</value>
+    <value>Діагноз</value>
   </data>
 </root>
