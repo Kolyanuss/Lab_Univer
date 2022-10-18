@@ -18,7 +18,7 @@ namespace Perceptrone_UI
         #region variable
         public Perceptron myPerc;
 
-        private List<Tuple<int[], char>> dataToLearn;
+        private List<Tuple<int[], double[]>> listExamples;
         private List<CheckBox> listOfCheckBox;
         private List<string> listOfActiveCheckBox;
 
@@ -31,8 +31,8 @@ namespace Perceptrone_UI
         public Form1()
         {
             InitializeComponent();
-            dataToLearn = new List<Tuple<int[], char>>();
             InitializeMyCheckBoxes();
+            listExamples = new List<Tuple<int[], double[]>>();
         }
         private void InitializeMyCheckBoxes()
         {
@@ -68,51 +68,47 @@ namespace Perceptrone_UI
             Application.Restart();
         }
 
-        private void AddToLearn(object sender, EventArgs e)
-        {
-            if (selected_array == null)
-            {
-                MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var btn = sender as Button;
-            selected_char = btn.Text[0];
-
-            dataToLearn.Add(new Tuple<int[], char>(selected_array, selected_char));
-            label_result.Text = "Елемент (" + selected_char + ") додано до масиву. Всього: " + dataToLearn.Count + " ел";
-        }
 
         private void button_StarLearn_Click(object sender, EventArgs e)
         {
-            if (dataToLearn.Count > 0)
+            dataGridView1.EndEdit();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                var res = myPerc.StartLearn(dataToLearn);
+                var vector = new int[row.Cells.Count - 1];
+                var i = 0;
+                for (i = 0; i < row.Cells.Count - 1; i++)
+                {
+                    vector[i] = Convert.ToBoolean(row.Cells[i].Value) ? 1 : 0;
+                }
+                double desire = Convert.ToBoolean(row.Cells[i].Value) ? 1 : 0;
+                listExamples.Add(new Tuple<int[], double[]>(vector, new double[1] { desire }));
+            }
+
+            if (listExamples.Count > 0)
+            {
+                var res = myPerc.StartLearn(listExamples);
                 label_result.Text = "Навчання завершено! Пройдено " + res.Item1 + " епох, середньоквадратична помилка - " + res.Item2;
-                dataToLearn.Clear();
+                listExamples.Clear();
             }
             else
             {
                 MessageBox.Show("Список навчальних даних пустий!", "Інфо", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            ToolStripMenuItem_recognize.Enabled = true;
         }
 
         private void button_Recognize_Click(object sender, EventArgs e)
         {
-            if (selected_array != null)
+            dataGridView2.EndEdit();
+            var cells = dataGridView2.Rows[0].Cells;
+            selected_array = new int[cells.Count];
+            for (var i = 0; i < cells.Count; i++)
             {
-                //label_rezult.Text = myPerc.Guess_letter(selected_array);
-                var text = "";
-                var rez = myPerc.Guess_letter_and_return_all_percent(selected_array);
-                foreach (var item in rez)
-                {
-                    text += item + "\n";
-                }
-                label_result.Text = text;
+                selected_array[i] = Convert.ToBoolean(cells[i].Value) ? 1 : 0;
             }
-            else MessageBox.Show("Помилка: масив вхідних даних пустий!", "Помилка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            var res = myPerc.Get_result(selected_array);
+            label_result.Text = "Вірогідність що ти хворий грипом: " + String.Format("{0:0.00}", res[0] * 100) + "%";
         }
 
         private void ToolStripMenuItem_Save_AI_Click(object sender, EventArgs e)
@@ -215,15 +211,8 @@ namespace Perceptrone_UI
 
         private void button_addExample_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Add();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                row.Selected = false;
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    // some code
-                }
-            }
+            var i = dataGridView1.Rows.Add();
+            dataGridView1.Rows[i].Selected = false;
         }
 
         private void button_deleteExample_Click(object sender, EventArgs e)

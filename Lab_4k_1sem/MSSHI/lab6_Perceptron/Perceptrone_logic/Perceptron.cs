@@ -8,7 +8,7 @@ namespace Perceptrone_logic
         public int countOfHidenLayers { get; } = 1;
         public int countOfNeuronInHidenLayer { get; } = 2;
         public int countOfNeuronInOutputLayer { get; } = 1;
-        public int countOfEpochs { get; set; } = 100;
+        public int countOfEpochs { get; set; } = 1000;
         public double Learning_speed { get; set; } = 0.8;
 
         private string allLetter = "";
@@ -114,13 +114,6 @@ namespace Perceptrone_logic
                 inputData = outputData;
             }
             return inputData;
-            /*
-            string res = "";
-            foreach (var item in inputData)
-            {
-                res += item + " ";
-            }
-            return res;*/
         }
 
         public List<string> Guess_letter_and_return_all_percent(int[] arrWithState)
