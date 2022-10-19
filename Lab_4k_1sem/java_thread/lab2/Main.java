@@ -10,13 +10,13 @@ public class Main {
         thread1 = new MyThread(counter1);
         thread2 = new MyThread(counter1);
 
-        System.out.println("First case, with Simple method");
+        System.out.println("Перший приклад, без модифiкацiй");
         thread1.start();
         thread2.start();
         thread1.join();
         thread2.join();
         Thread.sleep(2000);
-        System.out.println("Second case, with Sync method");
+        System.out.println("\nДругий приклад, iз використанням synchronized");
         new MyThread(counter2).start();
         new MyThread(counter2).start();
     }
@@ -24,26 +24,35 @@ public class Main {
 
 class MyThread extends Thread {
     myint counter = null;
-    public MyThread(myint param){
+
+    public MyThread(myint param) {
         this.counter = param;
     }
+
     @Override
     public void run() {
         try {
-            counter.increment();
-            System.out.println(counter.value());
-            System.out.println("-");
-            Thread.sleep(500);
-            counter.decrement();
-            System.out.println(counter.value());
+            for (int i = 0; i < 5; i++) {
+                counter.increment();
+                System.out.print(counter.value() + " ");
+                Thread.sleep(500);
+            }
+            System.out.print(" start decrement ");
+            for (int i = 0; i < 5; i++) {
+                counter.decrement();
+                System.out.print(counter.value() + " ");
+                Thread.sleep(500);
+            }
         } catch (InterruptedException e) {
         }
     }
 }
 
-interface myint{
+interface myint {
     public void increment() throws InterruptedException;
+
     public void decrement() throws InterruptedException;
+
     public int value();
 }
 
