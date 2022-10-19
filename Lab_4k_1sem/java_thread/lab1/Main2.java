@@ -1,9 +1,9 @@
-public class Main {
-    static EggVoice mAnotherOpinion;
+public class Main2 {
+    static Thread mAnotherOpinion;
 
     public static void main(String[] args) {
-        mAnotherOpinion = new EggVoice();
-        System.out.println("Початок суперечки з використанням класу Thread");
+        mAnotherOpinion = new Thread(new EggVoice2());
+        System.out.println("Початок суперечки з використанням класу Runnable");
         mAnotherOpinion.start();
         for (int i = 0; i < 5; i++) {
             try {
@@ -25,12 +25,12 @@ public class Main {
     }
 }
 
-class EggVoice extends Thread {
+class EggVoice2 implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < 5; i++) {
             try {
-                sleep(1000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
             System.out.println("яйце!");
