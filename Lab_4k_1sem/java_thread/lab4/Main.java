@@ -1,3 +1,5 @@
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -9,8 +11,15 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         Counter counter = new Counter();
 
-        new MyThread(counter).start();
-        new MyThread(counter).start();
+        thread1 = new MyThread(counter);
+        thread2 = new MyThread(counter);
+
+        ExecutorService pool = Executors.newFixedThreadPool(2);
+
+        pool.execute(thread1);
+        pool.execute(thread2);
+
+        pool.shutdown();
     }
 }
 
@@ -24,13 +33,18 @@ class MyThread extends Thread {
     @Override
     public void run() {
         try {
-            counter.increment();
-            System.out.println(counter.value());
-
-            Thread.sleep(500);
-
-            counter.decrement();
-            System.out.println(counter.value());
+            for (int i = 0; i < 5; i++) {
+                counter.increment();
+                System.out.print(counter.value());
+                Thread.sleep(500);
+            }
+            System.out.print(" start decrement ");
+            
+            for (int i = 0; i < 5; i++) {
+                counter.decrement();
+                System.out.print(counter.value());
+                Thread.sleep(500);
+            }
         } catch (InterruptedException e) {
         }
     }
