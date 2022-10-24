@@ -149,6 +149,7 @@ namespace Perceptrone_UI
         {
             this.Enabled = false;
             var dialog = new Form2();
+            myPerc = new Perceptron();
             dialog.textBox_countOfHidenLayers.Text += myPerc.countOfHidenLayers;
             dialog.textBox_countOfNeuronInHidenLayer.Text += myPerc.countOfNeuronInHidenLayer;
             dialog.textBox_countOfNeuronInOutputLayer.Text += myPerc.countOfNeuronInOutputLayer;
