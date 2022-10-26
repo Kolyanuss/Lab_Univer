@@ -109,13 +109,16 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="groupBox_inputs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Left</value>
   </data>
   <data name="groupBox_inputs.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 18pt</value>
   </data>
+  <data name="groupBox_inputs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <data name="groupBox_inputs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 155</value>
+    <value>612, 160</value>
   </data>
   <data name="groupBox_inputs.Text" xml:space="preserve">
     <value>Вхід мережі</value>
@@ -160,7 +163,7 @@
     <value>Segoe UI, 18pt</value>
   </data>
   <data name="groupBox_examples.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 179</value>
+    <value>0, 184</value>
   </data>
   <data name="groupBox_examples.Size" type="System.Drawing.Size, System.Drawing">
     <value>980, 250</value>
@@ -178,7 +181,7 @@
     <value>Segoe UI, 18pt</value>
   </data>
   <data name="groupBox_result.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 429</value>
+    <value>0, 434</value>
   </data>
   <data name="groupBox_result.Size" type="System.Drawing.Size, System.Drawing">
     <value>980, 145</value>
@@ -196,13 +199,37 @@
     <value>Segoe UI, 20.25pt</value>
   </data>
   <data name="label_result.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 574</value>
+    <value>0, 579</value>
   </data>
   <data name="label_result.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>990, 75</value>
   </data>
   <data name="label_result.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 37</value>
+  </data>
+  <data name="groupBox_outputs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="groupBox_outputs.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 18pt</value>
+  </data>
+  <data name="groupBox_outputs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>618, 0</value>
+  </data>
+  <data name="groupBox_outputs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 160</value>
+  </data>
+  <data name="groupBox_outputs.Text" xml:space="preserve">
+    <value>Виходи мережі</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>980, 160</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 17</value>

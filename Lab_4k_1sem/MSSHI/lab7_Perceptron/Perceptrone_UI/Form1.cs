@@ -19,11 +19,12 @@ namespace Perceptrone_UI
         public Perceptron myPerc;
 
         private List<Tuple<int[], double[]>> listExamples;
-        private List<CheckBox> listOfCheckBox;
-        private List<string> listOfActiveCheckBox;
+        private List<CheckBox> listOfInputCheckBox;
+        private List<CheckBox> listOfOutputCheckBox;
+        private List<string> listOfActiveInputCheckBox;
+        private List<string> listOfActiveOutputCheckBox;
 
         private int[]? selected_array = null;
-        private char selected_char;
 
         #endregion
 
@@ -31,18 +32,19 @@ namespace Perceptrone_UI
         public Form1()
         {
             InitializeComponent();
-            InitializeMyCheckBoxes();
+            InitializeMyInputCheckBoxes();
+            InitializeMyOutputCheckBoxes();
             listExamples = new List<Tuple<int[], double[]>>();
         }
-        private void InitializeMyCheckBoxes()
+        private void InitializeMyInputCheckBoxes()
         {
-            listOfActiveCheckBox = new List<string>();
+            listOfActiveInputCheckBox = new List<string>();
             List<string> nameOfDiseases = new List<string> {
                 "Насморк", "Тошнота", "Біль в горлі", "Розлад кишечника",
                 "Кашель", "Сухість в горлі", "Головні болі", "Слабкість",
                 "Хрипи", "Болі в животі", "Відсутність апетиту", "Втрата пам'яті",
                 "Чихання", "Температура", "Порушення сну", "Біль в м'язах" };
-            listOfCheckBox = new List<CheckBox>();
+            listOfInputCheckBox = new List<CheckBox>();
 
             for (int j = 0; j < 4; j++)
             {
@@ -55,9 +57,31 @@ namespace Perceptrone_UI
                     temp.Location = new Point(10 + (i * temp.Size.Width), 30 + (j * temp.Size.Height));
                     temp.Font = new Font("Arial", 12);
                     //temp.Click += new EventHandler(some func);
-                    listOfCheckBox.Add(temp);
+                    listOfInputCheckBox.Add(temp);
                     groupBox_inputs.Controls.Add(temp);
                 }
+            }
+        }
+
+        private void InitializeMyOutputCheckBoxes()
+        {
+            listOfActiveOutputCheckBox = new List<string>();
+            List<string> nameOfDisease = new List<string> {
+                "Хвороба 1", "Хвороба 2", "Хвороба 3" };
+
+            listOfOutputCheckBox = new List<CheckBox>();
+
+            for (int i = 0; i < nameOfDisease.Count; i++)
+            {
+                var temp = new CheckBox();
+                temp.Name = "checkBox_out_" + (i);
+                temp.Text = "" + nameOfDisease[i];
+                temp.Size = new Size(150, 30);
+                temp.Location = new Point(10, 30 + (i * temp.Size.Height));
+                temp.Font = new Font("Arial", 12);
+                //temp.Click += new EventHandler(some func);
+                listOfOutputCheckBox.Add(temp);
+                groupBox_outputs.Controls.Add(temp);
             }
         }
         #endregion
@@ -158,7 +182,7 @@ namespace Perceptrone_UI
             dialog.ShowDialog();
             if (dialog.DialogResult == DialogResult.OK)
             {
-                myPerc = new Perceptron(listOfActiveCheckBox.Count,
+                myPerc = new Perceptron(listOfActiveInputCheckBox.Count,
                     Convert.ToInt32(dialog.textBox_countOfHidenLayers.Text),
                     Convert.ToInt32(dialog.textBox_countOfNeuronInHidenLayer.Text),
                     Convert.ToInt32(dialog.textBox_countOfNeuronInOutputLayer.Text));
@@ -171,11 +195,11 @@ namespace Perceptrone_UI
 
         private void ToolStripMenuItem_confirmInput_Click(object sender, EventArgs e)
         {
-            foreach (var item in listOfCheckBox)
+            foreach (var item in listOfInputCheckBox)
             {
                 if (item.Checked)
                 {
-                    listOfActiveCheckBox.Add(item.Text);
+                    listOfActiveInputCheckBox.Add(item.Text);
                     dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn()
                     {
                         Name = item.Text,
@@ -188,11 +212,11 @@ namespace Perceptrone_UI
                     });
                 }
             }
-            if (listOfActiveCheckBox.Count <= 0)
+            if (listOfActiveInputCheckBox.Count <= 0)
             {
                 return;
             }
-            myPerc = new Perceptron(listOfActiveCheckBox.Count, 1, 1, 1);
+            myPerc = new Perceptron(listOfActiveInputCheckBox.Count, 1, 1, 1);
 
             dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn()
             {

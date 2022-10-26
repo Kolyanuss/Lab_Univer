@@ -48,11 +48,14 @@
             this.groupBox_result = new System.Windows.Forms.GroupBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label_result = new System.Windows.Forms.Label();
+            this.groupBox_outputs = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.groupBox_examples.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox_result.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -187,6 +190,19 @@
             resources.ApplyResources(this.label_result, "label_result");
             this.label_result.Name = "label_result";
             // 
+            // groupBox_outputs
+            // 
+            resources.ApplyResources(this.groupBox_outputs, "groupBox_outputs");
+            this.groupBox_outputs.Name = "groupBox_outputs";
+            this.groupBox_outputs.TabStop = false;
+            // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.groupBox_outputs);
+            this.panel1.Controls.Add(this.groupBox_inputs);
+            this.panel1.Name = "panel1";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -194,7 +210,7 @@
             this.Controls.Add(this.label_result);
             this.Controls.Add(this.groupBox_result);
             this.Controls.Add(this.groupBox_examples);
-            this.Controls.Add(this.groupBox_inputs);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
@@ -206,6 +222,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox_result.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,5 +248,7 @@
         private Button button_addExample;
         private DataGridView dataGridView1;
         private DataGridView dataGridView2;
+        private GroupBox groupBox_outputs;
+        private Panel panel1;
     }
 }
