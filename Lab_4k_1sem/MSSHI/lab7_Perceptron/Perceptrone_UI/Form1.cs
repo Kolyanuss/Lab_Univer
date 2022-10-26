@@ -62,7 +62,6 @@ namespace Perceptrone_UI
                 }
             }
         }
-
         private void InitializeMyOutputCheckBoxes()
         {
             listOfActiveOutputCheckBox = new List<string>();
@@ -98,14 +97,20 @@ namespace Perceptrone_UI
             dataGridView1.EndEdit();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                var vector = new int[row.Cells.Count - 1];
-                var i = 0;
-                for (i = 0; i < row.Cells.Count - 1; i++)
+                var vector_train = new int[listOfActiveInputCheckBox.Count];
+                for (var i = 0; i < listOfActiveInputCheckBox.Count; i++)
                 {
-                    vector[i] = Convert.ToBoolean(row.Cells[i].Value) ? 1 : 0;
+                    vector_train[i] = Convert.ToBoolean(row.Cells[i].Value) ? 1 : 0;
                 }
-                double desire = Convert.ToBoolean(row.Cells[i].Value) ? 1 : 0;
-                listExamples.Add(new Tuple<int[], double[]>(vector, new double[1] { desire }));
+
+                var vector_desire = new double[listOfActiveOutputCheckBox.Count];
+                for (var i = 0; i < listOfActiveOutputCheckBox.Count; i++)
+                {
+                    int current_index = i + listOfActiveInputCheckBox.Count;
+                    vector_desire[i] = Convert.ToBoolean(row.Cells[current_index].Value) ? 1 : 0;
+                }
+
+                listExamples.Add(new Tuple<int[], double[]>(vector_train, vector_desire));
             }
 
             if (listExamples.Count > 0)
@@ -132,7 +137,11 @@ namespace Perceptrone_UI
             }
 
             var res = myPerc.Get_result(selected_array);
-            label_result.Text = "Вірогідність що ти хворий грипом: " + String.Format("{0:0.00}", res[0] * 100) + "%";
+            label_result.Text = "";
+            for (int i = 0; i < res.Length; i++)
+            {
+                label_result.Text += "Вірогідність що ти хворий '" + listOfActiveOutputCheckBox[i] + "' - " + String.Format("{0:0.00}", res[i] * 100) + "%\n";
+            }
         }
 
         private void ToolStripMenuItem_Save_AI_Click(object sender, EventArgs e)
@@ -173,21 +182,15 @@ namespace Perceptrone_UI
         {
             this.Enabled = false;
             var dialog = new Form2();
-            myPerc = new Perceptron();
-            dialog.textBox_countOfHidenLayers.Text += myPerc.countOfHidenLayers;
-            dialog.textBox_countOfNeuronInHidenLayer.Text += myPerc.countOfNeuronInHidenLayer;
-            dialog.textBox_countOfNeuronInOutputLayer.Text += myPerc.countOfNeuronInOutputLayer;
-            dialog.textBox_maxCountOfEpochs.Text += myPerc.countOfEpochs;
-            dialog.textBox_Learning_speed.Text += myPerc.Learning_speed;
+            if (myPerc == null)
+            {
+                myPerc = new Perceptron();
+            }
+            dialog.SetAllField(myPerc);
             dialog.ShowDialog();
             if (dialog.DialogResult == DialogResult.OK)
             {
-                myPerc = new Perceptron(listOfActiveInputCheckBox.Count,
-                    Convert.ToInt32(dialog.textBox_countOfHidenLayers.Text),
-                    Convert.ToInt32(dialog.textBox_countOfNeuronInHidenLayer.Text),
-                    Convert.ToInt32(dialog.textBox_countOfNeuronInOutputLayer.Text));
-                myPerc.countOfEpochs = Convert.ToInt32(dialog.textBox_maxCountOfEpochs.Text);
-                myPerc.Learning_speed = Convert.ToDouble(dialog.textBox_Learning_speed.Text);
+                myPerc = dialog.GetPerceptronFromField(myPerc.countOfInputEntrances);
             }
             dialog.Dispose();
             this.Enabled = true;
@@ -195,6 +198,7 @@ namespace Perceptrone_UI
 
         private void ToolStripMenuItem_confirmInput_Click(object sender, EventArgs e)
         {
+            #region input block
             foreach (var item in listOfInputCheckBox)
             {
                 if (item.Checked)
@@ -216,18 +220,33 @@ namespace Perceptrone_UI
             {
                 return;
             }
-            myPerc = new Perceptron(listOfActiveInputCheckBox.Count, 1, 1, 1);
-
-            dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn()
+            #endregion
+            #region output block
+            foreach (var item in listOfOutputCheckBox)
             {
-                Name = "Хворий грипом?",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
-            });
+                if (item.Checked)
+                {
+                    listOfActiveOutputCheckBox.Add(item.Text);
+                    dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn()
+                    {
+                        Name = item.Text,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
+                    });                    
+                }
+            }
+            if (listOfActiveOutputCheckBox.Count <= 0)
+            {
+                return;
+            }
+            #endregion
+
+            myPerc = new Perceptron(listOfActiveInputCheckBox.Count, 1, 1, listOfActiveOutputCheckBox.Count);
 
             dataGridView2.Rows.Add();
             dataGridView2.Rows[0].Selected = false;
 
             groupBox_inputs.Enabled = false;
+            groupBox_outputs.Enabled = false;
             ToolStripMenuItem_confirmInput.Enabled = false;
             ToolStripMenuItem_startLearn.Enabled = true;
             button_addExample.Enabled = true;
