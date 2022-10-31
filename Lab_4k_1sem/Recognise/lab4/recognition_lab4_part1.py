@@ -16,6 +16,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Flatten
 from keras.layers import Dropout
 from keras.layers.convolutional import Conv2D, MaxPooling2D
+from keras.optimizers import Adam
 from keras.utils import np_utils
 from keras import regularizers
 import matplotlib.pyplot as plt
@@ -129,7 +130,7 @@ print(model.summary())
 """**Компілюємо модель**"""
 
 model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
+              optimizer=Adam(lr=0.0003, decay=1e-6),
               metrics=['accuracy'])
 
 """## Навчаємо нейрону мережу"""
