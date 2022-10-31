@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DataBlock;
+using System.Collections.Generic;
 
 namespace Perceptrone_logic
 {
@@ -15,6 +16,7 @@ namespace Perceptrone_logic
 
         private List<Neiron[]> layers;
 
+        #region ctors
         public Perceptron()
         {
             BasicInit();
@@ -60,14 +62,31 @@ namespace Perceptrone_logic
             }
             layers.Add(output_layer);
         }
+        #endregion
 
         public Tuple<int,double> StartLearn(List<Tuple<int[], double[]>> data)
         {
+            var newData = new List<Tuple<double[], double[]>>();
+            for (int i = 0; i < data.Count; i++)
+            {
+                newData.Add(new Tuple<double[], double[]>(MyExtensions.MyNormalization(data[i].Item1), MyExtensions.MyNormalization(data[i].Item2)));
+            }
+            var res = Teacher.Learn_backpropagation(layers, newData, countOfEpochs, Learning_speed);
+            Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
+            return new Tuple<int, double>(res.Item1, res.Item2[res.Item2.Count-1]);
+        }
+        public Tuple<int,double> StartLearn(List<Tuple<double[], double[]>> data)
+        {
+            for (int i = 0; i < data.Count; i++)
+            {
+                data[i] = new Tuple<double[], double[]>(MyExtensions.MyNormalization(data[i].Item1), MyExtensions.MyNormalization(data[i].Item2));
+            }
             var res = Teacher.Learn_backpropagation(layers, data, countOfEpochs, Learning_speed);
             Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
             return new Tuple<int, double>(res.Item1, res.Item2[res.Item2.Count-1]);
         }
-        public Tuple<int, double> StartLearn(List<Tuple<int[], char>> data)
+
+        /*public Tuple<int, double> StartLearn(List<Tuple<int[], char>> data)
         {
             var transform = new List<Tuple<int[], double[]>>();
             foreach (var item in data)
@@ -84,7 +103,7 @@ namespace Perceptrone_logic
                 transform.Add(new Tuple<int[], double[]>(item.Item1, answer));
             }
             return StartLearn(transform);
-        }
+        }*/
 
         /// <summary>
         /// Видає результат роботи навченої моделі
@@ -98,11 +117,32 @@ namespace Perceptrone_logic
                 throw new Exception("Неправильна довжина вхідного масиву даних!");
             }
 
-            double[] inputData = new double[arrWithState.Length];
-            for (int i = 0; i < arrWithState.Length; i++)
+            double[] inputData = MyExtensions.MyNormalization(arrWithState);
+
+            for (int j = 0; j < layers.Count; j++)
             {
-                inputData[i] = arrWithState[i];
+                double[] outputData = new double[layers[j].Length];
+                for (int i = 0; i < outputData.Length; i++)
+                {
+                    outputData[i] = layers[j][i].GetAnswerDouble(inputData);
+                }
+                inputData = outputData;
             }
+            return inputData;
+        }
+        /// <summary>
+        /// Видає результат роботи навченої моделі
+        /// </summary>
+        /// <param name="arrWithState">Довжина arrWithState повинна дорівнювати "countOfEntrances"</param>
+        /// <returns></returns>
+        public double[] Get_result(double[] arrWithState)
+        {
+            if (arrWithState.Length != countOfInputEntrances)
+            {
+                throw new Exception("Неправильна довжина вхідного масиву даних!");
+            }
+
+            double[] inputData = MyExtensions.MyNormalization(arrWithState);
 
             for (int j = 0; j < layers.Count; j++)
             {
@@ -116,7 +156,7 @@ namespace Perceptrone_logic
             return inputData;
         }
 
-        public List<string> Guess_letter_and_return_all_percent(int[] arrWithState)
+        /*public List<string> Guess_letter_and_return_all_percent(int[] arrWithState)
         {
             List<string> list = new List<string>();
             var resY = Get_result(arrWithState);
@@ -127,7 +167,7 @@ namespace Perceptrone_logic
                 list.Add("" + neuron.Name + "\t " + String.Format("{0:0.0000}", resY[i] * 100) + "%");
             }
             return list;
-        }
+        }*/
 
         public List<List<Tuple<char, List<double>>>> GetWeightToSave()
         {

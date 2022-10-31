@@ -1,4 +1,6 @@
 ﻿using DataBlock;
+using System.Collections.Generic;
+
 namespace Perceptrone_logic
 {
     public static class Teacher
@@ -73,37 +75,28 @@ namespace Perceptrone_logic
         }
 
         public static Tuple<int, List<double>> Learn_backpropagation(List<Neiron[]> layers,
-            List<Tuple<int[], double[]>> ListWithExamples, int epochs_of_learning, double Learning_speed)
+            List<Tuple<double[], double[]>> ListWithExamples, int epochs_of_learning, double Learning_speed)
         {
             int current_epochs_of_learning = 0;
             List<double> list_root_mean_squared_error = new List<double>();
             var counOfNeuronInLastLayer = layers[layers.Count - 1].Length;
             do
             {
-                //Console.WriteLine("Епоха: " + current_epochs_of_learning);
                 double sum_squared_error = 0;
                 foreach (var example in ListWithExamples)
                 {
-                    //Console.WriteLine("  Приклад: ({0} - {1}) - {2}",
-                    //    example.Item1[0], example.Item1[1], example.Item2[0]);
                     #region prepare data
-                    var desire_response = example.Item2;
-                    double[] inputData = new double[example.Item1.Length];
-                    for (int i = 0; i < inputData.Length; i++)
-                    {
-                        inputData[i] = example.Item1[i];
-                    }
+                    double[] inputData = example.Item1;
+                    double[] desire_response = example.Item2;
                     #endregion
 
                     #region Forward
                     for (int j = 0; j < layers.Count; j++)
                     {
-                        //Console.WriteLine("    Шар: " + j);
                         double[] outputData = new double[layers[j].Length];
                         for (int i = 0; i < outputData.Length; i++)
                         {
                             outputData[i] = layers[j][i].GetAnswerDouble(inputData);
-                            //Console.WriteLine("      Нейрон: " + i + ", Y: " + outputData[i] + " ");
                         }
                         inputData = outputData;
                     }

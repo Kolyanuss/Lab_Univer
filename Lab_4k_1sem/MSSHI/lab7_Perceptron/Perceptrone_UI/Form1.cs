@@ -18,13 +18,13 @@ namespace Perceptrone_UI
         #region variable
         public Perceptron myPerc;
 
-        private List<Tuple<int[], double[]>> listExamples;
+        private List<Tuple<double[], double[]>> listExamples;
         private List<CheckBox> listOfInputCheckBox;
         private List<CheckBox> listOfOutputCheckBox;
         private List<string> listOfActiveInputCheckBox;
         private List<string> listOfActiveOutputCheckBox;
 
-        private int[]? selected_array = null;
+        private double[]? selected_array = null;
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace Perceptrone_UI
             InitializeComponent();
             InitializeMyInputCheckBoxes();
             InitializeMyOutputCheckBoxes();
-            listExamples = new List<Tuple<int[], double[]>>();
+            listExamples = new List<Tuple<double[], double[]>>();
         }
         private void InitializeMyInputCheckBoxes()
         {
@@ -91,26 +91,84 @@ namespace Perceptrone_UI
             Application.Restart();
         }
 
+        private DataGridViewComboBoxColumn GetComboBoxColumn(string text)
+        {
+            var param = "0% 25% 50% 75% 100%".Split(' ');
+            var res = new DataGridViewComboBoxColumn()
+            {
+                Name = text,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
+                
+            };
+            res.Items.AddRange(param);
+            return res;
+        }
+
+        private void ToolStripMenuItem_confirmInput_Click(object sender, EventArgs e)
+        {
+            #region input block
+            foreach (var item in listOfInputCheckBox)
+            {
+                if (item.Checked)
+                {
+                    listOfActiveInputCheckBox.Add(item.Text);
+                    dataGridView1.Columns.Add(GetComboBoxColumn(item.Text));
+                    dataGridView2.Columns.Add(GetComboBoxColumn(item.Text));
+                }
+            }
+            if (listOfActiveInputCheckBox.Count <= 0)
+            {
+                return;
+            }
+            #endregion
+
+            #region output block
+            foreach (var item in listOfOutputCheckBox)
+            {
+                if (item.Checked)
+                {
+                    listOfActiveOutputCheckBox.Add(item.Text);
+                    dataGridView1.Columns.Add(GetComboBoxColumn(item.Text));                    
+                }
+            }
+            if (listOfActiveOutputCheckBox.Count <= 0)
+            {
+                return;
+            }
+            #endregion
+
+            myPerc = new Perceptron(listOfActiveInputCheckBox.Count, 1, 1, listOfActiveOutputCheckBox.Count);
+
+            dataGridView2.Rows.Add();
+            dataGridView2.Rows[0].Selected = false;
+
+            groupBox_inputs.Enabled = false;
+            groupBox_outputs.Enabled = false;
+            ToolStripMenuItem_confirmInput.Enabled = false;
+            ToolStripMenuItem_startLearn.Enabled = true;
+            button_addExample.Enabled = true;
+            button_deleteExample.Enabled = true;
+        }
 
         private void button_StarLearn_Click(object sender, EventArgs e)
         {
             dataGridView1.EndEdit();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                var vector_train = new int[listOfActiveInputCheckBox.Count];
+                var vector_train = new double[listOfActiveInputCheckBox.Count];
                 for (var i = 0; i < listOfActiveInputCheckBox.Count; i++)
                 {
-                    vector_train[i] = Convert.ToBoolean(row.Cells[i].Value) ? 1 : 0;
+                    vector_train[i] = Convert.ToDouble(row.Cells[i].Value.ToString().Split('%')[0]);
                 }
 
                 var vector_desire = new double[listOfActiveOutputCheckBox.Count];
                 for (var i = 0; i < listOfActiveOutputCheckBox.Count; i++)
                 {
                     int current_index = i + listOfActiveInputCheckBox.Count;
-                    vector_desire[i] = Convert.ToBoolean(row.Cells[current_index].Value) ? 1 : 0;
+                    vector_desire[i] = Convert.ToDouble(row.Cells[current_index].Value.ToString().Split('%')[0]);
                 }
 
-                listExamples.Add(new Tuple<int[], double[]>(vector_train, vector_desire));
+                listExamples.Add(new Tuple<double[], double[]>(vector_train, vector_desire));
             }
 
             if (listExamples.Count > 0)
@@ -130,10 +188,10 @@ namespace Perceptrone_UI
         {
             dataGridView2.EndEdit();
             var cells = dataGridView2.Rows[0].Cells;
-            selected_array = new int[cells.Count];
+            selected_array = new double[cells.Count];
             for (var i = 0; i < cells.Count; i++)
             {
-                selected_array[i] = Convert.ToBoolean(cells[i].Value) ? 1 : 0;
+                selected_array[i] = Convert.ToDouble(cells[i].Value.ToString().Split('%')[0]);
             }
 
             var res = myPerc.Get_result(selected_array);
@@ -196,67 +254,10 @@ namespace Perceptrone_UI
             this.Enabled = true;
         }
 
-        private void ToolStripMenuItem_confirmInput_Click(object sender, EventArgs e)
-        {
-            #region input block
-            foreach (var item in listOfInputCheckBox)
-            {
-                if (item.Checked)
-                {
-                    listOfActiveInputCheckBox.Add(item.Text);
-                    dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn()
-                    {
-                        Name = item.Text,
-                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
-                    });
-                    dataGridView2.Columns.Add(new DataGridViewCheckBoxColumn()
-                    {
-                        Name = item.Text,
-                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
-                    });
-                }
-            }
-            if (listOfActiveInputCheckBox.Count <= 0)
-            {
-                return;
-            }
-            #endregion
-            #region output block
-            foreach (var item in listOfOutputCheckBox)
-            {
-                if (item.Checked)
-                {
-                    listOfActiveOutputCheckBox.Add(item.Text);
-                    dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn()
-                    {
-                        Name = item.Text,
-                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
-                    });                    
-                }
-            }
-            if (listOfActiveOutputCheckBox.Count <= 0)
-            {
-                return;
-            }
-            #endregion
-
-            myPerc = new Perceptron(listOfActiveInputCheckBox.Count, 1, 1, listOfActiveOutputCheckBox.Count);
-
-            dataGridView2.Rows.Add();
-            dataGridView2.Rows[0].Selected = false;
-
-            groupBox_inputs.Enabled = false;
-            groupBox_outputs.Enabled = false;
-            ToolStripMenuItem_confirmInput.Enabled = false;
-            ToolStripMenuItem_startLearn.Enabled = true;
-            button_addExample.Enabled = true;
-            button_deleteExample.Enabled = true;
-        }
-
         private void button_addExample_Click(object sender, EventArgs e)
         {
             var i = dataGridView1.Rows.Add();
-            dataGridView1.Rows[i].Selected = false;
+            //dataGridView1.Rows[i].Selected = false;
         }
 
         private void button_deleteExample_Click(object sender, EventArgs e)
