@@ -11,24 +11,35 @@ Original file is located at
 
 import numpy as np
 from keras.datasets import cifar10
-from keras.models import Sequential
+from keras.saving.model_config import model_from_json
 from keras.utils import np_utils
 from keras.preprocessing import image
 import matplotlib.pyplot as plt
 
 # %matplotlib inline
 
-# Кількість класів зображень
+# Підготовка даних
+## Кількість класів зображень
 nb_classes = 10
-# Назви класівз набору даних  CIFAR-10
+## Назви класівз набору даних  CIFAR-10
 classes = ['літак', 'автомобіль', 'птиця', 'кіт', 'олень', 'собака', 'жаба', 'кінь', 'корабель', 'вантажівка']
 
-"""## Підготовка даних
-
-**Завантажуємо дані**
-"""
-
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
+X_train = X_train.astype('float32')
+X_test = X_test.astype('float32')
+X_train /= 255
+X_test /= 255
+Y_train = np_utils.to_categorical(y_train, nb_classes)
+Y_test = np_utils.to_categorical(y_test, nb_classes)
+
+## Завантажуємо дані
+json_file = open("cifar10_model.json", "r")
+model_json = json_file.read()
+json_file.close()
+model = model_from_json(model_json)
+model.load_weights('cifar10_model1.h5')
+model.summary()
+
 
 """**Перагляд прикладів даних**"""
 
@@ -51,13 +62,8 @@ Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 
-# from google.colab import files
-
-# files.download("cifar10_model.json")
-# files.download("cifar10_model1.h5")
-
-"""## Застосовуємо мережу для розпізнавання об'єктів на зображеннях
-
+"""
+## Застосовуємо мережу для розпізнавання об'єктів на зображеннях
 **Перегляд зображення з набору даних для тестування**
 """
 
@@ -84,24 +90,24 @@ prediction = np.argmax(prediction)
 print(classes[prediction])
 
 """**Друкуємо вірну відповідь**"""
-
+print("Вірна відповідь: ")
 print(classes[y_test[index][0]])
 
 """## Розпізнаємо додаткове зображення"""
-
-img_path = 'вантажівка2.jpg'
-img = image.load_img(img_path, target_size=(32, 32))
-plt.imshow(img)
-plt.show()
-
-"""**Перетворюємо малюнок в масив для розпізнавання**"""
-
-x = image.img_to_array(img)
-x /= 255
-x = np.expand_dims(x, axis=0)
-
-"""**Запускаємо розпізнавання**"""
-
-prediction = model.predict(x)
-prediction = np.argmax(prediction)
-print(classes[prediction])
+#
+# img_path = 'вантажівка2.jpg'
+# img = image.load_img(img_path, target_size=(32, 32))
+# plt.imshow(img)
+# plt.show()
+#
+# """**Перетворюємо малюнок в масив для розпізнавання**"""
+#
+# x = image.img_to_array(img)
+# x /= 255
+# x = np.expand_dims(x, axis=0)
+#
+# """**Запускаємо розпізнавання**"""
+#
+# prediction = model.predict(x)
+# prediction = np.argmax(prediction)
+# print(classes[prediction])
