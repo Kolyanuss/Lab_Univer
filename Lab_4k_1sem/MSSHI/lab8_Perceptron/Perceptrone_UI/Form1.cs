@@ -15,6 +15,7 @@ namespace Perceptrone_UI
         public NeuronNetwork myNetwork;
 
         private List<Tuple<double[], double[]>> listExamples;
+        private List<NumericUpDown> listNumericUpDown;
 
         private double[]? selected_array = null;
 
@@ -25,42 +26,62 @@ namespace Perceptrone_UI
         {
             InitializeComponent();
             listExamples = new List<Tuple<double[], double[]>>();
+            listNumericUpDown = new List<NumericUpDown>();
+
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_1);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_2);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_3);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_4);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_5);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_6);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_7);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_8);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_9);
+            listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_10);
         }
         #endregion
 
         #region my func
-        private DataGridViewComboBoxColumn GetComboBoxColumn(string text)
+        private DataGridViewTextBoxColumn GetTextBoxColumn(string text)
         {
-            var param = "0% 25% 50% 75% 100%".Split(' ');
-            var res = new DataGridViewComboBoxColumn()
+            var res = new DataGridViewTextBoxColumn()
             {
                 Name = text,
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
 
             };
-            res.Items.AddRange(param);
             return res;
         }
         private void ConfirmDesignNetwork()
         {
-            for (int i = 0; i < myNetwork.countOfInputEntrances; i++)
-            {
-                dataGridView1.Columns.Add(GetComboBoxColumn("x" + i));
-                dataGridView2.Columns.Add(GetComboBoxColumn("x" + i));
-            }
-
-            for (int i = 0; i < myNetwork.countOfNeuronInOutputLayer; i++)
-            {
-                dataGridView1.Columns.Add(GetComboBoxColumn("y" + i));
-            }
+            // Create network
             int CountInput = Convert.ToInt32(numericUpDown_countOfNeuronInIntputLayer.Value);
             int CountHiden = Convert.ToInt32(numericUpDown_countOfHidenLayers.Value);
             int CountOuput = Convert.ToInt32(numericUpDown_countOfNeuronInOutputLayer.Value);
-            myNetwork = new NeuronNetwork(CountInput, CountHiden, 1, CountOuput);
+            int[] ArrCountNeuron = new int[CountHiden];
+            for (int i = 0; i < CountHiden; i++)
+            {
+                ArrCountNeuron[i] = (int)listNumericUpDown[i].Value;
+            }
+            myNetwork = new NeuronNetwork(CountInput, CountHiden, ArrCountNeuron, CountOuput);
 
+            // clear table
+            dataGridView1.Columns.Clear();
+            dataGridView2.Columns.Clear();
+            // initialize table
+            for (int i = 0; i < myNetwork.countOfInputEntrances; i++)
+            {
+                dataGridView1.Columns.Add(GetTextBoxColumn("x" + (i + 1)));
+                dataGridView2.Columns.Add(GetTextBoxColumn("x" + (i + 1)));
+            }
+            for (int i = 0; i < myNetwork.countOfNeuronInOutputLayer; i++)
+            {
+                dataGridView1.Columns.Add(GetTextBoxColumn("y" + (i + 1)));
+            }
             dataGridView2.Rows.Add();
             dataGridView2.Rows[0].Selected = false;
-            
+
+            // unlock button
             button__StartLearn.Enabled = true;
             button_addExample.Enabled = true;
             button_deleteExample.Enabled = true;
@@ -98,7 +119,7 @@ namespace Perceptrone_UI
             myNetwork.countOfEpochs = CountOfEpochs;
 
             var res = myNetwork.StartLearn(listExamples);
-            label_result.Text = "Навчання завершено! Пройдено " + res.Item1 + " епох, середньоквадратична помилка - " + res.Item2;
+            label_resultLearn.Text = "Навчання завершено! Пройдено " + res.Item1 + " епох, середньоквадратична помилка - " + res.Item2;
             listExamples.Clear();
         }
 
@@ -172,7 +193,17 @@ namespace Perceptrone_UI
         }
         private void numericUpDown_countOfHidenLayers_ValueChanged(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < numericUpDown_countOfHidenLayers.Maximum; i++)
+            {
+                if (i < numericUpDown_countOfHidenLayers.Value)
+                {
+                    listNumericUpDown[i].Enabled = true;
+                }
+                else
+                {
+                    listNumericUpDown[i].Enabled = false;
+                }
+            }
         }
         #endregion
 
@@ -180,7 +211,7 @@ namespace Perceptrone_UI
         private void button_addExample_Click(object sender, EventArgs e)
         {
             var i = dataGridView1.Rows.Add();
-            //dataGridView1.Rows[i].Selected = false;
+            dataGridView1.Rows[i].Selected = false;
         }
 
         private void button_deleteExample_Click(object sender, EventArgs e)
@@ -198,7 +229,10 @@ namespace Perceptrone_UI
         #endregion
 
         #region page 3 funcs
-
+        private void button_recognize_Click(object sender, EventArgs e)
+        {
+            Recognize();
+        }
         #endregion
 
         #endregion

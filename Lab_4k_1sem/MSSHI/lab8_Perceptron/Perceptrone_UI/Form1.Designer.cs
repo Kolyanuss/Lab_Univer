@@ -29,7 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem_File = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Save_AI = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,67 +43,67 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button_deleteExample = new System.Windows.Forms.Button();
             this.button_addExample = new System.Windows.Forms.Button();
-            this.groupBox_result = new System.Windows.Forms.GroupBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.label_result = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button_CreateNetwork = new System.Windows.Forms.Button();
             this.groupBox_OutputLayer = new System.Windows.Forms.GroupBox();
+            this.numericUpDown_countOfNeuronInOutputLayer = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox_HidenLayers = new System.Windows.Forms.GroupBox();
+            this.numericUpDown_CountOfNeuronInHidelLayer_10 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_9 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_8 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_7 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_6 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_5 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_4 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_CountOfNeuronInHidelLayer_1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_countOfHidenLayers = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox_Inputlayer = new System.Windows.Forms.GroupBox();
+            this.numericUpDown_countOfNeuronInIntputLayer = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel_LearnControl = new System.Windows.Forms.Panel();
+            this.label_resultLearn = new System.Windows.Forms.Label();
+            this.numericUpDown_Learning_speed = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_maxCountOfEpochs = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button__StartLearn = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.numericUpDown_countOfNeuronInIntputLayer = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_countOfNeuronInOutputLayer = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_maxCountOfEpochs = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_Learning_speed = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
+            this.button_recognize = new System.Windows.Forms.Button();
+            this.label_result = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox_result.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox_OutputLayer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfNeuronInOutputLayer)).BeginInit();
             this.groupBox_HidenLayers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfHidenLayers)).BeginInit();
             this.groupBox_Inputlayer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfNeuronInIntputLayer)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.panel_LearnControl.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfNeuronInIntputLayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfNeuronInOutputLayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_maxCountOfEpochs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Learning_speed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_maxCountOfEpochs)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -151,7 +154,23 @@
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 25;
@@ -171,29 +190,31 @@
             this.button_addExample.UseVisualStyleBackColor = true;
             this.button_addExample.Click += new System.EventHandler(this.button_addExample_Click);
             // 
-            // groupBox_result
-            // 
-            resources.ApplyResources(this.groupBox_result, "groupBox_result");
-            this.groupBox_result.Controls.Add(this.dataGridView2);
-            this.groupBox_result.Name = "groupBox_result";
-            this.groupBox_result.TabStop = false;
-            // 
             // dataGridView2
             // 
             resources.ApplyResources(this.dataGridView2, "dataGridView2");
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.RowTemplate.Height = 25;
-            // 
-            // label_result
-            // 
-            resources.ApplyResources(this.label_result, "label_result");
-            this.label_result.Name = "label_result";
             // 
             // tabControl1
             // 
@@ -229,6 +250,26 @@
             this.groupBox_OutputLayer.Name = "groupBox_OutputLayer";
             this.groupBox_OutputLayer.TabStop = false;
             // 
+            // numericUpDown_countOfNeuronInOutputLayer
+            // 
+            resources.ApplyResources(this.numericUpDown_countOfNeuronInOutputLayer, "numericUpDown_countOfNeuronInOutputLayer");
+            this.numericUpDown_countOfNeuronInOutputLayer.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_countOfNeuronInOutputLayer.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_countOfNeuronInOutputLayer.Name = "numericUpDown_countOfNeuronInOutputLayer";
+            this.numericUpDown_countOfNeuronInOutputLayer.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
@@ -237,21 +278,221 @@
             // groupBox_HidenLayers
             // 
             resources.ApplyResources(this.groupBox_HidenLayers, "groupBox_HidenLayers");
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown10);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown9);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown8);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown7);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown6);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown5);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown4);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown3);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown2);
-            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown1);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_10);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_9);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_8);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_7);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_6);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_5);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_4);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_3);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_2);
+            this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_1);
             this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_countOfHidenLayers);
             this.groupBox_HidenLayers.Controls.Add(this.label2);
             this.groupBox_HidenLayers.Controls.Add(this.label1);
             this.groupBox_HidenLayers.Name = "groupBox_HidenLayers";
             this.groupBox_HidenLayers.TabStop = false;
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_10
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_10, "numericUpDown_CountOfNeuronInHidelLayer_10");
+            this.numericUpDown_CountOfNeuronInHidelLayer_10.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_10.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_10.Name = "numericUpDown_CountOfNeuronInHidelLayer_10";
+            this.numericUpDown_CountOfNeuronInHidelLayer_10.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_9
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_9, "numericUpDown_CountOfNeuronInHidelLayer_9");
+            this.numericUpDown_CountOfNeuronInHidelLayer_9.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_9.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_9.Name = "numericUpDown_CountOfNeuronInHidelLayer_9";
+            this.numericUpDown_CountOfNeuronInHidelLayer_9.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_8
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_8, "numericUpDown_CountOfNeuronInHidelLayer_8");
+            this.numericUpDown_CountOfNeuronInHidelLayer_8.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_8.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_8.Name = "numericUpDown_CountOfNeuronInHidelLayer_8";
+            this.numericUpDown_CountOfNeuronInHidelLayer_8.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_7
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_7, "numericUpDown_CountOfNeuronInHidelLayer_7");
+            this.numericUpDown_CountOfNeuronInHidelLayer_7.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_7.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_7.Name = "numericUpDown_CountOfNeuronInHidelLayer_7";
+            this.numericUpDown_CountOfNeuronInHidelLayer_7.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_6
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_6, "numericUpDown_CountOfNeuronInHidelLayer_6");
+            this.numericUpDown_CountOfNeuronInHidelLayer_6.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_6.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_6.Name = "numericUpDown_CountOfNeuronInHidelLayer_6";
+            this.numericUpDown_CountOfNeuronInHidelLayer_6.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_5
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_5, "numericUpDown_CountOfNeuronInHidelLayer_5");
+            this.numericUpDown_CountOfNeuronInHidelLayer_5.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_5.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_5.Name = "numericUpDown_CountOfNeuronInHidelLayer_5";
+            this.numericUpDown_CountOfNeuronInHidelLayer_5.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_4
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_4, "numericUpDown_CountOfNeuronInHidelLayer_4");
+            this.numericUpDown_CountOfNeuronInHidelLayer_4.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_4.Name = "numericUpDown_CountOfNeuronInHidelLayer_4";
+            this.numericUpDown_CountOfNeuronInHidelLayer_4.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_3
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_3, "numericUpDown_CountOfNeuronInHidelLayer_3");
+            this.numericUpDown_CountOfNeuronInHidelLayer_3.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_3.Name = "numericUpDown_CountOfNeuronInHidelLayer_3";
+            this.numericUpDown_CountOfNeuronInHidelLayer_3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_2
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_2, "numericUpDown_CountOfNeuronInHidelLayer_2");
+            this.numericUpDown_CountOfNeuronInHidelLayer_2.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_2.Name = "numericUpDown_CountOfNeuronInHidelLayer_2";
+            this.numericUpDown_CountOfNeuronInHidelLayer_2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_CountOfNeuronInHidelLayer_1
+            // 
+            resources.ApplyResources(this.numericUpDown_CountOfNeuronInHidelLayer_1, "numericUpDown_CountOfNeuronInHidelLayer_1");
+            this.numericUpDown_CountOfNeuronInHidelLayer_1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_CountOfNeuronInHidelLayer_1.Name = "numericUpDown_CountOfNeuronInHidelLayer_1";
+            this.numericUpDown_CountOfNeuronInHidelLayer_1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericUpDown_countOfHidenLayers
             // 
@@ -282,6 +523,26 @@
             this.groupBox_Inputlayer.Name = "groupBox_Inputlayer";
             this.groupBox_Inputlayer.TabStop = false;
             // 
+            // numericUpDown_countOfNeuronInIntputLayer
+            // 
+            resources.ApplyResources(this.numericUpDown_countOfNeuronInIntputLayer, "numericUpDown_countOfNeuronInIntputLayer");
+            this.numericUpDown_countOfNeuronInIntputLayer.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_countOfNeuronInIntputLayer.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_countOfNeuronInIntputLayer.Name = "numericUpDown_countOfNeuronInIntputLayer";
+            this.numericUpDown_countOfNeuronInIntputLayer.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
@@ -298,6 +559,7 @@
             // panel_LearnControl
             // 
             resources.ApplyResources(this.panel_LearnControl, "panel_LearnControl");
+            this.panel_LearnControl.Controls.Add(this.label_resultLearn);
             this.panel_LearnControl.Controls.Add(this.numericUpDown_Learning_speed);
             this.panel_LearnControl.Controls.Add(this.numericUpDown_maxCountOfEpochs);
             this.panel_LearnControl.Controls.Add(this.label4);
@@ -306,6 +568,57 @@
             this.panel_LearnControl.Controls.Add(this.button_addExample);
             this.panel_LearnControl.Controls.Add(this.button_deleteExample);
             this.panel_LearnControl.Name = "panel_LearnControl";
+            // 
+            // label_resultLearn
+            // 
+            resources.ApplyResources(this.label_resultLearn, "label_resultLearn");
+            this.label_resultLearn.Name = "label_resultLearn";
+            // 
+            // numericUpDown_Learning_speed
+            // 
+            resources.ApplyResources(this.numericUpDown_Learning_speed, "numericUpDown_Learning_speed");
+            this.numericUpDown_Learning_speed.DecimalPlaces = 3;
+            this.numericUpDown_Learning_speed.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericUpDown_Learning_speed.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown_Learning_speed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numericUpDown_Learning_speed.Name = "numericUpDown_Learning_speed";
+            this.numericUpDown_Learning_speed.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            // 
+            // numericUpDown_maxCountOfEpochs
+            // 
+            resources.ApplyResources(this.numericUpDown_maxCountOfEpochs, "numericUpDown_maxCountOfEpochs");
+            this.numericUpDown_maxCountOfEpochs.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_maxCountOfEpochs.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_maxCountOfEpochs.Name = "numericUpDown_maxCountOfEpochs";
+            this.numericUpDown_maxCountOfEpochs.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             // 
             // label4
             // 
@@ -327,296 +640,29 @@
             // tabPage3
             // 
             resources.ApplyResources(this.tabPage3, "tabPage3");
-            this.tabPage3.Controls.Add(this.groupBox_result);
+            this.tabPage3.Controls.Add(this.button_recognize);
+            this.tabPage3.Controls.Add(this.label_result);
+            this.tabPage3.Controls.Add(this.dataGridView2);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown_countOfNeuronInIntputLayer
+            // button_recognize
             // 
-            resources.ApplyResources(this.numericUpDown_countOfNeuronInIntputLayer, "numericUpDown_countOfNeuronInIntputLayer");
-            this.numericUpDown_countOfNeuronInIntputLayer.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown_countOfNeuronInIntputLayer.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown_countOfNeuronInIntputLayer.Name = "numericUpDown_countOfNeuronInIntputLayer";
-            this.numericUpDown_countOfNeuronInIntputLayer.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            resources.ApplyResources(this.button_recognize, "button_recognize");
+            this.button_recognize.Name = "button_recognize";
+            this.button_recognize.UseVisualStyleBackColor = true;
+            this.button_recognize.Click += new System.EventHandler(this.button_recognize_Click);
             // 
-            // numericUpDown_countOfNeuronInOutputLayer
+            // label_result
             // 
-            resources.ApplyResources(this.numericUpDown_countOfNeuronInOutputLayer, "numericUpDown_countOfNeuronInOutputLayer");
-            this.numericUpDown_countOfNeuronInOutputLayer.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown_countOfNeuronInOutputLayer.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown_countOfNeuronInOutputLayer.Name = "numericUpDown_countOfNeuronInOutputLayer";
-            this.numericUpDown_countOfNeuronInOutputLayer.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown_maxCountOfEpochs
-            // 
-            resources.ApplyResources(this.numericUpDown_maxCountOfEpochs, "numericUpDown_maxCountOfEpochs");
-            this.numericUpDown_maxCountOfEpochs.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown_maxCountOfEpochs.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown_maxCountOfEpochs.Name = "numericUpDown_maxCountOfEpochs";
-            this.numericUpDown_maxCountOfEpochs.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown_Learning_speed
-            // 
-            resources.ApplyResources(this.numericUpDown_Learning_speed, "numericUpDown_Learning_speed");
-            this.numericUpDown_Learning_speed.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown_Learning_speed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown_Learning_speed.Name = "numericUpDown_Learning_speed";
-            this.numericUpDown_Learning_speed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown1
-            // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown2
-            // 
-            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown3
-            // 
-            resources.ApplyResources(this.numericUpDown3, "numericUpDown3");
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown4
-            // 
-            resources.ApplyResources(this.numericUpDown4, "numericUpDown4");
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown5
-            // 
-            resources.ApplyResources(this.numericUpDown5, "numericUpDown5");
-            this.numericUpDown5.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown6
-            // 
-            resources.ApplyResources(this.numericUpDown6, "numericUpDown6");
-            this.numericUpDown6.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown6.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown7
-            // 
-            resources.ApplyResources(this.numericUpDown7, "numericUpDown7");
-            this.numericUpDown7.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown7.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown8
-            // 
-            resources.ApplyResources(this.numericUpDown8, "numericUpDown8");
-            this.numericUpDown8.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown8.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown9
-            // 
-            resources.ApplyResources(this.numericUpDown9, "numericUpDown9");
-            this.numericUpDown9.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown9.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown10
-            // 
-            resources.ApplyResources(this.numericUpDown10, "numericUpDown10");
-            this.numericUpDown10.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown10.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            resources.ApplyResources(this.label_result, "label_result");
+            this.label_result.Name = "label_result";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label_result);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
@@ -625,35 +671,35 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox_result.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox_OutputLayer.ResumeLayout(false);
             this.groupBox_OutputLayer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfNeuronInOutputLayer)).EndInit();
             this.groupBox_HidenLayers.ResumeLayout(false);
             this.groupBox_HidenLayers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CountOfNeuronInHidelLayer_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfHidenLayers)).EndInit();
             this.groupBox_Inputlayer.ResumeLayout(false);
             this.groupBox_Inputlayer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfNeuronInIntputLayer)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.panel_LearnControl.ResumeLayout(false);
             this.panel_LearnControl.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfNeuronInIntputLayer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_countOfNeuronInOutputLayer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_maxCountOfEpochs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Learning_speed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_maxCountOfEpochs)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -667,8 +713,6 @@
         private ToolStripMenuItem ToolStripMenuItem_Save_AI;
         private ToolStripMenuItem ToolStripMenuItem_Load_AI;
         private SaveFileDialog saveFileDialog1;
-        private GroupBox groupBox_result;
-        private Label label_result;
         private Button button_deleteExample;
         private Button button_addExample;
         private DataGridView dataGridView1;
@@ -694,15 +738,18 @@
         private NumericUpDown numericUpDown_countOfNeuronInOutputLayer;
         private NumericUpDown numericUpDown_Learning_speed;
         private NumericUpDown numericUpDown_maxCountOfEpochs;
-        private NumericUpDown numericUpDown10;
-        private NumericUpDown numericUpDown9;
-        private NumericUpDown numericUpDown8;
-        private NumericUpDown numericUpDown7;
-        private NumericUpDown numericUpDown6;
-        private NumericUpDown numericUpDown5;
-        private NumericUpDown numericUpDown4;
-        private NumericUpDown numericUpDown3;
-        private NumericUpDown numericUpDown2;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_10;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_9;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_8;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_7;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_6;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_5;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_4;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_3;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_2;
+        private NumericUpDown numericUpDown_CountOfNeuronInHidelLayer_1;
+        private Label label_result;
+        private Label label_resultLearn;
+        private Button button_recognize;
     }
 }

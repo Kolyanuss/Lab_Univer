@@ -7,12 +7,10 @@ namespace Perceptrone_logic
     {
         public int countOfInputEntrances { get; } = 2;
         public int countOfHidenLayers { get; } = 1;
-        public int countOfNeuronInHidenLayer { get; } = 2;
+        public int[] countOfNeuronInHidenLayer { get; }
         public int countOfNeuronInOutputLayer { get; } = 1;
         public int countOfEpochs { get; set; } = 1000;
         public double Learning_speed { get; set; } = 0.8;
-
-        private string allLetter = "";
 
         private List<Neiron[]> layers;
 
@@ -21,50 +19,77 @@ namespace Perceptrone_logic
         {
             BasicInit();
         }
-        public NeuronNetwork(int countOfInputEntrances, int countOfHidenLayers, 
+        public NeuronNetwork(int countOfInputEntrances, int countOfHidenLayers,
             int countOfNeuronInHidenLayer, int countOfNeuronInOutputLayer)
         {
             this.countOfInputEntrances = countOfInputEntrances;
             this.countOfHidenLayers = countOfHidenLayers;
-            this.countOfNeuronInHidenLayer = countOfNeuronInHidenLayer;
+            this.countOfNeuronInHidenLayer = new int[1] { countOfNeuronInHidenLayer };
             this.countOfNeuronInOutputLayer = countOfNeuronInOutputLayer;
             BasicInit();
         }
+        public NeuronNetwork(int countOfInputEntrances, int countOfHidenLayers,
+            int[] arrCountOfNeuronInHidenLayers, int countOfNeuronInOutputLayer)
+        {
+            if (arrCountOfNeuronInHidenLayers.Length != countOfHidenLayers)
+            {
+                throw new Exception("Довжина масиву із нейронами для прихованого шару != кількості прихованих шарів");
+            }
+            this.countOfInputEntrances = countOfInputEntrances;
+            this.countOfHidenLayers = countOfHidenLayers;
+            this.countOfNeuronInHidenLayer = arrCountOfNeuronInHidenLayers;
+            this.countOfNeuronInOutputLayer = countOfNeuronInOutputLayer;
+            BasicInit2();
+        }
         public void BasicInit()
+        {
+            layers = new List<Neiron[]>();
+
+            int countOfNeuronInPreviousLayer = countOfInputEntrances;
+            for (int j = 0; j < countOfHidenLayers; j++)
+            {
+                Neiron[] hiden_layer = new Neiron[countOfNeuronInHidenLayer[0]];
+                for (int i = 0; i < hiden_layer.Length; i++)
+                {
+                    hiden_layer[i] = new Neiron(countOfNeuronInPreviousLayer);
+                }
+                layers.Add(hiden_layer);
+                countOfNeuronInPreviousLayer = hiden_layer.Length;
+            }
+
+            Neiron[] output_layer = new Neiron[countOfNeuronInOutputLayer];
+            for (int i = 0; i < output_layer.Length; i++)
+            {
+                output_layer[i] = new Neiron(countOfNeuronInPreviousLayer);
+            }
+            layers.Add(output_layer);
+        }
+        public void BasicInit2()
         {
             layers = new List<Neiron[]>();
 
             int countOfEntrancesInPreviousLayer = countOfInputEntrances;
             for (int j = 0; j < countOfHidenLayers; j++)
             {
-                Neiron[] hiden_layer = new Neiron[countOfNeuronInHidenLayer];
+                Neiron[] hiden_layer = new Neiron[countOfNeuronInHidenLayer[j]];
                 for (int i = 0; i < hiden_layer.Length; i++)
                 {
                     hiden_layer[i] = new Neiron(countOfEntrancesInPreviousLayer);
                 }
                 layers.Add(hiden_layer);
-                countOfEntrancesInPreviousLayer = countOfNeuronInHidenLayer;
-                // countOfEntrancesInPreviousLayer = layers[layers.Count - 1].Length; // same
+                countOfEntrancesInPreviousLayer = hiden_layer.Length;
             }
-
-            char A_letter = Convert.ToChar(1040);
-            string additionalVal = "ҐЄІЇЬЮЯ";
-            for (int i = 0; i < 33 - additionalVal.Length; i++)
-            {
-                allLetter += A_letter++;
-            }
-            allLetter += additionalVal;
 
             Neiron[] output_layer = new Neiron[countOfNeuronInOutputLayer];
             for (int i = 0; i < output_layer.Length; i++)
             {
-                output_layer[i] = new Neiron(countOfEntrancesInPreviousLayer, allLetter[i]);
+                output_layer[i] = new Neiron(countOfEntrancesInPreviousLayer);
             }
             layers.Add(output_layer);
         }
         #endregion
 
-        public Tuple<int,double> StartLearn(List<Tuple<int[], double[]>> data)
+        public Tuple<int, double> StartLearn(List<Tuple<int[], double[]>> data)
         {
             var newData = new List<Tuple<double[], double[]>>();
             for (int i = 0; i < data.Count; i++)
@@ -73,9 +98,9 @@ namespace Perceptrone_logic
             }
             var res = Teacher.Learn_backpropagation(layers, newData, countOfEpochs, Learning_speed);
             Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
-            return new Tuple<int, double>(res.Item1, res.Item2[res.Item2.Count-1]);
+            return new Tuple<int, double>(res.Item1, res.Item2[res.Item2.Count - 1]);
         }
-        public Tuple<int,double> StartLearn(List<Tuple<double[], double[]>> data)
+        public Tuple<int, double> StartLearn(List<Tuple<double[], double[]>> data)
         {
             for (int i = 0; i < data.Count; i++)
             {
@@ -83,7 +108,7 @@ namespace Perceptrone_logic
             }
             var res = Teacher.Learn_backpropagation(layers, data, countOfEpochs, Learning_speed);
             Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
-            return new Tuple<int, double>(res.Item1, res.Item2[res.Item2.Count-1]);
+            return new Tuple<int, double>(res.Item1, res.Item2[res.Item2.Count - 1]);
         }
 
         /*public Tuple<int, double> StartLearn(List<Tuple<int[], char>> data)
