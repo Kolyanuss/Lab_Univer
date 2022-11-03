@@ -91,10 +91,13 @@ namespace Perceptrone_logic
 
         public Tuple<int, double> StartLearn(List<Tuple<int[], double[]>> data)
         {
+            MyExtensions.FindMinMax(data);
             var newData = new List<Tuple<double[], double[]>>();
             for (int i = 0; i < data.Count; i++)
             {
-                newData.Add(new Tuple<double[], double[]>(MyExtensions.MyNormalization(data[i].Item1), MyExtensions.MyNormalization(data[i].Item2)));
+                newData.Add(new Tuple<double[], double[]>(
+                    MyExtensions.MyNormalization(data[i].Item1), 
+                    MyExtensions.MyNormalization(data[i].Item2)));
             }
             var res = Teacher.Learn_backpropagation(layers, newData, countOfEpochs, Learning_speed);
             Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
@@ -102,9 +105,12 @@ namespace Perceptrone_logic
         }
         public Tuple<int, double> StartLearn(List<Tuple<double[], double[]>> data)
         {
+            MyExtensions.FindMinMax(data);
             for (int i = 0; i < data.Count; i++)
             {
-                data[i] = new Tuple<double[], double[]>(MyExtensions.MyNormalization(data[i].Item1), MyExtensions.MyNormalization(data[i].Item2));
+                data[i] = new Tuple<double[], double[]>(
+                    MyExtensions.MyNormalization(data[i].Item1), 
+                    MyExtensions.MyNormalization(data[i].Item2));
             }
             var res = Teacher.Learn_backpropagation(layers, data, countOfEpochs, Learning_speed);
             Console.WriteLine("Epochs: {0}.\nСередньоквадратична помилка: (before;after) ({1};{2})", res.Item1, res.Item2[0], res.Item2[res.Item2.Count - 1]);
