@@ -224,6 +224,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Deselected);
             // 
             // tabPage1
             // 

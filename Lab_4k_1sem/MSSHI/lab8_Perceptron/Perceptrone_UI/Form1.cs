@@ -85,32 +85,44 @@ namespace Perceptrone_UI
             button__StartLearn.Enabled = true;
             button_addExample.Enabled = true;
             button_deleteExample.Enabled = true;
+            button_CreateNetwork.Text = "Мережа успішно створена!";
         }
 
         private void StartLearn()
         {
             dataGridView1.EndEdit();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            try
             {
-                var vector_train = new double[myNetwork.countOfInputEntrances];
-                for (var i = 0; i < vector_train.Length; i++)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    vector_train[i] = Convert.ToDouble(row.Cells[i].Value.ToString().Split('%')[0]);
-                }
+                    var vector_train = new double[myNetwork.countOfInputEntrances];
+                    for (var i = 0; i < vector_train.Length; i++)
+                    {
+                        vector_train[i] = Convert.ToDouble(row.Cells[i].Value.ToString().Split('%')[0]);
+                    }
 
-                var vector_desire = new double[myNetwork.countOfNeuronInOutputLayer];
-                for (var i = 0; i < vector_desire.Length; i++)
-                {
-                    int current_index = i + vector_train.Length;
-                    vector_desire[i] = Convert.ToDouble(row.Cells[current_index].Value.ToString().Split('%')[0]);
-                }
+                    var vector_desire = new double[myNetwork.countOfNeuronInOutputLayer];
+                    for (var i = 0; i < vector_desire.Length; i++)
+                    {
+                        int current_index = i + vector_train.Length;
+                        vector_desire[i] = Convert.ToDouble(row.Cells[current_index].Value.ToString().Split('%')[0]);
+                    }
 
-                listExamples.Add(new Tuple<double[], double[]>(vector_train, vector_desire));
+                    listExamples.Add(new Tuple<double[], double[]>(vector_train, vector_desire));
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show(ex.Message+"\nНе залишайте пустих полів","Error", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                listExamples.Clear();
+                return;
             }
 
             if (listExamples.Count <= 0)
             {
-                MessageBox.Show("Список навчальних даних пустий! \n Добавте приклади", "Інфо", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Список навчальних даних пустий! \n Добавте приклади", "Інфо",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             int LearnSpeed = Convert.ToInt32(numericUpDown_Learning_speed.Value);
@@ -235,7 +247,11 @@ namespace Perceptrone_UI
         }
         #endregion
 
-        #endregion
+        private void tabControl1_Deselected(object sender, TabControlEventArgs e)
+        {
+            button_CreateNetwork.Text = "Створити мережу";
+        }
 
+        #endregion
     }
 }
