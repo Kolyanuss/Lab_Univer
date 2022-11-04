@@ -361,8 +361,11 @@
   <data name="numericUpDown_maxCountOfEpochs.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 15.75pt</value>
   </data>
+  <data name="numericUpDown_maxCountOfEpochs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>189, 89</value>
+  </data>
   <data name="numericUpDown_maxCountOfEpochs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 35</value>
+    <value>79, 35</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -447,6 +450,9 @@
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Навчання</value>
+  </data>
+  <data name="button_recognize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="button_recognize.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 14.25pt, style=Bold</value>

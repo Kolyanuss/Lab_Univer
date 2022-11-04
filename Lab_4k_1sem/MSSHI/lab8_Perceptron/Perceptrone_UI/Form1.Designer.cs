@@ -604,8 +604,13 @@
             // numericUpDown_maxCountOfEpochs
             // 
             resources.ApplyResources(this.numericUpDown_maxCountOfEpochs, "numericUpDown_maxCountOfEpochs");
+            this.numericUpDown_maxCountOfEpochs.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             this.numericUpDown_maxCountOfEpochs.Maximum = new decimal(new int[] {
-            1000,
+            99999,
             0,
             0,
             0});

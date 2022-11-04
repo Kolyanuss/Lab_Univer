@@ -1,11 +1,6 @@
 using Perceptrone_logic;
-using DataBlock;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Xml.Linq;
 using System.Data;
-using System.Windows.Forms;
-using System.Data.Common;
 
 namespace Perceptrone_UI
 {
@@ -113,7 +108,7 @@ namespace Perceptrone_UI
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show(ex.Message+"\nНе залишайте пустих полів","Error", 
+                MessageBox.Show(ex.Message + "\nНе залишайте пустих полів", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 listExamples.Clear();
                 return;
@@ -137,12 +132,16 @@ namespace Perceptrone_UI
 
         private void Recognize()
         {
+            if (dataGridView2.Rows.Count <= 0)
+            {
+                return;
+            }
             dataGridView2.EndEdit();
             var cells = dataGridView2.Rows[0].Cells;
             selected_array = new double[cells.Count];
             for (var i = 0; i < cells.Count; i++)
             {
-                selected_array[i] = Convert.ToDouble(cells[i].Value.ToString().Split('%')[0]);
+                selected_array[i] = Convert.ToDouble(cells[i].Value);
             }
 
             var res = myNetwork.Get_result(selected_array);
@@ -230,7 +229,15 @@ namespace Perceptrone_UI
         {
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 1);
+                HashSet<int> indexes = new HashSet<int>();
+                foreach (DataGridViewCell item in dataGridView1.SelectedCells)
+                {
+                    indexes.Add(item.RowIndex);
+                }
+                foreach (var item in indexes.OrderByDescending(x => x))
+                {
+                    dataGridView1.Rows.RemoveAt(item);
+                }
             }
         }
 
