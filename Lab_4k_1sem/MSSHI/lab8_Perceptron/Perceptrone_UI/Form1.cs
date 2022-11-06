@@ -262,7 +262,7 @@ namespace Perceptrone_UI
                 string json = File.ReadAllText(openFileDialog1.FileName);
                 try
                 {
-                    myNetwork.SetWeight(JsonSerializer.Deserialize<List<List<Tuple<char, List<double>>>>>(json));
+                    myNetwork.SetWeight(JsonSerializer.Deserialize<List<List<List<double>>>>(json));
                 }
                 catch (JsonException)
                 {

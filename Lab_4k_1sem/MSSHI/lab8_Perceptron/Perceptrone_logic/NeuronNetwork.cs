@@ -102,30 +102,30 @@
             return list;
         }*/
 
-        public List<List<Tuple<char, List<double>>>> GetWeightToSave()
+        public List<List<List<double>>> GetWeightToSave()
         {
-            var res = new List<List<Tuple<char, List<double>>>>();
+            var res = new List<List<List<double>>>();
             foreach (var layer in layers)
             {
-                var res_layer = new List<Tuple<char, List<double>>>();
+                var res_layer = new List<List<double>>();
                 foreach (var neuron in layer)
                 {
-                    res_layer.Add(neuron.GetEntranceWeight());
+                    res_layer.Add(neuron.GetAllWeight());
                 }
                 res.Add(res_layer);
             }
             return res;
         }
 
-        public void SetWeight(List<List<Tuple<char, List<double>>>> items)
+        public void SetWeight(List<List<List<double>>> items)
         {
             int i = 0;
-            foreach (var dict in items)
+            foreach (var item in items)
             {
                 int j = 0;
-                foreach (var oneExample in dict)
+                foreach (var oneExample in item)
                 {
-                    layers[i][j].SetEntrancesWeight(oneExample.Item2);
+                    layers[i][j].SetEntrancesWeight(oneExample);
                     j++;
                 }
                 i++;
@@ -144,12 +144,10 @@
         }
         public void ChangeActivationFuncOnLastLayer(Neiron.ActivationFuncs activationType)
         {
-
             foreach (var item in layers[layers.Count - 1])
             {
                 item.TypeActivFunc = activationType;
             }
-
         }
     }
 }

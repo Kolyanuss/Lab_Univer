@@ -148,15 +148,14 @@
         }
 
         #region get\set weight\state
-        public Tuple<char, List<double>> GetEntranceWeight()
+        public List<double> GetAllWeight()
         {
             var list = new List<double>();
             foreach (var item in arr_entrances)
             {
                 list.Add(item.weight);
             }
-            return new Tuple<char, List<double>>(Name, list);
-
+            return list;
         }
         public double GetEntranceWeight(int id_of_entrance)
         {
