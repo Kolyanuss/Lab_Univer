@@ -109,7 +109,7 @@ namespace Perceptrone_logic
                     {
                         var neuron = layers[layers.Count - 1][j];
                         ///neural error \ нейронна помилка
-                        var e = neuron.GetNeuralErrorBySigmoidFunc(desire_response[j]);
+                        var e = neuron.GetNeuralError(desire_response[j]);
                         var ne = Learning_speed * e;
                         for (int i = 0; i < neuron.CountOfEntrances; i++)
                         {

@@ -57,7 +57,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ToolStripMenuItem_File.Text" xml:space="preserve">
+    <value>Файл</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>814, 24</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
   <data name="ToolStripMenuItem_Save_AI.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 22</value>
   </data>
@@ -75,15 +84,6 @@
   </data>
   <data name="ToolStripMenuItem_restart.Text" xml:space="preserve">
     <value>Перезапуск</value>
-  </data>
-  <data name="ToolStripMenuItem_File.Text" xml:space="preserve">
-    <value>Файл</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>814, 24</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
   </data>
   <data name="saveFileDialog1.Filter" xml:space="preserve">
     <value>JSON|*.json</value>
@@ -142,6 +142,27 @@
   <data name="dataGridView_predict.Size" type="System.Drawing.Size, System.Drawing">
     <value>800, 114</value>
   </data>
+  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>814, 557</value>
+  </data>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>806, 527</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Проектування</value>
+  </data>
   <data name="button_CreateNetwork.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -149,13 +170,28 @@
     <value>Segoe UI, 24pt, style=Bold</value>
   </data>
   <data name="button_CreateNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 430</value>
+    <value>3, 466</value>
   </data>
   <data name="button_CreateNetwork.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 74</value>
+    <value>800, 58</value>
   </data>
   <data name="button_CreateNetwork.Text" xml:space="preserve">
     <value>Створити мережу</value>
+  </data>
+  <data name="groupBox_OutputLayer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="groupBox_OutputLayer.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 18pt</value>
+  </data>
+  <data name="groupBox_OutputLayer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 339</value>
+  </data>
+  <data name="groupBox_OutputLayer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 127</value>
+  </data>
+  <data name="groupBox_OutputLayer.Text" xml:space="preserve">
+    <value>Вихідний шар</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -177,9 +213,6 @@
   </data>
   <data name="comboBox_activationFuncOut.Items1" xml:space="preserve">
     <value>Сходинка</value>
-  </data>
-  <data name="comboBox_activationFuncOut.Items2" xml:space="preserve">
-    <value>Лінійна</value>
   </data>
   <data name="comboBox_activationFuncOut.MaxDropDownItems" type="System.Int32, mscorlib">
     <value>3</value>
@@ -205,20 +238,20 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Кількість нейронів у вихідному шарі</value>
   </data>
-  <data name="groupBox_OutputLayer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="groupBox_HidenLayers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="groupBox_OutputLayer.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="groupBox_HidenLayers.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 18pt</value>
   </data>
-  <data name="groupBox_OutputLayer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 303</value>
+  <data name="groupBox_HidenLayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 126</value>
   </data>
-  <data name="groupBox_OutputLayer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 127</value>
+  <data name="groupBox_HidenLayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 213</value>
   </data>
-  <data name="groupBox_OutputLayer.Text" xml:space="preserve">
-    <value>Вихідний шар</value>
+  <data name="groupBox_HidenLayers.Text" xml:space="preserve">
+    <value>Приховані шари</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -240,9 +273,6 @@
   </data>
   <data name="comboBox_activationFuncHiden.Items1" xml:space="preserve">
     <value>Сходинка</value>
-  </data>
-  <data name="comboBox_activationFuncHiden.Items2" xml:space="preserve">
-    <value>Лінійна</value>
   </data>
   <data name="comboBox_activationFuncHiden.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 157</value>
@@ -340,20 +370,17 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Кількість прихованих шарів</value>
   </data>
-  <data name="groupBox_HidenLayers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="groupBox_Inputlayer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="groupBox_HidenLayers.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="groupBox_Inputlayer.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 18pt</value>
   </data>
-  <data name="groupBox_HidenLayers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 90</value>
+  <data name="groupBox_Inputlayer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 123</value>
   </data>
-  <data name="groupBox_HidenLayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 213</value>
-  </data>
-  <data name="groupBox_HidenLayers.Text" xml:space="preserve">
-    <value>Приховані шари</value>
+  <data name="groupBox_Inputlayer.Text" xml:space="preserve">
+    <value>Вхідний шар</value>
   </data>
   <data name="numericUpDown_countOfNeuronInIntputLayer.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 39</value>
@@ -373,26 +400,32 @@
   <data name="label6.Text" xml:space="preserve">
     <value>Кількість нейронів у вхідному шарі</value>
   </data>
-  <data name="groupBox_Inputlayer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 26</value>
   </data>
-  <data name="groupBox_Inputlayer.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 18pt</value>
+  <data name="tabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="groupBox_Inputlayer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 87</value>
-  </data>
-  <data name="groupBox_Inputlayer.Text" xml:space="preserve">
-    <value>Вхідний шар</value>
-  </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>806, 507</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Проектування</value>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Навчання</value>
+  </data>
+  <data name="panel_LearnControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="panel_LearnControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>532, 0</value>
+  </data>
+  <data name="panel_LearnControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panel_LearnControl.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panel_LearnControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>274, 507</value>
   </data>
   <data name="checkBox_Normalization.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -493,42 +526,6 @@
   <data name="button__StartLearn.Text" xml:space="preserve">
     <value>Почати навчання</value>
   </data>
-  <data name="panel_LearnControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="panel_LearnControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>532, 0</value>
-  </data>
-  <data name="panel_LearnControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="panel_LearnControl.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="panel_LearnControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 507</value>
-  </data>
-  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 26</value>
-  </data>
-  <data name="tabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 507</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Навчання</value>
-  </data>
-  <data name="dataGridView_check.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dataGridView_check.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="dataGridView_check.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 501</value>
-  </data>
   <data name="tabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
@@ -540,6 +537,39 @@
   </data>
   <data name="tabPage3.Text" xml:space="preserve">
     <value>Перевірка</value>
+  </data>
+  <data name="dataGridView_check.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dataGridView_check.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridView_check.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 501</value>
+  </data>
+  <data name="tabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>806, 507</value>
+  </data>
+  <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPage4.Text" xml:space="preserve">
+    <value>Прогноз</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 117</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 169</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="button_recognize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -577,53 +607,59 @@
   <data name="label_result.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="comboBox_activationFuncIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 117</value>
+  <data name="comboBox_activationFuncIn.Items" xml:space="preserve">
+    <value>Сигмоїда</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 169</value>
+  <data name="comboBox_activationFuncIn.Items1" xml:space="preserve">
+    <value>Сходинка</value>
   </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="comboBox_activationFuncIn.Items2" xml:space="preserve">
+    <value>Лінійна</value>
+  </data>
+  <data name="comboBox_activationFuncIn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 72</value>
+  </data>
+  <data name="comboBox_activationFuncIn.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="comboBox_activationFuncIn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 40</value>
+  </data>
+  <data name="comboBox_activationFuncIn.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="tabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 507</value>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 72</value>
   </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>Прогноз</value>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 32</value>
   </data>
-  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>814, 537</value>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Функція активації:</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>814, 561</value>
+    <value>814, 581</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9.75pt</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>830, 600</value>
+    <value>830, 620</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

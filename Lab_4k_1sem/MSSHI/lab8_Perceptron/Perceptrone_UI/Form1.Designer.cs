@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem_File = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Save_AI = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,6 +84,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button_recognize = new System.Windows.Forms.Button();
             this.label_result = new System.Windows.Forms.Label();
+            this.comboBox_activationFuncIn = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_train)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_predict)).BeginInit();
@@ -164,23 +166,23 @@
             this.dataGridView_train.AllowUserToAddRows = false;
             this.dataGridView_train.AllowUserToResizeRows = false;
             this.dataGridView_train.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_train.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_train.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_train.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_train.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_train.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_train.Name = "dataGridView_train";
             this.dataGridView_train.RowHeadersVisible = false;
             this.dataGridView_train.RowTemplate.Height = 25;
@@ -551,7 +553,9 @@
             // groupBox_Inputlayer
             // 
             resources.ApplyResources(this.groupBox_Inputlayer, "groupBox_Inputlayer");
+            this.groupBox_Inputlayer.Controls.Add(this.label9);
             this.groupBox_Inputlayer.Controls.Add(this.numericUpDown_countOfNeuronInIntputLayer);
+            this.groupBox_Inputlayer.Controls.Add(this.comboBox_activationFuncIn);
             this.groupBox_Inputlayer.Controls.Add(this.label6);
             this.groupBox_Inputlayer.Name = "groupBox_Inputlayer";
             this.groupBox_Inputlayer.TabStop = false;
@@ -726,6 +730,22 @@
             resources.ApplyResources(this.label_result, "label_result");
             this.label_result.Name = "label_result";
             // 
+            // comboBox_activationFuncIn
+            // 
+            resources.ApplyResources(this.comboBox_activationFuncIn, "comboBox_activationFuncIn");
+            this.comboBox_activationFuncIn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_activationFuncIn.FormattingEnabled = true;
+            this.comboBox_activationFuncIn.Items.AddRange(new object[] {
+            resources.GetString("comboBox_activationFuncIn.Items"),
+            resources.GetString("comboBox_activationFuncIn.Items1"),
+            resources.GetString("comboBox_activationFuncIn.Items2")});
+            this.comboBox_activationFuncIn.Name = "comboBox_activationFuncIn";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -829,5 +849,7 @@
         private ComboBox comboBox_activationFuncOut;
         private Label label8;
         private Label label7;
+        private Label label9;
+        private ComboBox comboBox_activationFuncIn;
     }
 }

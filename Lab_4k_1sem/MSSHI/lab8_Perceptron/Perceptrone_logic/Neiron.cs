@@ -120,10 +120,15 @@
             return CalcWeight();
         }
 
-        public double GetNeuralErrorBySigmoidFunc(double desire_response)
+        public double GetNeuralError(double desire_response)
         {
-            var Y = ActivationFunc_Sigmoid();
-            return Y * (1.0 - Y) * (desire_response - Y);
+            var Y = ActivationFunc();
+            var res = desire_response - Y;
+            if (TypeActivFunc == ActivationFuncs.SIGMOID)
+            {
+                res *= Y * (1.0 - Y);
+            }
+            return res;
         }
 
         /*public bool GetAnswerBool(int[] testMas)

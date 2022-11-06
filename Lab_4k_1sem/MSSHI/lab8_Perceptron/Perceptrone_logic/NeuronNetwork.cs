@@ -149,5 +149,12 @@
                 item.TypeActivFunc = activationType;
             }
         }
+        public void ChangeActivationFuncOnFirstLayer(Neiron.ActivationFuncs activationType)
+        {
+            foreach (var item in layers[0])
+            {
+                item.TypeActivFunc = activationType;
+            }
+        }
     }
 }

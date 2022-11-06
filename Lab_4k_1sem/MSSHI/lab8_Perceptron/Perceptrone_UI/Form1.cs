@@ -36,6 +36,7 @@ namespace Perceptrone_UI
             listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_9);
             listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_10);
 
+            comboBox_activationFuncIn.SelectedItem = comboBox_activationFuncIn.Items[0];
             comboBox_activationFuncHiden.SelectedItem = comboBox_activationFuncHiden.Items[0];
             comboBox_activationFuncOut.SelectedItem = comboBox_activationFuncOut.Items[0];
 
@@ -95,11 +96,16 @@ namespace Perceptrone_UI
 
             // Assignment of the activation function
             ActivationFuncs activationFuncs;
+
+            activationFuncs = AssignmentOfActivationFunction(comboBox_activationFuncIn.SelectedItem.ToString());
+            myNetwork.ChangeActivationFuncOnFirstLayer(activationFuncs);
+
             if (comboBox_activationFuncHiden.Enabled)
             {
                 activationFuncs = AssignmentOfActivationFunction(comboBox_activationFuncHiden.SelectedItem.ToString());
                 myNetwork.ChangeActivationFunc(activationFuncs);
             }
+
             activationFuncs = AssignmentOfActivationFunction(comboBox_activationFuncOut.SelectedItem.ToString());
             myNetwork.ChangeActivationFuncOnLastLayer(activationFuncs);
 
@@ -221,7 +227,7 @@ namespace Perceptrone_UI
             label_result.Text = "";
             for (int i = 0; i < res.Length; i++)
             {
-                label_result.Text += "y" + i + " - " + String.Format("{0:0.00}", res[i] * 100) + "%\n";
+                label_result.Text += "y" + i + " - " + String.Format("{0:0.00}", res[i] * 100) + "\n";
             }
         }
         #endregion
