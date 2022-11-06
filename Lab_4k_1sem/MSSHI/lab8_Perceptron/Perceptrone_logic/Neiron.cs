@@ -22,8 +22,13 @@
             }
         }
 
+        public enum ActivationFuncs
+        {
+            STEP, SIGMOID, LINEAR
+        }
+
         public int CountOfEntrances { get; }
-        private entrances[] arr_entrances; // всі входи в перцептрона
+        private entrances[] arr_entrances; // всі входи мережі
         public double Tetta // sensitivity threshold || поріг чутливості
         {
             get { return -arr_entrances[0].weight; }
@@ -35,6 +40,34 @@
         /// </summary>
         public double activation_threshold_Y = 0.98;
         private Tuple<double, double> rangeOfEntraceWeight = new Tuple<double, double>(-1, 1);
+        private Func<double> ActivationFunc;
+        private ActivationFuncs CurrentActivFunc;
+        public ActivationFuncs TypeActivFunc
+        {
+            get
+            {
+                return CurrentActivFunc;
+            }
+            set
+            {
+                CurrentActivFunc = value;
+                switch (CurrentActivFunc)
+                {
+                    case ActivationFuncs.STEP:
+                        ActivationFunc = ActivationFunc_Step;
+                        break;
+                    case ActivationFuncs.SIGMOID:
+                        ActivationFunc = ActivationFunc_Sigmoid;
+                        break;
+                    case ActivationFuncs.LINEAR:
+                        ActivationFunc = ActivationFunc_Linear;
+                        break;
+                    default:
+                        ActivationFunc = ActivationFunc_Sigmoid;
+                        break;
+                }                
+            }
+        }
 
         public Neiron(int CountOfEntrances)
         {
@@ -44,8 +77,9 @@
         public Neiron(int CountOfEntrances, char name) : this(CountOfEntrances) => this.Name = name;
         private void BasicInit()
         {
+            TypeActivFunc = ActivationFuncs.SIGMOID;
+
             arr_entrances = new entrances[this.CountOfEntrances];
-            //arr_entrances.SetValue(new entrances(true, GetRandNumInRange(rangeOfEntraceWeight.Item1, rangeOfEntraceWeight.Item2)), 0);
             for (int i = 0; i < this.CountOfEntrances; i++)
             {
                 arr_entrances.SetValue(new entrances(true, GetRandNumInRange(rangeOfEntraceWeight.Item1, rangeOfEntraceWeight.Item2)), i);
@@ -70,69 +104,50 @@
         /// <summary>
         /// Сигмоїдна функція активації
         /// </summary>
-        public double CalcY_SigmoidFunc()
+        private double ActivationFunc_Sigmoid()
         {
             return (1.0 / (1.0 + Math.Exp(0 - CalcWeight())));
         }
         /// <summary>
         /// активізаційна функція сходинки
         /// </summary>
-        public double CalcY_StepFunc()
+        private double ActivationFunc_Step()
         {
             return CalcWeight() >= 0 ? 1 : 0;
+        }
+        private double ActivationFunc_Linear()
+        {
+            return CalcWeight();
         }
 
         public double GetNeuralErrorBySigmoidFunc(double desire_response)
         {
-            var Y = CalcY_SigmoidFunc();
+            var Y = ActivationFunc_Sigmoid();
             return Y * (1.0 - Y) * (desire_response - Y);
         }
 
-        public int GetAnswerInt(int[] testMas)
+        /*public bool GetAnswerBool(int[] testMas)
         {
             SetEntrancesState(testMas);
-            return CalcY_SigmoidFunc() >= activation_threshold_Y ? 1 : 0;
-        }
-        public bool GetAnswerBool(int[] testMas)
-        {
-            SetEntrancesState(testMas);
-            return CalcY_SigmoidFunc() >= activation_threshold_Y ? true : false;
-        }
+            return ActivationFunc_Sigmoid() >= activation_threshold_Y ? true : false;
+        }*/
+
         public double GetAnswerDouble(int[] testMas)
         {
             SetEntrancesState(testMas);
-            return CalcY_SigmoidFunc();
+            return ActivationFunc();
         }
         public double GetAnswerDouble(double[] testMas)
         {
             SetEntrancesState(testMas);
-            return CalcY_SigmoidFunc();
+            return ActivationFunc();
         }
-        public double GetAnswerDouble_StepFunc(int[] testMas)
+        public double GetAnswerDouble()
         {
-            SetEntrancesState(testMas);
-            return CalcY_StepFunc();
-        }
-        public double GetAnswerDouble_StepFunc(double[] testMas)
-        {
-            SetEntrancesState(testMas);
-            return CalcY_StepFunc();
-        }
-        public Tuple<char, double>? GetAnswerWithPercent(int[] testMas)
-        {
-            SetEntrancesState(testMas);
-            var y = CalcY_SigmoidFunc();
-            return y >= activation_threshold_Y ? new Tuple<char, double>(Name, y) : null;
-        }
-        public Tuple<char, double> GetAllAnswerWithPercent(int[] testMas)
-        {
-            SetEntrancesState(testMas);
-            var y = CalcY_SigmoidFunc();
-            return new Tuple<char, double>(Name, y);
+            return ActivationFunc();
         }
 
-
-        #region get\set
+        #region get\set weight\state
         public Tuple<char, List<double>> GetEntranceWeight()
         {
             var list = new List<double>();

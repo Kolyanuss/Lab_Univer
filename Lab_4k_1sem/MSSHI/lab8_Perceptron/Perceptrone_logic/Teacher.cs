@@ -24,7 +24,7 @@ namespace Perceptrone_logic
                     bool desire_response = (item.Item2 == neironToLearn.Name) ? true : false;
 
                     neironToLearn.SetEntrancesState(item.Item1);
-                    var rez_y = neironToLearn.CalcY_SigmoidFunc();
+                    var rez_y = neironToLearn.GetAnswerDouble();
                     if ((Convert.ToInt32(desire_response) == 1 && rez_y >= neironToLearn.activation_threshold_Y) ||
                         (Convert.ToInt32(desire_response) == 0 && rez_y <= 1 - neironToLearn.activation_threshold_Y))
                     {
@@ -55,7 +55,7 @@ namespace Perceptrone_logic
                     bool desire_response = item.Item2;
 
                     neironToLearn.SetEntrancesState(item.Item1);
-                    var rez_y = neironToLearn.CalcY_SigmoidFunc();
+                    var rez_y = neironToLearn.GetAnswerDouble();
                     if ((Convert.ToInt32(desire_response) == 1 && rez_y >= neironToLearn.activation_threshold_Y) ||
                         (Convert.ToInt32(desire_response) == 0 && rez_y <= 1 - neironToLearn.activation_threshold_Y))
                     {
@@ -76,7 +76,7 @@ namespace Perceptrone_logic
 
         public static Tuple<int, List<double>> Learn_backpropagation(List<Neiron[]> layers,
             List<Tuple<double[], double[]>> ListWithExamples, int epochs_of_learning, double Learning_speed)
-        {
+        {            
             int current_epochs_of_learning = 0;
             List<double> list_root_mean_squared_error = new List<double>();
             var counOfNeuronInLastLayer = layers[layers.Count - 1].Length;
@@ -117,7 +117,7 @@ namespace Perceptrone_logic
                             neuron.SetEntrancesWeight(i, x);
                         }
                         listWithNeuralError[j] = e;
-                        sum_squared_error += Math.Pow(desire_response[j] - neuron.CalcY_SigmoidFunc(), 2);
+                        sum_squared_error += Math.Pow(desire_response[j] - neuron.GetAnswerDouble(), 2);
                     }
                     #endregion
 
@@ -129,7 +129,7 @@ namespace Perceptrone_logic
                         for (int j = 0; j < countOfNeuronInCurrentLayer; j++) // for by neurons
                         {
                             var neuron = layers[l][j];
-                            var rez_y = neuron.CalcY_SigmoidFunc();
+                            var rez_y = neuron.GetAnswerDouble();
 
                             double sumOfNeuralErrorNextLayer = 0;
                             for (int i = 0; i < listWithNeuralError.Length; i++)

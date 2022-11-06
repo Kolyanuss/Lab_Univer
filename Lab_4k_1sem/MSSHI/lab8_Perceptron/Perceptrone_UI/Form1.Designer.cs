@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem_File = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Save_AI = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,17 +38,21 @@
             this.ToolStripMenuItem_restart = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_train = new System.Windows.Forms.DataGridView();
             this.button_deleteExample = new System.Windows.Forms.Button();
             this.button_addExample = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_predict = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button_CreateNetwork = new System.Windows.Forms.Button();
             this.groupBox_OutputLayer = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBox_activationFuncOut = new System.Windows.Forms.ComboBox();
             this.numericUpDown_countOfNeuronInOutputLayer = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox_HidenLayers = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBox_activationFuncHiden = new System.Windows.Forms.ComboBox();
             this.numericUpDown_CountOfNeuronInHidelLayer_10 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_CountOfNeuronInHidelLayer_9 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_CountOfNeuronInHidelLayer_8 = new System.Windows.Forms.NumericUpDown();
@@ -69,6 +71,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel_LearnControl = new System.Windows.Forms.Panel();
+            this.checkBox_Normalization = new System.Windows.Forms.CheckBox();
             this.label_resultLearn = new System.Windows.Forms.Label();
             this.numericUpDown_Learning_speed = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_maxCountOfEpochs = new System.Windows.Forms.NumericUpDown();
@@ -76,11 +79,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button__StartLearn = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dataGridView_check = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.button_recognize = new System.Windows.Forms.Button();
             this.label_result = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_train)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_predict)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox_OutputLayer.SuspendLayout();
@@ -104,6 +110,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Learning_speed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_maxCountOfEpochs)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_check)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -149,32 +158,33 @@
             // 
             resources.ApplyResources(this.saveFileDialog1, "saveFileDialog1");
             // 
-            // dataGridView1
+            // dataGridView_train
             // 
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.dataGridView_train, "dataGridView_train");
+            this.dataGridView_train.AllowUserToAddRows = false;
+            this.dataGridView_train.AllowUserToResizeRows = false;
+            this.dataGridView_train.BackgroundColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_train.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView_train.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.ShowCellToolTips = false;
+            this.dataGridView_train.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView_train.Name = "dataGridView_train";
+            this.dataGridView_train.RowHeadersVisible = false;
+            this.dataGridView_train.RowTemplate.Height = 25;
+            this.dataGridView_train.ShowCellToolTips = false;
             // 
             // button_deleteExample
             // 
@@ -190,31 +200,16 @@
             this.button_addExample.UseVisualStyleBackColor = true;
             this.button_addExample.Click += new System.EventHandler(this.button_addExample_Click);
             // 
-            // dataGridView2
+            // dataGridView_predict
             // 
-            resources.ApplyResources(this.dataGridView2, "dataGridView2");
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowTemplate.Height = 25;
+            resources.ApplyResources(this.dataGridView_predict, "dataGridView_predict");
+            this.dataGridView_predict.AllowUserToAddRows = false;
+            this.dataGridView_predict.AllowUserToResizeRows = false;
+            this.dataGridView_predict.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView_predict.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_predict.Name = "dataGridView_predict";
+            this.dataGridView_predict.RowHeadersVisible = false;
+            this.dataGridView_predict.RowTemplate.Height = 25;
             // 
             // tabControl1
             // 
@@ -222,6 +217,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Deselected);
@@ -246,10 +242,28 @@
             // groupBox_OutputLayer
             // 
             resources.ApplyResources(this.groupBox_OutputLayer, "groupBox_OutputLayer");
+            this.groupBox_OutputLayer.Controls.Add(this.label8);
+            this.groupBox_OutputLayer.Controls.Add(this.comboBox_activationFuncOut);
             this.groupBox_OutputLayer.Controls.Add(this.numericUpDown_countOfNeuronInOutputLayer);
             this.groupBox_OutputLayer.Controls.Add(this.label3);
             this.groupBox_OutputLayer.Name = "groupBox_OutputLayer";
             this.groupBox_OutputLayer.TabStop = false;
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // comboBox_activationFuncOut
+            // 
+            resources.ApplyResources(this.comboBox_activationFuncOut, "comboBox_activationFuncOut");
+            this.comboBox_activationFuncOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_activationFuncOut.FormattingEnabled = true;
+            this.comboBox_activationFuncOut.Items.AddRange(new object[] {
+            resources.GetString("comboBox_activationFuncOut.Items"),
+            resources.GetString("comboBox_activationFuncOut.Items1"),
+            resources.GetString("comboBox_activationFuncOut.Items2")});
+            this.comboBox_activationFuncOut.Name = "comboBox_activationFuncOut";
             // 
             // numericUpDown_countOfNeuronInOutputLayer
             // 
@@ -279,6 +293,8 @@
             // groupBox_HidenLayers
             // 
             resources.ApplyResources(this.groupBox_HidenLayers, "groupBox_HidenLayers");
+            this.groupBox_HidenLayers.Controls.Add(this.label7);
+            this.groupBox_HidenLayers.Controls.Add(this.comboBox_activationFuncHiden);
             this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_10);
             this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_9);
             this.groupBox_HidenLayers.Controls.Add(this.numericUpDown_CountOfNeuronInHidelLayer_8);
@@ -294,6 +310,22 @@
             this.groupBox_HidenLayers.Controls.Add(this.label1);
             this.groupBox_HidenLayers.Name = "groupBox_HidenLayers";
             this.groupBox_HidenLayers.TabStop = false;
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // comboBox_activationFuncHiden
+            // 
+            resources.ApplyResources(this.comboBox_activationFuncHiden, "comboBox_activationFuncHiden");
+            this.comboBox_activationFuncHiden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_activationFuncHiden.FormattingEnabled = true;
+            this.comboBox_activationFuncHiden.Items.AddRange(new object[] {
+            resources.GetString("comboBox_activationFuncHiden.Items"),
+            resources.GetString("comboBox_activationFuncHiden.Items1"),
+            resources.GetString("comboBox_activationFuncHiden.Items2")});
+            this.comboBox_activationFuncHiden.Name = "comboBox_activationFuncHiden";
             // 
             // numericUpDown_CountOfNeuronInHidelLayer_10
             // 
@@ -552,7 +584,7 @@
             // tabPage2
             // 
             resources.ApplyResources(this.tabPage2, "tabPage2");
-            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Controls.Add(this.dataGridView_train);
             this.tabPage2.Controls.Add(this.panel_LearnControl);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -560,6 +592,7 @@
             // panel_LearnControl
             // 
             resources.ApplyResources(this.panel_LearnControl, "panel_LearnControl");
+            this.panel_LearnControl.Controls.Add(this.checkBox_Normalization);
             this.panel_LearnControl.Controls.Add(this.label_resultLearn);
             this.panel_LearnControl.Controls.Add(this.numericUpDown_Learning_speed);
             this.panel_LearnControl.Controls.Add(this.numericUpDown_maxCountOfEpochs);
@@ -569,6 +602,12 @@
             this.panel_LearnControl.Controls.Add(this.button_addExample);
             this.panel_LearnControl.Controls.Add(this.button_deleteExample);
             this.panel_LearnControl.Name = "panel_LearnControl";
+            // 
+            // checkBox_Normalization
+            // 
+            resources.ApplyResources(this.checkBox_Normalization, "checkBox_Normalization");
+            this.checkBox_Normalization.Name = "checkBox_Normalization";
+            this.checkBox_Normalization.UseVisualStyleBackColor = true;
             // 
             // label_resultLearn
             // 
@@ -646,11 +685,34 @@
             // tabPage3
             // 
             resources.ApplyResources(this.tabPage3, "tabPage3");
-            this.tabPage3.Controls.Add(this.button_recognize);
-            this.tabPage3.Controls.Add(this.label_result);
-            this.tabPage3.Controls.Add(this.dataGridView2);
+            this.tabPage3.Controls.Add(this.dataGridView_check);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView_check
+            // 
+            resources.ApplyResources(this.dataGridView_check, "dataGridView_check");
+            this.dataGridView_check.AllowUserToAddRows = false;
+            this.dataGridView_check.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView_check.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_check.Name = "dataGridView_check";
+            this.dataGridView_check.RowHeadersVisible = false;
+            this.dataGridView_check.RowTemplate.Height = 25;
+            // 
+            // tabPage4
+            // 
+            resources.ApplyResources(this.tabPage4, "tabPage4");
+            this.tabPage4.Controls.Add(this.panel1);
+            this.tabPage4.Controls.Add(this.dataGridView_predict);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.button_recognize);
+            this.panel1.Controls.Add(this.label_result);
+            this.panel1.Name = "panel1";
             // 
             // button_recognize
             // 
@@ -670,14 +732,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_train)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_predict)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox_OutputLayer.ResumeLayout(false);
@@ -705,7 +766,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Learning_speed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_maxCountOfEpochs)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_check)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -721,12 +785,12 @@
         private SaveFileDialog saveFileDialog1;
         private Button button_deleteExample;
         private Button button_addExample;
-        private DataGridView dataGridView1;
-        private DataGridView dataGridView2;
+        private DataGridView dataGridView_train;
+        private DataGridView dataGridView_predict;
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private TabPage tabPage3;
+        private TabPage tabPage4;
         private Panel panel_LearnControl;
         private Button button__StartLearn;
         private Label label4;
@@ -757,5 +821,13 @@
         private Label label_result;
         private Label label_resultLearn;
         private Button button_recognize;
+        private CheckBox checkBox_Normalization;
+        private TabPage tabPage3;
+        private DataGridView dataGridView_check;
+        private Panel panel1;
+        private ComboBox comboBox_activationFuncHiden;
+        private ComboBox comboBox_activationFuncOut;
+        private Label label8;
+        private Label label7;
     }
 }

@@ -1,13 +1,15 @@
 using Perceptrone_logic;
 using System.Text.Json;
 using System.Data;
+using DataBlock;
+using static Perceptrone_logic.Neiron;
 
 namespace Perceptrone_UI
 {
     public partial class Form1 : Form
     {
         #region variable
-        public NeuronNetwork myNetwork;
+        public NeuronNetwork myNetwork = new NeuronNetwork();
 
         private List<Tuple<double[], double[]>> listExamples;
         private List<NumericUpDown> listNumericUpDown;
@@ -33,6 +35,21 @@ namespace Perceptrone_UI
             listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_8);
             listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_9);
             listNumericUpDown.Add(numericUpDown_CountOfNeuronInHidelLayer_10);
+
+            comboBox_activationFuncHiden.SelectedItem = comboBox_activationFuncHiden.Items[0];
+            comboBox_activationFuncOut.SelectedItem = comboBox_activationFuncOut.Items[0];
+
+            var DefaultCellStyle = new Font("Segoe UI", 14);
+            var HeaderCellStyle = new Font("Segoe UI Semibold", 18, FontStyle.Bold);
+
+            dataGridView_train.DefaultCellStyle.Font = DefaultCellStyle;
+            dataGridView_train.ColumnHeadersDefaultCellStyle.Font = HeaderCellStyle;
+
+            dataGridView_check.DefaultCellStyle.Font = DefaultCellStyle;
+            dataGridView_check.ColumnHeadersDefaultCellStyle.Font = HeaderCellStyle;
+
+            dataGridView_predict.DefaultCellStyle.Font = DefaultCellStyle;
+            dataGridView_predict.ColumnHeadersDefaultCellStyle.Font = HeaderCellStyle;
         }
         #endregion
 
@@ -47,6 +64,22 @@ namespace Perceptrone_UI
             };
             return res;
         }
+
+        public ActivationFuncs AssignmentOfActivationFunction(string? str)
+        {
+            switch (str)
+            {
+                case "Сходинка":
+                    return ActivationFuncs.STEP;
+                case "Сигмоїда":
+                    return ActivationFuncs.SIGMOID;
+                case "Лінійна":
+                    return ActivationFuncs.LINEAR;
+                default:
+                    throw new Exception("Error: немає співпадіння для функції активації");
+            };
+        }
+
         private void ConfirmDesignNetwork()
         {
             // Create network
@@ -60,21 +93,35 @@ namespace Perceptrone_UI
             }
             myNetwork = new NeuronNetwork(CountInput, CountHiden, ArrCountNeuron, CountOuput);
 
+            // Assignment of the activation function
+            ActivationFuncs activationFuncs;
+            if (comboBox_activationFuncHiden.Enabled)
+            {
+                activationFuncs = AssignmentOfActivationFunction(comboBox_activationFuncHiden.SelectedItem.ToString());
+                myNetwork.ChangeActivationFunc(activationFuncs);
+            }
+            activationFuncs = AssignmentOfActivationFunction(comboBox_activationFuncOut.SelectedItem.ToString());
+            myNetwork.ChangeActivationFuncOnLastLayer(activationFuncs);
+
             // clear table
-            dataGridView1.Columns.Clear();
-            dataGridView2.Columns.Clear();
+            dataGridView_train.Columns.Clear();
+            dataGridView_check.Columns.Clear();
+            dataGridView_predict.Columns.Clear();
             // initialize table
             for (int i = 0; i < myNetwork.countOfInputEntrances; i++)
             {
-                dataGridView1.Columns.Add(GetTextBoxColumn("x" + (i + 1)));
-                dataGridView2.Columns.Add(GetTextBoxColumn("x" + (i + 1)));
+                dataGridView_train.Columns.Add(GetTextBoxColumn("x" + (i + 1)));
+                dataGridView_check.Columns.Add(GetTextBoxColumn("x" + (i + 1)));
+                dataGridView_predict.Columns.Add(GetTextBoxColumn("x" + (i + 1)));
             }
             for (int i = 0; i < myNetwork.countOfNeuronInOutputLayer; i++)
             {
-                dataGridView1.Columns.Add(GetTextBoxColumn("y" + (i + 1)));
+                dataGridView_train.Columns.Add(GetTextBoxColumn("d" + (i + 1)));
+                dataGridView_check.Columns.Add(GetTextBoxColumn("d" + (i + 1)));
+                dataGridView_check.Columns.Add(GetTextBoxColumn("y" + (i + 1)));
             }
-            dataGridView2.Rows.Add();
-            dataGridView2.Rows[0].Selected = false;
+            dataGridView_predict.Rows.Add();
+            dataGridView_predict.Rows[0].Selected = false;
 
             // unlock button
             button__StartLearn.Enabled = true;
@@ -85,10 +132,10 @@ namespace Perceptrone_UI
 
         private void StartLearn()
         {
-            dataGridView1.EndEdit();
+            dataGridView_train.EndEdit();
             try
             {
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                foreach (DataGridViewRow row in dataGridView_train.Rows)
                 {
                     var vector_train = new double[myNetwork.countOfInputEntrances];
                     for (var i = 0; i < vector_train.Length; i++)
@@ -118,6 +165,7 @@ namespace Perceptrone_UI
             {
                 MessageBox.Show("Список навчальних даних пустий! \n Добавте приклади", "Інфо",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
 
             int LearnSpeed = Convert.ToInt32(numericUpDown_Learning_speed.Value);
@@ -125,19 +173,44 @@ namespace Perceptrone_UI
             myNetwork.Learning_speed = LearnSpeed;
             myNetwork.countOfEpochs = CountOfEpochs;
 
+            if (checkBox_Normalization.Checked)
+            {
+                listExamples = MyExtensions.MyNormalization(listExamples);
+            }
             var res = myNetwork.StartLearn(listExamples);
+
             label_resultLearn.Text = "Навчання завершено! Пройдено " + res.Item1 + " епох, середньоквадратична помилка - " + res.Item2;
+            FillCheckTable();
             listExamples.Clear();
+        }
+
+        private void FillCheckTable()
+        {
+            dataGridView_check.Rows.Clear();
+            for (int i = 0; i < listExamples.Count; i++)
+            {
+                dataGridView_check.Rows.Add();
+                dataGridView_check.Rows[i].Selected = false;
+
+                List<double> example = new List<double>(listExamples[i].Item1.Concat(listExamples[i].Item2));
+                var cells = dataGridView_check.Rows[i].Cells;
+
+                for (int j = 0; j < example.Count; j++)
+                {
+                    cells[j].Value = example[j];
+                }
+                cells[cells.Count - 1].Value = myNetwork.Get_result(listExamples[i].Item1).FirstOrDefault();
+            }
         }
 
         private void Recognize()
         {
-            if (dataGridView2.Rows.Count <= 0)
+            if (dataGridView_predict.Rows.Count <= 0)
             {
                 return;
             }
-            dataGridView2.EndEdit();
-            var cells = dataGridView2.Rows[0].Cells;
+            dataGridView_predict.EndEdit();
+            var cells = dataGridView_predict.Rows[0].Cells;
             selected_array = new double[cells.Count];
             for (var i = 0; i < cells.Count; i++)
             {
@@ -187,7 +260,16 @@ namespace Perceptrone_UI
             if (res == DialogResult.OK)
             {
                 string json = File.ReadAllText(openFileDialog1.FileName);
-                myNetwork.SetWeight(JsonSerializer.Deserialize<List<List<Tuple<char, List<double>>>>>(json));
+                try
+                {
+                    myNetwork.SetWeight(JsonSerializer.Deserialize<List<List<Tuple<char, List<double>>>>>(json));
+                }
+                catch (JsonException)
+                {
+                    MessageBox.Show("Тип загруженої моделі не співпадає дійсною", "Error!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             else
             {
@@ -204,6 +286,17 @@ namespace Perceptrone_UI
         }
         private void numericUpDown_countOfHidenLayers_ValueChanged(object sender, EventArgs e)
         {
+            if (numericUpDown_countOfHidenLayers.Value != 0)
+            {
+                comboBox_activationFuncHiden.Enabled = true;
+                label7.Enabled = true;
+            }
+            else
+            {
+                comboBox_activationFuncHiden.Enabled = false;
+                label7.Enabled = false;
+            }
+
             for (int i = 0; i < numericUpDown_countOfHidenLayers.Maximum; i++)
             {
                 if (i < numericUpDown_countOfHidenLayers.Value)
@@ -221,22 +314,22 @@ namespace Perceptrone_UI
         #region page 2 funcs
         private void button_addExample_Click(object sender, EventArgs e)
         {
-            var i = dataGridView1.Rows.Add();
-            dataGridView1.Rows[i].Selected = false;
+            var i = dataGridView_train.Rows.Add();
+            dataGridView_train.Rows[i].Selected = false;
         }
 
         private void button_deleteExample_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count > 0)
+            if (dataGridView_train.Rows.Count > 0)
             {
                 HashSet<int> indexes = new HashSet<int>();
-                foreach (DataGridViewCell item in dataGridView1.SelectedCells)
+                foreach (DataGridViewCell item in dataGridView_train.SelectedCells)
                 {
                     indexes.Add(item.RowIndex);
                 }
                 foreach (var item in indexes.OrderByDescending(x => x))
                 {
-                    dataGridView1.Rows.RemoveAt(item);
+                    dataGridView_train.Rows.RemoveAt(item);
                 }
             }
         }
