@@ -192,6 +192,7 @@ namespace Perceptrone_UI
 
         private void FillCheckTable()
         {
+            double maxError = 0;
             dataGridView_check.Rows.Clear();
             for (int i = 0; i < listExamples.Count; i++)
             {
@@ -206,7 +207,14 @@ namespace Perceptrone_UI
                     cells[j].Value = example[j];
                 }
                 cells[cells.Count - 1].Value = myNetwork.Get_result(listExamples[i].Item1).FirstOrDefault();
+                var x = Math.Abs(Convert.ToDouble(cells[cells.Count - 1].Value) -
+                    Convert.ToDouble(cells[cells.Count - 2].Value));
+                if (x > maxError)
+                {
+                    maxError = x;
+                }
             }
+            label_check.Text = "Max Error: " + maxError;
         }
 
         private void Recognize()

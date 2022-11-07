@@ -67,7 +67,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox_Inputlayer = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.numericUpDown_countOfNeuronInIntputLayer = new System.Windows.Forms.NumericUpDown();
+            this.comboBox_activationFuncIn = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel_LearnControl = new System.Windows.Forms.Panel();
@@ -84,8 +86,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button_recognize = new System.Windows.Forms.Button();
             this.label_result = new System.Windows.Forms.Label();
-            this.comboBox_activationFuncIn = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label_check = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_train)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_predict)).BeginInit();
@@ -560,6 +561,11 @@
             this.groupBox_Inputlayer.Name = "groupBox_Inputlayer";
             this.groupBox_Inputlayer.TabStop = false;
             // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
             // numericUpDown_countOfNeuronInIntputLayer
             // 
             resources.ApplyResources(this.numericUpDown_countOfNeuronInIntputLayer, "numericUpDown_countOfNeuronInIntputLayer");
@@ -579,6 +585,17 @@
             0,
             0,
             0});
+            // 
+            // comboBox_activationFuncIn
+            // 
+            resources.ApplyResources(this.comboBox_activationFuncIn, "comboBox_activationFuncIn");
+            this.comboBox_activationFuncIn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_activationFuncIn.FormattingEnabled = true;
+            this.comboBox_activationFuncIn.Items.AddRange(new object[] {
+            resources.GetString("comboBox_activationFuncIn.Items"),
+            resources.GetString("comboBox_activationFuncIn.Items1"),
+            resources.GetString("comboBox_activationFuncIn.Items2")});
+            this.comboBox_activationFuncIn.Name = "comboBox_activationFuncIn";
             // 
             // label6
             // 
@@ -689,6 +706,7 @@
             // tabPage3
             // 
             resources.ApplyResources(this.tabPage3, "tabPage3");
+            this.tabPage3.Controls.Add(this.label_check);
             this.tabPage3.Controls.Add(this.dataGridView_check);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -730,21 +748,10 @@
             resources.ApplyResources(this.label_result, "label_result");
             this.label_result.Name = "label_result";
             // 
-            // comboBox_activationFuncIn
+            // label_check
             // 
-            resources.ApplyResources(this.comboBox_activationFuncIn, "comboBox_activationFuncIn");
-            this.comboBox_activationFuncIn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_activationFuncIn.FormattingEnabled = true;
-            this.comboBox_activationFuncIn.Items.AddRange(new object[] {
-            resources.GetString("comboBox_activationFuncIn.Items"),
-            resources.GetString("comboBox_activationFuncIn.Items1"),
-            resources.GetString("comboBox_activationFuncIn.Items2")});
-            this.comboBox_activationFuncIn.Name = "comboBox_activationFuncIn";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
+            resources.ApplyResources(this.label_check, "label_check");
+            this.label_check.Name = "label_check";
             // 
             // Form1
             // 
@@ -786,6 +793,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Learning_speed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_maxCountOfEpochs)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_check)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -851,5 +859,6 @@
         private Label label7;
         private Label label9;
         private ComboBox comboBox_activationFuncIn;
+        private Label label_check;
     }
 }

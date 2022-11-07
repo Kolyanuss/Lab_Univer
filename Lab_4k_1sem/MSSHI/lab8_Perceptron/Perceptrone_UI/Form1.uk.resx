@@ -92,12 +92,11 @@
   <data name="dataGridView_train.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dataGridView_train.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="dataGridView_train.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
   <data name="dataGridView_train.Size" type="System.Drawing.Size, System.Drawing">
-    <value>532, 507</value>
+    <value>526, 521</value>
   </data>
   <data name="button_deleteExample.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -148,6 +147,7 @@
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -382,8 +382,29 @@
   <data name="groupBox_Inputlayer.Text" xml:space="preserve">
     <value>Вхідний шар</value>
   </data>
+  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 32</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Функція активації:</value>
+  </data>
   <data name="numericUpDown_countOfNeuronInIntputLayer.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 39</value>
+  </data>
+  <data name="comboBox_activationFuncIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="comboBox_activationFuncIn.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="comboBox_activationFuncIn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 40</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -406,8 +427,11 @@
   <data name="tabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 507</value>
+    <value>806, 527</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Навчання</value>
@@ -416,7 +440,7 @@
     <value>Right</value>
   </data>
   <data name="panel_LearnControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>532, 0</value>
+    <value>529, 3</value>
   </data>
   <data name="panel_LearnControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -425,7 +449,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="panel_LearnControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 507</value>
+    <value>274, 521</value>
   </data>
   <data name="checkBox_Normalization.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -530,7 +554,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 507</value>
+    <value>806, 527</value>
   </data>
   <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -539,19 +563,19 @@
     <value>Перевірка</value>
   </data>
   <data name="dataGridView_check.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+    <value>Top</value>
   </data>
   <data name="dataGridView_check.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="dataGridView_check.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 501</value>
+    <value>800, 445</value>
   </data>
   <data name="tabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 507</value>
+    <value>806, 527</value>
   </data>
   <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -607,47 +631,26 @@
   <data name="label_result.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="comboBox_activationFuncIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="comboBox_activationFuncIn.Items" xml:space="preserve">
-    <value>Сигмоїда</value>
-  </data>
-  <data name="comboBox_activationFuncIn.Items1" xml:space="preserve">
-    <value>Сходинка</value>
-  </data>
-  <data name="comboBox_activationFuncIn.Items2" xml:space="preserve">
-    <value>Лінійна</value>
-  </data>
-  <data name="comboBox_activationFuncIn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 72</value>
-  </data>
-  <data name="comboBox_activationFuncIn.MaxDropDownItems" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="comboBox_activationFuncIn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 40</value>
-  </data>
-  <data name="comboBox_activationFuncIn.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label_check.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label_check.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 72</value>
+  <data name="label_check.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 14.25pt</value>
   </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 32</value>
+  <data name="label_check.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 448</value>
   </data>
-  <data name="label9.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="label_check.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 25</value>
   </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Функція активації:</value>
+  <data name="label_check.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label_check.Text" xml:space="preserve">
+    <value>label10</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 17</value>
