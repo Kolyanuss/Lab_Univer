@@ -152,9 +152,8 @@ namespace Perceptrone_logic
                     #endregion
                 }
                 ListWithExamples.Shuffle();
-                current_epochs_of_learning += 1;
                 list_root_mean_squared_error.Add(1.0 / (ListWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error);
-            } while (current_epochs_of_learning < epochs_of_learning && list_root_mean_squared_error[list_root_mean_squared_error.Count - 1] >= 0.001);
+            } while (++current_epochs_of_learning < epochs_of_learning && list_root_mean_squared_error[list_root_mean_squared_error.Count - 1] >= 0.001);
 
             return new Tuple<int, List<double>>(current_epochs_of_learning, list_root_mean_squared_error);
         }

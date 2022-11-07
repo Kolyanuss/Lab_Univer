@@ -174,7 +174,7 @@ namespace Perceptrone_UI
                 return;
             }
 
-            int LearnSpeed = Convert.ToInt32(numericUpDown_Learning_speed.Value);
+            double LearnSpeed = Convert.ToDouble(numericUpDown_Learning_speed.Value);
             int CountOfEpochs = Convert.ToInt32(numericUpDown_maxCountOfEpochs.Value);
             myNetwork.Learning_speed = LearnSpeed;
             myNetwork.countOfEpochs = CountOfEpochs;
