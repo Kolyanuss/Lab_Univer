@@ -76,13 +76,13 @@ namespace Perceptrone_logic
 
         public static Tuple<int, List<double>> Learn_backpropagation(List<Neiron[]> layers,
             List<Tuple<double[], double[]>> ListWithExamples, int epochs_of_learning, double Learning_speed)
-        {            
-            int current_epochs_of_learning = 0;
+        {
             List<double> list_root_mean_squared_error = new List<double>();
+            double max_error;
             var counOfNeuronInLastLayer = layers[layers.Count - 1].Length;
+            int current_epochs_of_learning = 0;
             do
             {
-                double sum_squared_error = 0;
                 foreach (var example in ListWithExamples)
                 {
                     #region prepare data
@@ -117,7 +117,6 @@ namespace Perceptrone_logic
                             neuron.SetEntrancesWeight(i, x);
                         }
                         listWithNeuralError[j] = e;
-                        sum_squared_error += Math.Pow(desire_response[j] - neuron.GetAnswerDouble(), 2);
                     }
                     #endregion
 
@@ -151,9 +150,46 @@ namespace Perceptrone_logic
                     #endregion
                     #endregion
                 }
+
+                #region calc root mean squared error AND max error
+                double sum_squared_error = 0;
+                max_error = 0;
+                foreach (var example in ListWithExamples)
+                {                    
+                    double[] inputData = example.Item1;
+                    double[] desire_response = example.Item2;
+                    #region Forward
+                    for (int j = 0; j < layers.Count; j++)
+                    {
+                        double[] outputData = new double[layers[j].Length];
+                        for (int i = 0; i < outputData.Length; i++)
+                        {
+                            outputData[i] = layers[j][i].GetAnswerDouble(inputData);
+                        }
+                        inputData = outputData;
+                    }
+                    #endregion
+
+                    for (int j = 0; j < counOfNeuronInLastLayer; j++)
+                    {
+                        var neuron = layers[layers.Count - 1][j];
+                        double neuralError = desire_response[j] - neuron.GetAnswerDouble();
+
+                        sum_squared_error += Math.Pow(neuralError, 2);
+
+                        if (Math.Abs(neuralError) > max_error)
+                        {
+                            max_error = Math.Abs(neuralError);
+                        }
+                    }
+                }
+                #endregion
+
                 ListWithExamples.Shuffle();
                 list_root_mean_squared_error.Add(1.0 / (ListWithExamples.Count * counOfNeuronInLastLayer) * sum_squared_error);
-            } while (++current_epochs_of_learning < epochs_of_learning && list_root_mean_squared_error[list_root_mean_squared_error.Count - 1] >= 0.001);
+            } while (++current_epochs_of_learning < epochs_of_learning
+                     && list_root_mean_squared_error[list_root_mean_squared_error.Count - 1] >= 0.001
+                     && max_error > 0.02);
 
             return new Tuple<int, List<double>>(current_epochs_of_learning, list_root_mean_squared_error);
         }

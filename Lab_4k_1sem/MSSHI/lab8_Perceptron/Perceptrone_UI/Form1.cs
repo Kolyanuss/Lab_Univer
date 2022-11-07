@@ -235,7 +235,7 @@ namespace Perceptrone_UI
             label_result.Text = "";
             for (int i = 0; i < res.Length; i++)
             {
-                label_result.Text += "y" + i + " - " + String.Format("{0:0.00}", res[i] * 100) + "\n";
+                label_result.Text += "y" + i + " - " + String.Format("{0:0.00}", res[i]) + "\n";
             }
         }
         #endregion
