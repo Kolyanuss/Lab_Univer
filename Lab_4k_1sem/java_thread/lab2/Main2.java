@@ -68,16 +68,18 @@ class MyThread3 extends Thread {
 class Counter2 {
     private int c = 0;
     private int c2 = 0;
+    private Object lock1 = new Object();
+    private Object lock2 = new Object();
 
     public void increment_first() throws InterruptedException {
-        synchronized (this) {
+        synchronized (lock1) {
             Thread.sleep(150);
             c++;
         }
     }
 
     public void decrement_first() throws InterruptedException {
-        synchronized (this) {
+        synchronized (lock1) {
             Thread.sleep(100);
             c--;
         }
@@ -89,14 +91,14 @@ class Counter2 {
 
 
     public void increment_second() throws InterruptedException {
-        synchronized (this) {
+        synchronized (lock2) {
             Thread.sleep(150);
             c2++;
         }
     }
 
     public void decrement_second() throws InterruptedException {
-        synchronized (this) {
+        synchronized (lock2) {
             Thread.sleep(100);
             c2--;
         }
