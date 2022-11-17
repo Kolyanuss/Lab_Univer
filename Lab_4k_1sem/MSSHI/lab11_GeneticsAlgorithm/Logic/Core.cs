@@ -34,9 +34,11 @@
 
         public void Start()
         {
-
+            foreach (var item in popolation)
+            {
+                fitnesFunc(item);
+            }
         }
-
 
     }
 }
