@@ -25,6 +25,10 @@
             return new Individual(this);
         }
 
-
+        public void MutationFlipBit()
+        {
+            int index = new Random().Next(chromosomes.Count);
+            chromosomes[index].MutationFlipBit();
+        }
     }
 }
