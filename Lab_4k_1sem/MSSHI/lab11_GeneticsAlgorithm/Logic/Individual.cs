@@ -13,5 +13,18 @@
                 chromosomes.Add(new Chromosome(lenghtChromosome));
             }
         }
+
+        public Individual(Individual individual)
+        {
+            chromosomes = individual.chromosomes.ToList();
+            fitness = individual.fitness;
+        }
+
+        public Individual Clone()
+        {
+            return new Individual(this);
+        }
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Logic
+﻿using System.Data.SqlTypes;
+
+namespace Logic
 {
     public class Core
     {
@@ -11,6 +13,8 @@
         public List<Individual> popolation;
 
         private readonly Func<Individual, double> fitnesFunc;
+        private readonly Func<List<Individual>> selectionFunc;
+        private readonly Action<Individual, Individual> crossoverFunc;
 
         public Core()
         {
@@ -20,6 +24,8 @@
                 popolation.Add(new Individual(countChromosomes, lenghtChromosome));
             }
             fitnesFunc = OneMaxFitness;
+            selectionFunc = SelectionTournament;
+            crossoverFunc = ;
         }
 
         private double OneMaxFitness(Individual individual)
@@ -32,12 +38,36 @@
             return individual.fitness;
         }
 
+        private List<Individual> SelectionTournament()
+        {
+            var res = new List<Individual>();
+            var rnd = new Random();
+            for (int i = 0; i < popolation.Count; i++)
+            {
+                int x = 0, y = 0, z = 0;
+                while (x == y || x == z || y == z)
+                {
+                    x = rnd.Next(populationSize);
+                    y = rnd.Next(populationSize);
+                    z = rnd.Next(populationSize);
+                }
+                res.Add(new List<Individual>() { popolation[x], popolation[y], popolation[z] }.MaxBy(o => o.fitness));
+            }
+            return res;
+        }
+
+        private void CrossoverOnePoint(Individual child1, Individual child2)
+        {
+
+        }
+
         public void Start()
         {
             foreach (var item in popolation)
             {
                 fitnesFunc(item);
             }
+
         }
 
     }
