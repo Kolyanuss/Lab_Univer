@@ -2,7 +2,7 @@ package Myconflict;
 
 public class ConflictModify {
     private final String name;
-    private boolean isInUse = false;
+    private static boolean isInUse = false;
 
     public ConflictModify(String name) {
         this.name = name;
@@ -13,10 +13,14 @@ public class ConflictModify {
     }
 
     public synchronized void bow(ConflictModify bower) {
+        checkIsInUse();
+        isInUse = true;
+
         System.out.format(
                 "%s: %s" + " пропускає мене!%n",
                 this.name,
                 bower.getName());
+
         bower.bowBack(this);
     }
 
@@ -25,6 +29,9 @@ public class ConflictModify {
                 "%s: %s" + " пропускає мене у вiдповiдь!%n",
                 this.name,
                 bower.getName());
+
+        isInUse = false;
+        notifyAll();
     }
 
     public synchronized void checkIsInUse() {
@@ -33,10 +40,5 @@ public class ConflictModify {
                 wait();
             } catch (InterruptedException e) {}
         }
-    }
-
-    public synchronized void changeIsInUse(boolean var) {
-        isInUse = var;
-        notifyAll();
     }
 }
