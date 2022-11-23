@@ -12,6 +12,8 @@ namespace Logic
         public int maxCountGeneration = 50;
         public List<Individual> popolation;
 
+        private Random rnd;
+
         private readonly Func<Individual, double> fitnesFunc;
         private readonly Func<List<Individual>> selectionFunc;
         private readonly Action<Individual, Individual> crossoverFunc;
@@ -26,6 +28,8 @@ namespace Logic
             fitnesFunc = OneMaxFitness;
             selectionFunc = SelectionTournament;
             crossoverFunc = CrossoverOnePoint;
+
+            rnd = new Random();
         }
 
         private double OneMaxFitness(Individual individual)
@@ -59,9 +63,7 @@ namespace Logic
         private void CrossoverOnePoint(Individual parent1, Individual parent2)
         {
             int s = new Random().Next(2, parent1.chromosomes[0].genes.Count - 2);
-            var child1 = new Individual(parent1);
-            var child2 = new Individual(parent2);
-            for (int i = 0; i < child1.chromosomes.Count; i++)
+            for (int i = 0; i < parent1.chromosomes.Count; i++)
             {
                 var gen1 = parent1.chromosomes[i].genes;
                 var gen2 = parent2.chromosomes[i].genes;
@@ -69,21 +71,33 @@ namespace Logic
                 var slice1 = gen1.GetRange(s, gen1.Count - s);
                 var slice2 = gen2.GetRange(s, gen2.Count - s);
 
-                child1.chromosomes[i].genes.RemoveRange(s, gen1.Count - s);
-                child1.chromosomes[i].genes.InsertRange(s, slice2);
+                parent1.chromosomes[i].genes.RemoveRange(s, gen1.Count - s);
+                parent1.chromosomes[i].genes.InsertRange(s, slice2);
 
-                child2.chromosomes[i].genes.RemoveRange(s, gen2.Count - s);
-                child2.chromosomes[i].genes.InsertRange(s, slice1);
+                parent2.chromosomes[i].genes.RemoveRange(s, gen2.Count - s);
+                parent2.chromosomes[i].genes.InsertRange(s, slice1);
             }
         }
 
         public void Start()
         {
+            List<double> fitnessVal = new List<double>();
             foreach (var item in popolation)
             {
-                fitnesFunc(item);
+                fitnessVal.Add(fitnesFunc(item));
             }
 
+            int generationCounter = 0;
+            double oneMaxLenght = 100;
+            while (fitnessVal.Max() < oneMaxLenght && generationCounter++ < maxCountGeneration)
+            {
+                var newGeneration = selectionFunc();
+
+                for (int i = 0; i < populationSize; i+=2)
+                {
+
+                }
+            }
         }
 
     }
