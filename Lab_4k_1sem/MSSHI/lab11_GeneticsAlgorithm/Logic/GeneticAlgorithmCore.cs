@@ -4,10 +4,10 @@
     {
         public readonly int lenghtChromosome = 100;
         public readonly int countChromosomes = 1;
-        public readonly int populationSize = 100;
+        public readonly int populationSize = 200;
         public double probabilityCrossover = 1;
         public double probabilityMutation = 0.01;
-        public int maxCountGeneration = 50;
+        public int maxCountGeneration = 100;
         private List<Individual> population;
 
         private readonly Random rnd;
@@ -93,14 +93,13 @@
             List<double> fitnessVal = UpdateFitnes();
             List<double> listMaxFitnes = new List<double>();
             List<double> listMeanFitnes = new List<double>();
+            listMaxFitnes.Add(fitnessVal.Max());
+            listMeanFitnes.Add(fitnessVal.Average());
 
             int generationCounter = 0;
             double maxResult = population[0].chromosomes.Count * population[0].chromosomes[0].genes.Count;
             while (fitnessVal.Max() < maxResult && generationCounter++ < maxCountGeneration)
             {
-                listMaxFitnes.Add(fitnessVal.Max());
-                listMeanFitnes.Add(fitnessVal.Average());
-
                 var newGeneration = selectionFunc();
 
                 for (int i = 0; i < populationSize - 1; i += 2)
@@ -121,6 +120,9 @@
 
                 population = newGeneration;
                 fitnessVal = UpdateFitnes();
+
+                listMaxFitnes.Add(fitnessVal.Max());
+                listMeanFitnes.Add(fitnessVal.Average());
             }
             return new Tuple<List<double>, List<double>>(listMaxFitnes, listMeanFitnes);
         }
