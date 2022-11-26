@@ -4,7 +4,7 @@
     {
         public readonly int lenghtChromosome = 100;
         public readonly int countChromosomes = 1;
-        public readonly int populationSize = 100;
+        public readonly int populationSize = 200;
         public double probabilityCrossover = 1;
         public double probabilityMutation = 0.1;
         public int maxCountGeneration = 50;
@@ -42,8 +42,7 @@
 
         private List<Individual> SelectionTournament()
         {
-            var res = new List<Individual>();
-            var rnd = new Random();
+            var newGeneration = new List<Individual>();
             for (int i = 0; i < popolation.Count; i++)
             {
                 int x = 0, y = 0, z = 0;
@@ -53,9 +52,12 @@
                     y = rnd.Next(populationSize);
                     z = rnd.Next(populationSize);
                 }
-                res.Add(new List<Individual>() { popolation[x], popolation[y], popolation[z] }.MaxBy(o => o.fitness));
+                Individual individualCopy = new Individual(
+                    new List<Individual>() { popolation[x], popolation[y], popolation[z] }.MaxBy(o => o.fitness));
+                newGeneration.Add(individualCopy);
             }
-            return res;
+
+            return newGeneration;
         }
 
         private void CrossoverOnePoint(Individual parent1, Individual parent2)
@@ -93,7 +95,7 @@
             List<double> listMaxFitnes = new List<double>();
 
             int generationCounter = 0;
-            double oneMaxLenght = 100;
+            double oneMaxLenght = popolation[0].chromosomes.Count * popolation[0].chromosomes[0].genes.Count;
             while (fitnessVal.Max() < oneMaxLenght && generationCounter++ < maxCountGeneration)
             {
                 listMaxFitnes.Add(fitnessVal.Max());
