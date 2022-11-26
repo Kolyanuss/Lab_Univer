@@ -17,8 +17,14 @@
 
         public void MutationFlipBit()
         {
-            int index = rnd.Next(genes.Count);
-            genes[index] = genes[index] == 0 ? 1 : 0;
+            double internalProbabilityMutation = 1.0 / genes.Count;
+            for (int i = 0; i < genes.Count; i++)
+            {
+                if (rnd.NextDouble() < internalProbabilityMutation)
+                {
+                    genes[i] = genes[i] == 0 ? 1 : 0;
+                }
+            }
         }
     }
 }

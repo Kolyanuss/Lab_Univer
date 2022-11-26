@@ -4,9 +4,9 @@
     {
         public readonly int lenghtChromosome = 100;
         public readonly int countChromosomes = 1;
-        public readonly int populationSize = 200;
+        public readonly int populationSize = 100;
         public double probabilityCrossover = 1;
-        public double probabilityMutation = 0.1;
+        public double probabilityMutation = 0.01;
         public int maxCountGeneration = 50;
         private List<Individual> popolation;
 
@@ -52,11 +52,8 @@
                     y = rnd.Next(populationSize);
                     z = rnd.Next(populationSize);
                 }
-                Individual individualCopy = new Individual(
-                    new List<Individual>() { popolation[x], popolation[y], popolation[z] }.MaxBy(o => o.fitness));
-                newGeneration.Add(individualCopy);
+                newGeneration.Add(new List<Individual>() { popolation[x], popolation[y], popolation[z] }.MaxBy(o => o.fitness).Clone());
             }
-
             return newGeneration;
         }
 
@@ -89,16 +86,18 @@
             return fitnessVal;
         }
 
-        public List<double> Start()
+        public Tuple<List<double>, List<double>> Start()
         {
             List<double> fitnessVal = UpdateFitnes();
             List<double> listMaxFitnes = new List<double>();
+            List<double> listMeanFitnes = new List<double>();
 
             int generationCounter = 0;
-            double oneMaxLenght = popolation[0].chromosomes.Count * popolation[0].chromosomes[0].genes.Count;
-            while (fitnessVal.Max() < oneMaxLenght && generationCounter++ < maxCountGeneration)
+            double maxResult = popolation[0].chromosomes.Count * popolation[0].chromosomes[0].genes.Count;
+            while (fitnessVal.Max() < maxResult && generationCounter++ < maxCountGeneration)
             {
                 listMaxFitnes.Add(fitnessVal.Max());
+                listMeanFitnes.Add(fitnessVal.Average());
 
                 var newGeneration = selectionFunc();
 
@@ -121,7 +120,7 @@
                 popolation = newGeneration;
                 fitnessVal = UpdateFitnes();
             }
-            return listMaxFitnes;
+            return new Tuple<List<double>, List<double>>(listMaxFitnes, listMeanFitnes);
         }
     }
 }

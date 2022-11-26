@@ -12,23 +12,24 @@ namespace WinFormsApp1
             InitializeComponent();
 
             var myModel = new PlotModel();
-            var series = new LineSeries
-            {
-                Title = "test"
-            };
             var Yaxis = new LinearAxis { Position = AxisPosition.Left, Title = "Fitness" };
             var Xaxis = new LinearAxis { Position = AxisPosition.Bottom, Title = "Generation" };
-
             myModel.Axes.Add(Yaxis);
             myModel.Axes.Add(Xaxis);
 
-            var list = new GeneticAlgorithmCore().Start();
-            for (int i = 0; i < list.Count; i++)
+            var tupe = new GeneticAlgorithmCore().Start();
+            var list1 = tupe.Item1;
+            var list2 = tupe.Item2;
+            var series1 = new LineSeries { Title = "max" };
+            var series2 = new LineSeries { Title = "mean" };
+            for (int i = 0; i < list1.Count; i++)
             {
-                series.Points.Add(new DataPoint(i, list[i]));
+                series1.Points.Add(new DataPoint(i, list1[i]));
+                series2.Points.Add(new DataPoint(i, list2[i]));
             }
 
-            myModel.Series.Add(series);
+            myModel.Series.Add(series1);
+            myModel.Series.Add(series2);
             plotView1.Model = myModel;
         }
     }
