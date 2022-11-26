@@ -16,7 +16,11 @@
 
         public Individual(Individual individual)
         {
-            chromosomes = individual.chromosomes.ToList();
+            chromosomes = new List<Chromosome>();
+            foreach (var item in individual.chromosomes)
+            {
+                chromosomes.Add(item.Clone());
+            }
             fitness = individual.fitness;
         }
 

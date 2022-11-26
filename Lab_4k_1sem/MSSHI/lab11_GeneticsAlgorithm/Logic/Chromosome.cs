@@ -15,6 +15,17 @@
             }
         }
 
+        public Chromosome(Chromosome chromosome)
+        {
+            genes = new List<int>(chromosome.genes);
+            rnd = chromosome.rnd;
+        }
+
+        public Chromosome Clone()
+        {
+            return new Chromosome(this);
+        }
+
         public void MutationFlipBit()
         {
             double internalProbabilityMutation = 1.0 / genes.Count;
