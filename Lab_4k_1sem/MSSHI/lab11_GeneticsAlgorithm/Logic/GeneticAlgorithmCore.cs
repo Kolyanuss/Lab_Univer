@@ -2,9 +2,9 @@
 {
     public class GeneticAlgorithmCore
     {
-        public readonly int lenghtChromosome = 20;
+        public readonly int lenghtChromosome = 100;
         public readonly int countChromosomes = 1;
-        public readonly int populationSize = 30;
+        public readonly int populationSize = 100;
         public double probabilityCrossover = 1;
         public double probabilityMutation = 0.01;
         public int maxCountGeneration = 50;
@@ -52,7 +52,9 @@
                     y = rnd.Next(populationSize);
                     z = rnd.Next(populationSize);
                 }
-                newGeneration.Add(new List<Individual>() { population[x], population[y], population[z] }.MaxBy(o => o.fitness).Clone());
+                List<Individual> listOfThreeIndivid = new() { population[x], population[y], population[z] };
+                var bestIndivid = listOfThreeIndivid.MaxBy(individ => individ.fitness).Clone();
+                newGeneration.Add(bestIndivid);
             }
             return newGeneration;
         }
@@ -81,7 +83,7 @@
             List<double> fitnessVal = new List<double>();
             foreach (var item in population)
             {
-                fitnessVal.Add(fitnesFunc(item)); // problem
+                fitnessVal.Add(fitnesFunc(item));
             }
             return fitnessVal;
         }
