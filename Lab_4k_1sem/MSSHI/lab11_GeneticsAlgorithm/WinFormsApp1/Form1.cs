@@ -17,9 +17,10 @@ namespace WinFormsApp1
             myModel.Axes.Add(Yaxis);
             myModel.Axes.Add(Xaxis);
 
-            var tupe = new GeneticAlgorithmCore().Start();
-            var list1 = tupe.Item1;
-            var list2 = tupe.Item2;
+            var list1 = new List<double>();
+            var list2 = new List<double>();
+            new GeneticAlgorithmCore().Start(list1, list2);
+
             var series1 = new LineSeries { Title = "max" };
             var series2 = new LineSeries { Title = "mean" };
             for (int i = 0; i < list1.Count; i++)

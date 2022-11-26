@@ -2,17 +2,18 @@
 {
     public class GeneticAlgorithmCore
     {
-        public readonly int lenghtChromosome = 100;
+        public readonly int lenghtChromosome = 80;
         public readonly int countChromosomes = 1;
         public readonly int populationSize = 200;
         public double probabilityCrossover = 1;
-        public double probabilityMutation = 0.01;
+        public double probabilityMutation = 0.05;
         public int maxCountGeneration = 100;
         private List<Individual> population;
-
+        private double maxResult;
         private readonly Random rnd;
 
         private readonly Func<Individual, double> fitnesFunc;
+        private readonly Func<List<double>, bool> isMaxFitnesValFunc;
         private readonly Func<List<Individual>> selectionFunc;
         private readonly Action<Individual, Individual> crossoverFunc;
 
@@ -24,6 +25,7 @@
                 population.Add(new Individual(countChromosomes, lenghtChromosome));
             }
             fitnesFunc = OneMaxFitness;
+            isMaxFitnesValFunc = isMaxFitnesValOneMax;
             selectionFunc = SelectionTournament;
             crossoverFunc = CrossoverOnePoint;
 
@@ -38,6 +40,12 @@
                 individual.fitness += chromosome.genes.Sum();
             }
             return individual.fitness;
+        }
+
+        private bool isMaxFitnesValOneMax(List<double> fitnessVal)
+        {
+            maxResult = population[0].chromosomes.Count * population[0].chromosomes[0].genes.Count;
+            return fitnessVal.Max() == maxResult;
         }
 
         private List<Individual> SelectionTournament()
@@ -88,17 +96,15 @@
             return fitnessVal;
         }
 
-        public Tuple<List<double>, List<double>> Start()
+        public Individual Start(List<double> listMaxFitnes, List<double> listMeanFitnes)
         {
             List<double> fitnessVal = UpdateFitnes();
-            List<double> listMaxFitnes = new List<double>();
-            List<double> listMeanFitnes = new List<double>();
             listMaxFitnes.Add(fitnessVal.Max());
             listMeanFitnes.Add(fitnessVal.Average());
 
             int generationCounter = 0;
-            double maxResult = population[0].chromosomes.Count * population[0].chromosomes[0].genes.Count;
-            while (fitnessVal.Max() < maxResult && generationCounter++ < maxCountGeneration)
+            
+            while (!isMaxFitnesValFunc(fitnessVal) && generationCounter++ < maxCountGeneration)
             {
                 var newGeneration = selectionFunc();
 
@@ -124,7 +130,14 @@
                 listMaxFitnes.Add(fitnessVal.Max());
                 listMeanFitnes.Add(fitnessVal.Average());
             }
-            return new Tuple<List<double>, List<double>>(listMaxFitnes, listMeanFitnes);
+            foreach (var item in population)
+            {
+                if(item.fitness == maxResult)
+                {
+                    return item;
+                }
+            }
+            return population.MaxBy(idivid => idivid.fitness);
         }
     }
 }
