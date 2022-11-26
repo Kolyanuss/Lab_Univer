@@ -1,24 +1,22 @@
-﻿using System.Data.SqlTypes;
-
-namespace Logic
+﻿namespace Logic
 {
-    public class Core
+    public class GeneticAlgorithmCore
     {
-        public readonly int lenghtChromosome = 20;
-        public readonly int countChromosomes = 20;
+        public readonly int lenghtChromosome = 100;
+        public readonly int countChromosomes = 1;
         public readonly int populationSize = 100;
         public double probabilityCrossover = 1;
         public double probabilityMutation = 0.1;
         public int maxCountGeneration = 50;
-        public List<Individual> popolation;
+        private List<Individual> popolation;
 
-        private Random rnd;
+        private readonly Random rnd;
 
         private readonly Func<Individual, double> fitnesFunc;
         private readonly Func<List<Individual>> selectionFunc;
         private readonly Action<Individual, Individual> crossoverFunc;
 
-        public Core()
+        public GeneticAlgorithmCore()
         {
             popolation = new List<Individual>();
             for (int i = 0; i < populationSize; i++)
@@ -79,26 +77,49 @@ namespace Logic
             }
         }
 
-        public void Start()
+        private List<double> UpdateFitnes()
         {
             List<double> fitnessVal = new List<double>();
             foreach (var item in popolation)
             {
                 fitnessVal.Add(fitnesFunc(item));
             }
+            return fitnessVal;
+        }
+
+        public List<double> Start()
+        {
+            List<double> fitnessVal = UpdateFitnes();
+            List<double> listMaxFitnes = new List<double>();
 
             int generationCounter = 0;
             double oneMaxLenght = 100;
             while (fitnessVal.Max() < oneMaxLenght && generationCounter++ < maxCountGeneration)
             {
+                listMaxFitnes.Add(fitnessVal.Max());
+
                 var newGeneration = selectionFunc();
 
-                for (int i = 0; i < populationSize; i+=2)
+                for (int i = 0; i < populationSize - 1; i += 2)
                 {
-
+                    if (rnd.NextDouble() < probabilityCrossover)
+                    {
+                        crossoverFunc(newGeneration[i], newGeneration[i + 1]);
+                    }
                 }
-            }
-        }
 
+                foreach (var item in newGeneration)
+                {
+                    if (rnd.NextDouble() < probabilityMutation)
+                    {
+                        item.MutationFlipBit();
+                    }
+                }
+
+                popolation = newGeneration;
+                fitnessVal = UpdateFitnes();
+            }
+            return listMaxFitnes;
+        }
     }
 }
