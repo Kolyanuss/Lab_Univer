@@ -2,9 +2,9 @@
 {
     public class GeneticAlgorithmCore
     {
-        public readonly int lenghtChromosome = 80;
+        public readonly int lenghtChromosome = 10;
         public readonly int countChromosomes = 1;
-        public readonly int populationSize = 200;
+        public readonly int populationSize = 10;
         public double probabilityCrossover = 1;
         public double probabilityMutation = 0.05;
         public int maxCountGeneration = 100;
@@ -24,8 +24,8 @@
             {
                 population.Add(new Individual(countChromosomes, lenghtChromosome));
             }
-            fitnesFunc = OneMaxFitness;
-            isMaxFitnesValFunc = isMaxFitnesValOneMax;
+            fitnesFunc = FxFitness;
+            isMaxFitnesValFunc = IsMaxFitnesVal;
             selectionFunc = SelectionTournament;
             crossoverFunc = CrossoverOnePoint;
 
@@ -42,9 +42,23 @@
             return individual.fitness;
         }
 
-        private bool isMaxFitnesValOneMax(List<double> fitnessVal)
+        private bool IsMaxFitnesValOneMax(List<double> fitnessVal)
         {
             maxResult = population[0].chromosomes.Count * population[0].chromosomes[0].genes.Count;
+            return fitnessVal.Max() == maxResult;
+        }
+
+        private double FxFitness(Individual individual)
+        {
+            var str = string.Join("", individual.chromosomes[0].genes.ToArray());
+            var x = Convert.ToInt32(str, 2);
+            individual.fitness = 2 * x * x + 1;
+            return individual.fitness;
+        }
+
+        private bool IsMaxFitnesVal(List<double> fitnessVal)
+        {
+            maxResult = double.MaxValue;
             return fitnessVal.Max() == maxResult;
         }
 
@@ -69,7 +83,12 @@
 
         private void CrossoverOnePoint(Individual parent1, Individual parent2)
         {
-            int s = new Random().Next(2, parent1.chromosomes[0].genes.Count - 2);
+            if (parent1.chromosomes[0].genes.Count < 3)
+            {
+                throw new ArgumentException("неможливо проводити схрещування із малою кількість генів");
+            }
+            int s = new Random().Next(1, parent1.chromosomes[0].genes.Count - 1);
+
             for (int i = 0; i < parent1.chromosomes.Count; i++)
             {
                 var gen1 = parent1.chromosomes[i].genes;
@@ -88,7 +107,7 @@
 
         private List<double> UpdateFitnes()
         {
-            List<double> fitnessVal = new List<double>();
+            var fitnessVal = new List<double>();
             foreach (var item in population)
             {
                 fitnessVal.Add(fitnesFunc(item));
@@ -103,7 +122,7 @@
             listMeanFitnes.Add(fitnessVal.Average());
 
             int generationCounter = 0;
-            
+
             while (!isMaxFitnesValFunc(fitnessVal) && generationCounter++ < maxCountGeneration)
             {
                 var newGeneration = selectionFunc();
@@ -132,7 +151,7 @@
             }
             foreach (var item in population)
             {
-                if(item.fitness == maxResult)
+                if (item.fitness == maxResult)
                 {
                     return item;
                 }

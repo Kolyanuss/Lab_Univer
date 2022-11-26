@@ -19,7 +19,9 @@ namespace WinFormsApp1
 
             var list1 = new List<double>();
             var list2 = new List<double>();
-            new GeneticAlgorithmCore().Start(list1, list2);
+            var bestIndivid = new GeneticAlgorithmCore().Start(list1, list2);
+
+            myModel.Title = string.Join("", bestIndivid.chromosomes[0].genes.ToArray());
 
             var series1 = new LineSeries { Title = "max" };
             var series2 = new LineSeries { Title = "mean" };
