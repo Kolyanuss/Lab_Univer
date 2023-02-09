@@ -5,10 +5,10 @@ $pib = $_POST['pib'];
 $tel = $_POST['tel'];
 $com = $_POST['com'];
 // Параметри для підключення
-$db_host = "sql212.epizy.com";
-$db_user = "epiz_33558799"; // Логін БД
-$db_password = "r7mVyAVJMIsvcf"; // Пароль БД
-$db_base = 'epiz_33558799_zakaz'; // Назва БД
+$db_host = "lb1sskbd";
+$db_user = "root"; // Логін БД
+$db_password = ""; // Пароль БД
+$db_base = 'zakaz'; // Назва БД
 $db_table = "zakaz"; // Назва таблиці БД
 // Підключення до бази даних
 $mysqli = new mysqli($db_host, $db_user, $db_password, $db_base);
