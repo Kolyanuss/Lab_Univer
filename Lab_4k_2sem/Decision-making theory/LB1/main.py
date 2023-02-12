@@ -8,12 +8,22 @@ fileOutName2 = "out2.txt"
 
 
 def binaryAction1(x, y):
-    result = x  # temp
+    result = []
+    for itemX in x:
+        existPair = False
+        for itemY in y:
+            if itemX == itemY:
+                existPair = True                
+                break
+        if not existPair:
+            result.append(itemX)
+    print("Дію (Різниця) успішно виконано")
     return result
 
 
 def binaryAction2(x, y):
     result = y  # temp
+    print("Дію (Чи порожній перетин) успішно виконано")
     return result
 
 
@@ -75,23 +85,21 @@ printArr(VAR2)
 
 while True:
     typeAction = input("""Виберіть дію:
-    1 - Варіант 1
-    2 - Варіант 2
+    1 - Різниця
+    2 - Чи порожній перетин?
     3 - Завершення роботи
     >""")
 
     if typeAction == "1":
-        result = printArr(binaryAction1(VAR1, VAR2))
-        print(
-            f"Дію успішно виконано, результат буде записаний у файл '{fileOutName1}'")
+        result = str(binaryAction1(VAR1, VAR2))
+        print(f"Результат записаний у файл '{fileOutName1}'")
         file = open(fileOutName1, "w")
         file.write(result)
         file.close()
 
     elif typeAction == "2":
-        result = printArr(binaryAction2(VAR1, VAR2))
-        print(
-            f"Дію успішно виконано, результат буде записаний у файл '{fileOutName2}'")
+        result = binaryAction2(VAR1, VAR2)
+        print(f"Дію успішно виконано, результат буде записаний у файл '{fileOutName2}'")
         file = open(fileOutName2, "w")
         file.write(result)
         file.close()
