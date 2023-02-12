@@ -1,6 +1,6 @@
 import re
-VAR1 = ""
-VAR2 = ""
+VAR1 = []
+VAR2 = []
 fileInName1 = "in1.txt"
 fileInName2 = "in2.txt"
 fileOutName1 = "out1.txt"
