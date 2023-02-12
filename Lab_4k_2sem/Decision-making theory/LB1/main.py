@@ -13,7 +13,7 @@ def binaryAction1(x, y):
         existPair = False
         for itemY in y:
             if itemX == itemY:
-                existPair = True                
+                existPair = True
                 break
         if not existPair:
             result.append(itemX)
@@ -22,7 +22,17 @@ def binaryAction1(x, y):
 
 
 def binaryAction2(x, y):
-    result = y  # temp
+    result = "Перетин "
+    isEmpty = True
+    for itemX in x:
+        for itemY in y:
+            if itemX == itemY:
+                isEmpty = False
+                result += "не "
+                break
+        if not isEmpty:
+            break
+    result += "порожній!"
     print("Дію (Чи порожній перетин) успішно виконано")
     return result
 
