@@ -21,19 +21,28 @@ def readFile(fileInName):
     text = open(fileInName, "r").read()
     lines = text.splitlines()
     result = []
-    for line in lines:
-        result.append(list(map(int, line.split(" "))))
+    if lines[0].count(",") > 0:
+        for line in lines:
+            result.append(list(map(int, line.split(","))))
+    else:
+        for line in lines:
+            result.append(list(map(int, line.split(" "))))
+        result = arrToRelation(result)
     return result
 
 
-def convertArrayToReadAbleStr(arr):
-    result = ""
+def printArr(arr):
     for line in arr:
-        for item in line:
-            result += str(item)+" "
-        result += "\n"
-    return result
+        print(line)
 
+def arrToRelation(arr):
+    result = []
+    for i in range(0, len(arr)):
+        vector = arr[i]
+        for j in range(0, len(vector)):
+            if vector[j] == 1:
+                result.append([i+1,j+1])
+    return result
 
 while True:
     typeOfInput = input("""Виберіть тип вводу даних:
@@ -60,9 +69,9 @@ while True:
     print("Виберіть один із двох запропонованих варіантів ввівши цифру 1 або 2 в терміналі")
 
 print("Перше вхідне бінарне відношення:")
-print(convertArrayToReadAbleStr(VAR1))
+printArr(VAR1)
 print("Друге вхідне бінарне відношення:")
-print(convertArrayToReadAbleStr(VAR2))
+printArr(VAR2)
 
 while True:
     typeAction = input("""Виберіть дію:
@@ -72,7 +81,7 @@ while True:
     >""")
 
     if typeAction == "1":
-        result = convertArrayToReadAbleStr(binaryAction1(VAR1, VAR2))
+        result = printArr(binaryAction1(VAR1, VAR2))
         print(
             f"Дію успішно виконано, результат буде записаний у файл '{fileOutName1}'")
         file = open(fileOutName1, "w")
@@ -80,7 +89,7 @@ while True:
         file.close()
 
     elif typeAction == "2":
-        result = convertArrayToReadAbleStr(binaryAction2(VAR1, VAR2))
+        result = printArr(binaryAction2(VAR1, VAR2))
         print(
             f"Дію успішно виконано, результат буде записаний у файл '{fileOutName2}'")
         file = open(fileOutName2, "w")
