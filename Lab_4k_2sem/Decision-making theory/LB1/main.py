@@ -76,14 +76,21 @@ while True:
         VAR2 = readFile(fileInName2)
         break
     elif typeOfInput == "2":
-        # myRange = input(
-        #     "Введіть цифровий діапазон для першого бінарного відношення(наприклад 1 5):")
-        # rangeStart, rangeEnd = re.split("[ ,-]", myRange)
-        # VAR1 = [*range(int(rangeStart), int(rangeEnd))]
-        # myRange = input(
-        #     "Введіть цифровий діапазон для другого бінарного відношення(наприклад 2 10):")
-        # rangeStart, rangeEnd = re.split("[ ,-]", myRange)
-        # VAR2 = [*range(int(rangeStart), int(rangeEnd))]
+        myRange = input(
+            "Введіть множину для першого бін. відношення(наприклад: 1-5)>")
+        rangeStart, rangeEnd = re.split("[ ,-]", myRange)
+        set = [*range(int(rangeStart), int(rangeEnd))]
+        for item1 in set:
+            for item2 in set:
+                VAR1.append([item1,item2])
+
+        myRange = input(
+            "Введіть множину для другого бін. відношення(наприклад: 2 4)>")
+        rangeStart, rangeEnd = re.split("[ ,-]", myRange)
+        set = [*range(int(rangeStart), int(rangeEnd))]
+        for item1 in set:
+            for item2 in set:
+                VAR2.append([item1,item2])
         break
 
     print("Виберіть один із двох запропонованих варіантів ввівши цифру 1 або 2 в терміналі")
