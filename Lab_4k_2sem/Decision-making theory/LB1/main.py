@@ -67,7 +67,7 @@ def arrToRelation(arr):
 while True:
     typeOfInput = input("""Виберіть тип вводу даних:
     1 - ввід з файлу
-    2 - ввід вручну(тимчасово не працює)
+    2 - ввід вручну
     >""")
     if typeOfInput == "1":
         print(
