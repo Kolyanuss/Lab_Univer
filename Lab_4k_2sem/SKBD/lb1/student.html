@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>add student admin panel</title>
+</head>
+<body>
+<center>
+    <h2>Добавте студента!</h2><br>
+    <form method="POST" action="sql_students.php">
+        <p><textarea name="name" type="text" placeholder="Імя" rows="1" cols="50"></textarea></p>
+        <p><textarea name="surname" type="text" placeholder="Прізвище" rows="1" cols="50"></textarea></p>
+        <p><textarea name="lastname" type="text" placeholder="По батькові" rows="1" cols="50"></textarea></p>
+        <p><textarea name="address" type="text" placeholder="Адреса" rows="3" cols="50"></textarea></p>
+        <p><textarea name="phone" type="text" placeholder="Телефон" rows="1" cols="50"></textarea></p>
+        <p><input type="submit" value="Надіслати"/></p>
+    </form>
+</center>
+</body>
+</html>

@@ -9,12 +9,13 @@
 </head>
 <body>
 <center>
-    <h2>Замовте у нас сайт!</h2><br>
-    <form method="POST" action="sql.php">
-        <p><textarea name="pib" type="text" placeholder="ПІБ" rows="1" cols="50"></textarea></p>
-        <p><textarea name="tel" type="text" placeholder="Телефон" rows="1" cols="50"></textarea></p>
-        <p><textarea name="com" type="text" placeholder="Коментар" rows="3" cols="50"></textarea></p>
-        <p><input type="submit" value="Надіслати"/></p>
+    <h2>Адмін панелька!</h2><br>
+    <button onclick="location.href='student.html'">Добавити студента</button>
+    <br>
+    <button onclick="location.href='predmet.html'">Добавити предмет</button>
+    <br>
+    <form method="GET" action="sql_getGrades.php">
+        <p><input type="submit" value="Показати оцінки"/></p>
     </form>
 </center>
 </body>
