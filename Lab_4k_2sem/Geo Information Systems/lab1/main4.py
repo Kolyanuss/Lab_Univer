@@ -59,7 +59,7 @@ print("Найпівнічніша точка: ( {:.4f}, {:.4f})".format(
     resultsY['north'][0], resultsY['north'][1]))
 print("найпівденніша точка: ( {:.4f}, {:.4f})".format(
     resultsY['south'][0], resultsY['south'][1]))
-avgPointY = getAVGPoint(resultsY[0], resultsY[1])
+avgPointY = getAVGPoint(resultsY['north'], resultsY['south'])
 
 resultsX = {'west': None, 'east': None}
 findMaxMinXPoints(geometry, resultsX)
@@ -67,8 +67,9 @@ print("Найзахідніша точка: ({:.4f}, {:.4f})".format(
     resultsX['west'][0], resultsX['west'][1]))
 print("Найсхідніша точка: ({:.4f}, {:.4f})".format(
     resultsX['east'][0], resultsX['east'][1]))
-avgPointX = getAVGPoint(resultsX[0], resultsX[1])
+avgPointX = getAVGPoint(resultsX['west'], resultsX['east'])
 
 avgPoint = getAVGPoint(avgPointX, avgPointY)
-print("Середня точка: ({:.4f}, {:.4f})".format(
-    avgPoint[0], avgPoint[1]))
+print("Середня точка: ({:.4f}, {:.4f}) для об'єкту ".format(avgPoint[0], avgPoint[1]) + feature.GetField("NAME"))
+dist = calcDistance(resultsY['north'], resultsY['south'])
+print(f"Дистанція між павнічною і південною точкою: {dist}")
