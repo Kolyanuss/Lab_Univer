@@ -57,8 +57,8 @@ CREATE TABLE `banner` (
 --
 
 INSERT INTO `banner` (`id`, `title`, `description`, `image`) VALUES
-(1, 'Welcome To Our Cafe', 'Cafe For Fun', '1570611540_image_home1.jpg'),
-(2, 'Welcom To Our Cafe', 'Cafe For Fun', '1570611154_image_home4.png');
+(1, 'Welcome To Our Cafe', 'Cafe For Fun', 'path_to_img.png'),
+(2, 'Welcom To Our Cafe', 'Cafe For Fun', 'path_to_img.png');
 
 -- --------------------------------------------------------
 
@@ -93,14 +93,14 @@ CREATE TABLE `food` (
 --
 
 INSERT INTO `food` (`id`, `title`, `description`, `image`) VALUES
-(1, 'Burger ', 'this is burger', '1570623252_image_burger-cropped.jpg'),
-(2, 'Noodels', 'this is noodels', '1570623276_image_noodels.jpg'),
-(3, 'French Fries', 'this is french fries', '1570623304_image_secrets-giving-day-old-french-fries-delicious-second-life.1280x600.jpg'),
-(4, 'Veg Roll', 'This is Veg roll', '1570623336_image_roll.jpeg'),
-(5, 'Hot Coffe', 'this is hot coffe', '1570637028_image_coffe1.jpeg'),
-(6, 'Cold Coffe', 'this is Cold Coffe', '1570637053_image_coffe2.jpg'),
-(7, 'Coke', 'Coke with ice-cream', '1570637264_image_coke.jpg'),
-(8, 'Mango Shake', 'This is Mango Shake', '1570637375_image_juice2.jpg');
+(1, 'Burger ', 'this is burger', 'path_to_img.png'),
+(2, 'Noodels', 'this is noodels', 'path_to_img.png'),
+(3, 'French Fries', 'this is french fries', 'path_to_img.png'),
+(4, 'Veg Roll', 'This is Veg roll', 'path_to_img.png'),
+(5, 'Hot Coffe', 'this is hot coffe', 'path_to_img.png'),
+(6, 'Cold Coffe', 'this is Cold Coffe', 'path_to_img.png'),
+(7, 'Coke', 'Coke with ice-cream', 'path_to_img.png'),
+(8, 'Mango Shake', 'This is Mango Shake', 'path_to_img.png');
 
 -- --------------------------------------------------------
 
@@ -119,7 +119,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `username`, `password`) VALUES
-(1, 'admin', '0192023a7bbd73250516f069df18b500');
+(1, 'admin', 'admin123');
 
 -- --------------------------------------------------------
 
@@ -138,9 +138,9 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `icon`, `description`) VALUES
-(1, 'fab fa-accessible-icon', 'Good Food And Fast Services'),
-(2, 'fa fa-accessible-icon', 'Home Delivery Available'),
-(3, 'fa fa-accessible-icon', 'Free Delivery ');
+(1, 'path_to_img.ico', 'Good Food And Fast Services'),
+(2, 'path_to_img.ico', 'Home Delivery Available'),
+(3, 'path_to_img.ico', 'Free Delivery ');
 
 -- --------------------------------------------------------
 
@@ -160,8 +160,8 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`id`, `name`, `title`, `photo`) VALUES
-(1, 'Максмович Микола', 'Student', '1570637708_photo_team4.jpg'),
-(2, 'Ковальчук Мирослав', 'Teacher', '1570637579_photo_team3.jpg');
+(1, 'Максмович Микола', 'Student', 'path_to_img.png'),
+(2, 'Ковальчук Мирослав', 'Teacher', 'path_to_img.png');
 
 --
 -- Indexes for dumped tables
