@@ -12,3 +12,5 @@ geometryName = geometry.GetGeometryName()
 print()
 print("Геометрія заданного Геооб’єкту представляє собою {} ".format(
     geometryName))
+geometryArea = geometry.GetArea()
+print("З площею {} ".format(geometryArea))
