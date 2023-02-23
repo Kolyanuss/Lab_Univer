@@ -1,17 +1,27 @@
 import osgeo.ogr
-from stufFunc import printLayers
+import matplotlib.pyplot as plt
+import geopandas as gpd
+from stufFunc import printLayers, getRoadLength
 
-shapefile = osgeo.ogr.Open("resource/gis_osm_roads_free_1.shp")
+path_to_file = "resource/gis_osm_roads_free_1.shp"
+shapefile = osgeo.ogr.Open(path_to_file)
 numLayers = shapefile.GetLayerCount()
 printLayers(numLayers, shapefile)
 
-road_layer  = shapefile.GetLayer()
+road_layer = shapefile.GetLayer()
 
-total_length = 0
+# getRoadLength(road_layer)
 
+query = 'maxspeed >= 60'
+# # filters
+print("Feture where ",query)
+road_layer.SetAttributeFilter(query)
+count=0
 for feature in road_layer:
-    geometry = feature.GetGeometryRef()
-    length = geometry.Length()
-    total_length += length
+    count+=1
+road_layer.ResetReading()
+print("count = ", count)
 
-print(f'Total road length: {total_length}')
+getRoadLength(road_layer)
+
+# plot - use main3.py

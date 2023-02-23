@@ -14,3 +14,24 @@ def printLayers(numLayers, shapefile):
         #     feature = layer.GetFeature(featureNum)
         #     featureName = feature.GetField("NAME")
         #     print("Геооб’єкт {} під назвою {}". format(featureNum, featureName))
+
+
+def printFeatureName(shapefile):
+    road_layer = shapefile.GetLayer()
+    for feature in road_layer:    
+        for key, val in zip(feature.items(), feature):
+            print(key, " - ", val)
+        break
+
+
+def getRoadLength(road_layer):
+    # road length
+    total_length = 0
+    for feature in road_layer:
+        geometry = feature.GetGeometryRef()
+        length = geometry.Length()
+        total_length += length
+
+    print(f'Total road length: {total_length}')
+    road_layer.ResetReading()
+    return total_length
