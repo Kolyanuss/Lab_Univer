@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>add predmet admin panel</title>
+</head>
+<body>
+<center>
+    <h2>Добавте предмет!</h2><br>
+    <form method="POST" action="sql_add_predmets.php">
+        <p><textarea type="text" name="name" placeholder="Назва предмету" rows="1" cols="50"></textarea></p>
+        <p><input type="number" name="countLec" placeholder="Кількість лекцій" min="0"></input></p>
+        <p><input type="number" name="countPrac" placeholder="Кількість практик" min="0"></input></p>
+        <p><input type="number" name="countLab" placeholder="Кількість лабораторних" min="0"></input></p>
+        <p><input type="submit" value="Надіслати"/></p>
+    </form>
+</center>
+</body>
+</html>
