@@ -1,0 +1,19 @@
+CREATE TABLE `mylog` (
+`id` INT NOT NULL AUTO_INCREMENT ,
+`user` VARCHAR( 20 ) NOT NULL ,
+`query` VARCHAR( 15 ) NOT NULL ,
+`timestamp` TIMESTAMP NOT NULL ,
+PRIMARY KEY ( `id` )
+);
+
+CREATE TRIGGER `my_trigger` BEFORE INSERT ON `syllabus`
+FOR EACH ROW
+ INSERT INTO `mylog` SET `user`= USER(), `query`='insert';
+
+CREATE TRIGGER `my_trigger2` AFTER INSERT ON `syllabus`
+FOR EACH ROW
+ INSERT INTO `mylog` SET `user`= USER(), `query`='insert';
+
+CREATE TRIGGER `my_trigger3` BEFORE INSERT ON `predmets`
+FOR EACH ROW
+ INSERT INTO `mylog` SET `user`= USER(), `query`='insert';

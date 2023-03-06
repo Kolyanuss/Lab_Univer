@@ -14,20 +14,22 @@
     <form method="POST" action="">
         <p>
             Предмет: 
-            <select name="predmets">
-                <?php include 'sql_getAllPredmets.php'; ?>
+            <select name="predmets">                
+                <?php require 'database/DB_connection.php';
+                require 'get/sql_getAllPredmets.php'; ?>
             </select>
         </p>
         <p>
             Студент: 
             <select name="students">
-                <?php include 'sql_getAllStudents.php'; ?>
+                <?php require 'database/DB_connection.php';
+                require 'get/sql_getAllStudents.php'; ?>
             </select>
         </p>
         
         <p>Рік навчання: 
             <input type="number" name="year"
-            min="1900" max="2099" step="1" placeholder="ex: 2023"></input>
+            min="1900" max="2099" step="1" placeholder="ex: 2023" value="2023"></input>
         </p>
 
         <p>Семестр:</p>
@@ -47,4 +49,4 @@
 </center>
 </body>
 </html>
-<?php include 'sql_add_syllabus.php'; ?>
+<?php include 'post/sql_add_syllabus.php'; ?>

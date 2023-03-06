@@ -14,7 +14,7 @@ $lastname = $_POST['lastname'];
 $address = $_POST['address'];
 $phone = $_POST['phone'];
 
-require 'database/DB_connection.php';
+require '../database/DB_connection.php';
 
 // Виконуємо запит
 $result = $mysqli->query(
@@ -24,7 +24,7 @@ $result = $mysqli->query(
 );
 // Перевіряємо виконання запиту та виводимо відповідне повідомлення
 if ($result == true) {
-    echo '<center>Інформація занесена в базу даних!</br><a href="index.html">Повернутись на головну</a></center>';
+    echo '<center>Інформація занесена в базу даних!</br><a href="../index.html">Повернутись на головну</a></center>';
     $sql_select = 'SELECT * FROM '.$db_table_stud;
     $result2 = mysqli_query($mysqli, $sql_select);
     $row = mysqli_fetch_array($result2);

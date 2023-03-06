@@ -7,9 +7,16 @@ $field_3 = 'year';
 $field_4 = 'semester';
 $field_5 = 'grade';
 
-require 'database/DB_connection.php';
+require '../database/DB_connection.php';
 
-echo '<center><a href="index.html">Повернутись на головну</a></center>';
+echo '<center><a href="../index.html">Повернутись на головну</a></center>';
+echo '<center><a href="sql_getByGroup.php">Інформація про окремий предмет</a></center>';
+
+// Запит обчислення  середньої оцінки
+$sql_select = 'SELECT AVG('.$field_5.') FROM '.$db_table_syll;
+$result = $mysqli->query($sql_select);
+$row = mysqli_fetch_array($result);
+printf("<p>Середня оцінка: ".$row[0]."</p><br>");
 
 // Виконуємо запит
 $sql_select = 'SELECT * FROM '.$db_table_syll;
