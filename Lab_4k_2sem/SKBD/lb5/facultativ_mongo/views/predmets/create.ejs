@@ -1,0 +1,13 @@
+<% include ../partials/header %>
+
+<h1>Create a New Predmet</h1>
+
+<form method="POST" action="/predmets">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required>
+  </div>
+  <button type="submit">Create</button>
+</form>
+
+<% include ../partials/footer %>
