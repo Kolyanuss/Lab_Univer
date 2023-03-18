@@ -1,11 +1,18 @@
 <%- include ("../partials/header")%>
 
-<h1>Edit <%= predmet.name %></h1>
+<h1>Edit <%= item.name %></h1>
 
-<form method="POST" action="/predmets/<%= predmet._id %>?_method=PUT">
+<form method="PUT" action="/predmets/<%= item._id %>">
+  <input type="hidden" name="_method" value="PUT">
   <div>
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" value="<%= predmet.name %>" required>
+    <input type="text" id="name" name="name" value="<%= item.name %>" required>
+    <label for="name">lecturesize</label>
+    <input type="text" id="lect" name="lect" value="<%= item.lecturesize %>" required>
+    <label for="name">practicesize</label>
+    <input type="text" id="prac" name="prac" value="<%= item.practicesize %>" required>
+    <label for="name">labsize</label>
+    <input type="text" id="lab" name="lab" value="<%= item.labsize %>" required>
   </div>
   <button type="submit">Save</button>
 </form>

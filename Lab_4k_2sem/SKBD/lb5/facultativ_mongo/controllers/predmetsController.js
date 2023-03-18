@@ -4,8 +4,8 @@ const predmetsController = {
   // Отримання списку всіх предметів
   async getAll(req, res) {
     try {
-      const predmets = await Predmet.find();
-      res.render("predmets/index", { predmets });
+      const items = await Predmet.find();
+      res.render("predmets/index", { items });
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -20,9 +20,12 @@ const predmetsController = {
   // Створення нового предмету
   async create(req, res) {
     try {
-      const { name } = req.body;
-      const predmet = new Predmet({ name });
-      await predmet.save();
+      const name = req.body.name;
+      const lecturesize = req.body.lect;
+      const practicesize = req.body.prac;
+      const labsize = req.body.lab;
+      const item = new Predmet({name,lecturesize,practicesize,labsize});
+      await item.save();
       res.redirect("/predmets");
     } catch (err) {
       console.error(err);
@@ -33,9 +36,9 @@ const predmetsController = {
   // Отримання форми для оновлення предмету
   async updateForm(req, res) {
     try {
-      const predmet = await Predmet.findById(req.params.id);
-      if (!predmet) return res.status(404).send("Predmet not found");
-      res.render("predmets/update", { predmet });
+      const item = await Predmet.findById(req.params.id);
+      if (!item) return res.status(404).send("Predmet not found");
+      res.render("predmets/update", { item });
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -44,12 +47,21 @@ const predmetsController = {
 
   // Оновлення предмету
   async update(req, res) {
+    console.log("pin0");
     try {
-      const { name } = req.body;
-      let predmet = await Predmet.findById(req.params.id);
-      if (!predmet) return res.status(404).send("Predmet not found");
-      predmet.name = name;
-      await predmet.save();
+      const name = req.body.name;
+      const lecturesize = req.body.lect;
+      const practicesize = req.body.prac;
+      const labsize = req.body.lab;
+      console.log("pin1");
+      let item = await Predmet.findById(req.params.id);
+      console.log("pin2");
+      if (!item) return res.status(404).send("Predmet not found");
+      item.name = name;
+      item.lecturesize = lecturesize;
+      item.practicesize = practicesize;
+      item.labsize = labsize;
+      await item.save();
       res.redirect("/predmets");
     } catch (err) {
       console.error(err);
@@ -60,9 +72,9 @@ const predmetsController = {
   // Видалення предмету
   async delete(req, res) {
     try {
-      let predmet = await Predmet.findById(req.params.id);
-      if (!predmet) return res.status(404).send("Predmet not found");
-      await predmet.remove();
+      let item = await Predmet.findById(req.params.id);
+      if (!item) return res.status(404).send("Predmet not found");
+      await item.remove();
       res.redirect("/predmets");
     } catch (err) {
       console.error(err);

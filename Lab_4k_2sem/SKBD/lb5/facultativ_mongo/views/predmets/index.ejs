@@ -8,21 +8,33 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>lecturesize</th>
+      <th>practicesize</th>
+      <th>labsize</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
   </thead>
   <tbody>
-    <% predmets.forEach(function(predmet) { %>
+    <% items.forEach(function(item) { %>
     <tr>
-      <td><%= predmet.name %></td>
+      <td><%= item.name %></td>
+      <td><%= item.lecturesize %></td>
+      <td><%= item.practicesize %></td>
+      <td><%= item.labsize %></td>
       <td>
-        <a href="/predmets/edit/<%= predmet._id %>">Edit</a>
+        <form
+          method="GET"
+          action="/predmets/edit/<%= item._id %>"
+          style="display: inline"
+        >
+          <button type="submit">Edit</button>
+        </form>
       </td>
       <td>
         <form
           method="POST"
-          action="/predmets/<%= predmet._id %>?_method=DELETE"
+          action="/predmets/<%= item._id %>?_method=DELETE"
           style="display: inline"
         >
           <button type="submit">Delete</button>
