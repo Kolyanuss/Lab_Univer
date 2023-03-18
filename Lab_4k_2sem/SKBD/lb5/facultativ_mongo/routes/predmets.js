@@ -5,7 +5,6 @@ const router = express.Router();
 const predmetsController = require('../controllers/predmetsController');
 
 router.get('/', predmetsController.getAll);
-router.get('/:id', predmetsController.getById);
 
 router.get('/create', predmetsController.createForm);
 router.post('/', predmetsController.create);

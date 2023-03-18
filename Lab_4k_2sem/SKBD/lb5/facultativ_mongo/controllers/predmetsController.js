@@ -12,18 +12,6 @@ const predmetsController = {
     }
   },
   
-  // Отримання 1 предмета
-  async getById(req, res) {
-    try {
-      const predmet = await Predmet.findById(req.params.id);
-      if (!predmet) return res.status(404).send("Predmet not found");
-      res.render("predmets/index", { predmet });
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Server Error");
-    }
-  },
-
   // Отримання форми для створення нового предмету
   createForm(req, res) {
     res.render("predmets/create");
