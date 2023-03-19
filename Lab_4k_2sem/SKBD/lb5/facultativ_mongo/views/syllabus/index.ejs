@@ -1,16 +1,15 @@
 <%- include ("../partials/header")%>
 
-<h1>Predmets List</h1>
+<h1>Grades List</h1>
 
-<a href="/predmets/createform">Create a New Predmet</a>
+<a href="/syllabus/createform">Create a New grade record</a>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>lecturesize</th>
-      <th>practicesize</th>
-      <th>labsize</th>
+      <th>id student</th>
+      <th>id predmet</th>
+      <th>Оцінка</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
@@ -18,14 +17,13 @@
   <tbody>
     <% items.forEach(function(item) { %>
     <tr>
-      <td><%= item.name %></td>
-      <td><%= item.lecturesize %></td>
-      <td><%= item.practicesize %></td>
-      <td><%= item.labsize %></td>
+      <td><%= item.id_student %></td>
+      <td><%= item.id_predmet %></td>
+      <td><%= item.grade %></td>
       <td>
         <form
           method="GET"
-          action="/predmets/editform/<%= item._id %>"
+          action="/syllabus/editform/<%= item._id %>"
           style="display: inline"
         >
           <button type="submit">Edit</button>
@@ -34,7 +32,7 @@
       <td>
         <form
           method="POST"
-          action="/predmets/delete/<%= item._id %>"
+          action="/syllabus/delete/<%= item._id %>"
           style="display: inline"
         >
           <button type="submit">Delete</button>

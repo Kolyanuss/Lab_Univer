@@ -1,11 +1,11 @@
-const Predmet = require("../models/predmet");
+const Student = require("../models/student");
 
-const predmetsController = {
-  // Отримання списку всіх предметів
+const studentsController = {
+  // Отримання списку всіх студентів
   async getAll(req, res) {
     try {
-      const items = await Predmet.find();
-      res.render("predmets/index", { items });
+      const items = await Student.find();
+      res.render("students/index", { items });
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -14,15 +14,15 @@ const predmetsController = {
 
   // Отримання форми для створення нового предмету
   createForm(req, res) {
-    res.render("predmets/create");
+    res.render("students/create");
   },
 
   // Створення нового предмету
   async create(req, res) {
     try {
-      const item = new Predmet(req.body);
+      const item = new Student(req.body);
       await item.save();
-      res.redirect("/predmets");
+      res.redirect("/students");
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -32,9 +32,9 @@ const predmetsController = {
   // Отримання форми для оновлення предмету
   async updateForm(req, res) {
     try {
-      const item = await Predmet.findById(req.params.id);
-      if (!item) return res.status(404).send("Predmet not found");
-      res.render("predmets/update", { item });
+      const item = await Student.findById(req.params.id);
+      if (!item) return res.status(404).send("Student not found");
+      res.render("students/update", { item });
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -44,14 +44,15 @@ const predmetsController = {
   // Оновлення предмету
   async update(req, res) {
     try {
-      let item = await Predmet.findById(req.params.id);
-      if (!item) return res.status(404).send("Predmet not found");
+      let item = await Student.findById(req.params.id);
+      if (!item) return res.status(404).send("Student not found");
       item.name = req.body.name;
-      item.lecturesize = req.body.lect;
-      item.practicesize = req.body.prac;
-      item.labsize = req.body.lab;
+      item.surname = req.body.surname;
+      item.lastname = req.body.lastname;
+      item.address = req.body.address;
+      item.phone = req.body.phone;
       await item.save();
-      res.redirect("/predmets");
+      res.redirect("/students");
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -61,9 +62,9 @@ const predmetsController = {
   // Видалення предмету
   async delete(req, res) {
     try {
-      let item = await Predmet.findByIdAndRemove(req.params.id);
-      if (!item) return res.status(404).send("Predmet not found");
-      res.redirect("/predmets");
+      let item = await Student.findByIdAndRemove(req.params.id);
+      if (!item) return res.status(404).send("Student not found");
+      res.redirect("/students");
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -71,4 +72,4 @@ const predmetsController = {
   },
 };
 
-module.exports = predmetsController;
+module.exports = studentsController;

@@ -6,12 +6,12 @@ const predmetsController = require('../controllers/predmetsController');
 
 router.get('/', predmetsController.getAll);
 
-router.get('/create', predmetsController.createForm);
+router.get('/createform', predmetsController.createForm);
 router.post('/', predmetsController.create);
 
-router.get('/edit/:id', predmetsController.updateForm);
-router.put('/:id', predmetsController.update);
+router.get('/editform/:id', predmetsController.updateForm);
+router.post('/edit/:id', predmetsController.update);
 
-router.delete('/:id', predmetsController.delete);
+router.post('/delete/:id', predmetsController.delete);
 
 module.exports = router;

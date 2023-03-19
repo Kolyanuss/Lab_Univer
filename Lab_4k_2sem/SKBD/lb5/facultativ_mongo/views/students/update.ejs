@@ -1,0 +1,21 @@
+<%- include ("../partials/header")%>
+
+<h1>Edit <%= item.name %></h1>
+
+<form method="POST" action="/students/edit/<%= item._id %>">
+  <div>
+    <label for="name">Ім'я</label>
+    <input type="text" id="name" name="name" value="<%= item.name %>" required>
+    <label for="surname">Прізвище</label>
+    <input type="text" id="surname" name="surname" value="<%= item.surname %>" required>
+    <label for="lastname">Побатькові</label>
+    <input type="text" id="lastname" name="lastname" value="<%= item.lastname %>" required>
+    <label for="address">Адреса</label>
+    <input type="text" id="address" name="address" value="<%= item.address %>" required>
+    <label for="phone">Телефон</label>
+    <input type="text" id="phone" name="phone" value="<%= item.phone %>" required>
+  </div>
+  <button type="submit">Save</button>
+</form>
+
+<%- include ("../partials/footer") %>

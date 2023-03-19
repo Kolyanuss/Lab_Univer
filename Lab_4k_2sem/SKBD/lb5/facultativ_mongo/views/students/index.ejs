@@ -1,16 +1,17 @@
 <%- include ("../partials/header")%>
 
-<h1>Predmets List</h1>
+<h1>Students List</h1>
 
-<a href="/predmets/createform">Create a New Predmet</a>
+<a href="/students/createform">Create a New Student record</a>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>lecturesize</th>
-      <th>practicesize</th>
-      <th>labsize</th>
+      <th>Ім'я</th>
+      <th>Прізвище</th>
+      <th>Побатькові</th>
+      <th>Адреса</th>
+      <th>Телефон</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
@@ -19,13 +20,14 @@
     <% items.forEach(function(item) { %>
     <tr>
       <td><%= item.name %></td>
-      <td><%= item.lecturesize %></td>
-      <td><%= item.practicesize %></td>
-      <td><%= item.labsize %></td>
+      <td><%= item.surname %></td>
+      <td><%= item.lastname %></td>
+      <td><%= item.address %></td>
+      <td><%= item.phone %></td>
       <td>
         <form
           method="GET"
-          action="/predmets/editform/<%= item._id %>"
+          action="/students/editform/<%= item._id %>"
           style="display: inline"
         >
           <button type="submit">Edit</button>
@@ -34,7 +36,7 @@
       <td>
         <form
           method="POST"
-          action="/predmets/delete/<%= item._id %>"
+          action="/students/delete/<%= item._id %>"
           style="display: inline"
         >
           <button type="submit">Delete</button>

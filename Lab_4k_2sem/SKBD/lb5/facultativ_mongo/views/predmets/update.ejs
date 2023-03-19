@@ -2,8 +2,7 @@
 
 <h1>Edit <%= item.name %></h1>
 
-<form method="PUT" action="/predmets/<%= item._id %>">
-  <input type="hidden" name="_method" value="PUT">
+<form method="POST" action="/predmets/edit/<%= item._id %>">
   <div>
     <label for="name">Name</label>
     <input type="text" id="name" name="name" value="<%= item.name %>" required>

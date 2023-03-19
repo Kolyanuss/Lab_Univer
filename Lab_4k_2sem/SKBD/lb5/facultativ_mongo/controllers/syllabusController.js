@@ -1,11 +1,11 @@
-const Predmet = require("../models/predmet");
+const Syllabus = require("../models/syllabus");
 
-const predmetsController = {
-  // Отримання списку всіх предметів
+const syllabusController = {
+  // Отримання списку
   async getAll(req, res) {
     try {
-      const items = await Predmet.find();
-      res.render("predmets/index", { items });
+      const items = await Syllabus.find();
+      res.render("syllabus/index", { items });
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -14,15 +14,15 @@ const predmetsController = {
 
   // Отримання форми для створення нового предмету
   createForm(req, res) {
-    res.render("predmets/create");
+    res.render("syllabus/create");
   },
 
   // Створення нового предмету
   async create(req, res) {
     try {
-      const item = new Predmet(req.body);
+      const item = new Syllabus(req.body);
       await item.save();
-      res.redirect("/predmets");
+      res.redirect("/syllabus");
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -32,9 +32,9 @@ const predmetsController = {
   // Отримання форми для оновлення предмету
   async updateForm(req, res) {
     try {
-      const item = await Predmet.findById(req.params.id);
-      if (!item) return res.status(404).send("Predmet not found");
-      res.render("predmets/update", { item });
+      const item = await Syllabus.findById(req.params.id);
+      if (!item) return res.status(404).send("Syllabus not found");
+      res.render("syllabus/update", { item });
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -44,14 +44,13 @@ const predmetsController = {
   // Оновлення предмету
   async update(req, res) {
     try {
-      let item = await Predmet.findById(req.params.id);
-      if (!item) return res.status(404).send("Predmet not found");
-      item.name = req.body.name;
-      item.lecturesize = req.body.lect;
-      item.practicesize = req.body.prac;
-      item.labsize = req.body.lab;
+      let item = await Syllabus.findById(req.params.id);
+      if (!item) return res.status(404).send("Syllabus not found");
+      item.id_student = req.body.id_student;
+      item.id_predmet = req.body.id_predmet;
+      item.grade = req.body.grade;
       await item.save();
-      res.redirect("/predmets");
+      res.redirect("/syllabus");
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -61,9 +60,9 @@ const predmetsController = {
   // Видалення предмету
   async delete(req, res) {
     try {
-      let item = await Predmet.findByIdAndRemove(req.params.id);
-      if (!item) return res.status(404).send("Predmet not found");
-      res.redirect("/predmets");
+      let item = await Syllabus.findByIdAndRemove(req.params.id);
+      if (!item) return res.status(404).send("Syllabus not found");
+      res.redirect("/syllabus");
     } catch (err) {
       console.error(err);
       res.status(500).send("Server Error");
@@ -71,4 +70,4 @@ const predmetsController = {
   },
 };
 
-module.exports = predmetsController;
+module.exports = syllabusController;
