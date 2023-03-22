@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps JavaScript API Example</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <script>
+      function initMap() {
+        // Створюємо об'єкт карти та встановлюємо початкову точку видимості
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 51.505, lng: -0.09}
+        });
+
+        // Створюємо об'єкт маркера та встановлюємо його координати
+        var marker = new google.maps.Marker({
+          position: {lat: 51.505, lng: -0.09},
+          map: map,
+          title: 'Hello World!'
+        });
+      }
+    </script>
+  </head>
+  <body onload="initMap()">
+    <div id="map" style="height: 400px;"></div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+{% block head %}
+<!-- Посилання на бібліотеку Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha384-T3riUCCGVmr0v0Po9Oj63zFQ6VVubY6MtbqpELDm8wLdjg6i53/xpTBwyfrvHOFr" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha384-cvI8sWvm5qL0tE5GQZM1tss5d5DRcbnuHZ0UN0XyGys7z5DlrJMgYkAKA1yzAxZ4" crossorigin=""></script>
+{% endblock %}
+
+{% block content %}
+<div id="map" style="height: 500px"></div>
+<script>
+  // Ініціалізуємо карту
+  var map = L.map("map").setView([51.505, -0.09], 13);
+
+  // Додаємо плитку OpenStreetMap
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+    maxZoom: 18,
+  }).addTo(map);
+
+  // Завантажуємо точки геометрії з сервера та додаємо їх на карту
+  for (const item in items) {
+    var marker = L.marker([item.geometry.y, item.geometry.x]).addTo(map);
+    marker.bindPopup(String(item.name));
+  }
+</script>
+{% endblock %}

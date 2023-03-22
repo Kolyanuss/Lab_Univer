@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    {% load static %}
+    <!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>
+            <a href="getAllAmenity/">Get All Amenity</a> - 
+            <a href="mapAllAmenity/">Show All Amenity on Map</a>
+        </li>
+        <li>
+            <a href="getAllShops/">Get All Shops</a> - 
+            <a href="mapAllShops/">Show All Shop on Map</a>
+        </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <form action="getByFilter/" method="get">
+        <select name="typeAmenity" id="typeAmenity" onreset="showShop()" onchange="showShop()">
+          {% for item in AmenityItems %}
+          <option value="{{item}}">{{item}}</option>
+          {% endfor %}
+        </select>
+        <select hidden id="typeShop" name="typeShop">
+          {% for item in ShopItems %}
+          <option value="{{item}}">{{item}}</option>
+          {% endfor %}
+        </select>
+
+        <br>
+        <input type="number" name="radius" placeholder="Радіус">
+        <br>
+        <button type="submit">Пошук</button>
+
+        <script>
+          function showShop() {
+            var x = document.getElementById("typeAmenity").value;
+            if (x === "shop") {
+              document.getElementById("typeShop").style.display = "block";
+            } else {
+              document.getElementById("typeShop").style.display = "none";
+            }
+          }
+        </script>
+      </form>
+    </main>
+  </body>
+</html>
