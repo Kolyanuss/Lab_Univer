@@ -20,7 +20,6 @@ from myapp import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.renderMainPage),
-    path("testMap/", views.testMap),
 
     path("getAllShops/", views.getAllShops),
     path("getAllAmenity/", views.getAllAmenity),
@@ -28,6 +27,5 @@ urlpatterns = [
     path("mapAllShops/", views.mapAllShops),
     path("mapAllAmenity/", views.mapAllAmenity),
 
-    path("getByFilter/", views.getByFilter),    
-    path("mapByFilter/", views.mapByFilter),
+    path("searchByFilter/", views.searchByFilter),
 ]

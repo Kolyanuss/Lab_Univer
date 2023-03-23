@@ -16,11 +16,19 @@
     margin: 0;
   }
   #map {
-    height: 100%;
+    height: 97.5%;
     width: 100%;
   }
 </style>
 {% endblock %} {% block content %}
+<div id="header">
+  <form>
+    <button><a href="/">На головну</a></button>
+    <input type="text" value="" disabled>
+    <input type="number" placeholder="Радіус">
+    <button type="submit">Пошук в радіусі</button>
+  </form>
+</div>
 <div id="map"></div>
 <script>
   // Ініціалізуємо карту
@@ -35,8 +43,27 @@
 
   // Завантажуємо точки геометрії з сервера та додаємо їх на карту  
   '{% for item in items %}'
-  L.marker(['{{ item.geometry.y }}', '{{ item.geometry.x}}']).addTo(map).bindPopup(String('{{item.name}}'));
+  marker = L.marker(['{{ item.geometry.y }}', '{{ item.geometry.x}}'])
+    .addTo(map)
+    .bindPopup(String('{{item}}'));
+  marker.on('click', function(e) {
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    console.log("Клікнуто на точку з координатами (" + lat + ", " + lng + ")");
+    marker.setIcon(
+      L.icon({
+        iconUrl: 'ico.png', // todo add ico
+        iconSize: [38, 95]
+      })
+    );
+  }); 
   '{% endfor %}'
+
+  map.on('click', function(e) {
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    console.log("Клікнуто на мапу з координатами (" + lat + ", " + lng + ")");
+  });
 
 </script>
 {% endblock %}

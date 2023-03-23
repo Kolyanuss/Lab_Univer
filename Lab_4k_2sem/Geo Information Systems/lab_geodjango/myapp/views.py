@@ -69,13 +69,16 @@ def _myFilter(request):
 
     return listResult
 
-def getByFilter(request):
+def _getByFilter(request):
     listResult = _myFilter(request)
     return render(request, "list.html", {"items": listResult})
 
-def mapByFilter(request):
+def _mapByFilter(request):
     listResult = _myFilter(request)
     return render(request, "map.html", {"items": listResult})
 
-def testMap(request):
-    return render(request, "testMap.html")
+def searchByFilter(request):
+    if '_list' in request.GET:
+        return _getByFilter(request)
+    elif '_map' in request.GET:
+        return _mapByFilter(request)

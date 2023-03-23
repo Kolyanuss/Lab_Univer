@@ -23,7 +23,7 @@
       </nav>
     </header>
     <main>
-      <form action="mapByFilter/" method="get">
+      <form action="searchByFilter/" method="get">
         <select name="typeAmenity" id="typeAmenity" onreset="showShop()" onchange="showShop()">
           {% for item in AmenityItems %}
           <option value="{{item}}">{{item}}</option>
@@ -38,7 +38,8 @@
         <br>
         <!-- <input type="number" name="radius" placeholder="Радіус"> -->
         <br>
-        <button type="submit">Пошук</button>
+        <button type="submit" name="_list">Пошук</button>
+        <button type="submit" name="_map">Карта</button>
 
         <script>
           function showShop() {
