@@ -23,7 +23,7 @@
       </nav>
     </header>
     <main>
-      <form action="getByFilter/" method="get">
+      <form action="mapByFilter/" method="get">
         <select name="typeAmenity" id="typeAmenity" onreset="showShop()" onchange="showShop()">
           {% for item in AmenityItems %}
           <option value="{{item}}">{{item}}</option>
@@ -36,7 +36,7 @@
         </select>
 
         <br>
-        <input type="number" name="radius" placeholder="Радіус">
+        <!-- <input type="number" name="radius" placeholder="Радіус"> -->
         <br>
         <button type="submit">Пошук</button>
 

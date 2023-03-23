@@ -48,51 +48,34 @@ def getTypeOfAmenity():
         ListStringNames.append(item['amenity'])
     return ListStringNames
 
-def getByFilter(request):
+def _myFilter(request):
     selected_option_amentity = request.GET.get("typeAmenity")
     
     if selected_option_amentity == None:
         return HttpResponse("Error 404 Amenity not found")
-    # print(selected_option_amentity)
     
     selected_option_shop = ""
     if selected_option_amentity == "shop":
         selected_option_shop = request.GET.get("typeShop")
         if selected_option_shop == None:
             return HttpResponse("Error 404 Shop not found")
-        # print(selected_option_shop)
 
     listResult = []
-    table_name = "che_point_amenity"
-    column_name = "amenity"
-    condition = selected_option_amentity
     if selected_option_shop != "":
-        table_name = "che_point_shop"
-        column_name = "shop"
-        condition = selected_option_shop
+        listResult = che_point_shop.objects.filter(shop=selected_option_shop)
+    else:
+        listResult = che_point_amenity.objects.filter(amenity=selected_option_amentity)
+    _convertCorruptedTextToNormal(listResult)
 
-    listResult = che_point_shop.objects.raw(f"SELECT * FROM {table_name} WHERE {column_name} = '{condition}'") # fix this
-    print(listResult)
+    return listResult
 
+def getByFilter(request):
+    listResult = _myFilter(request)
     return render(request, "list.html", {"items": listResult})
 
-def showMap(request):
-    selected_option_amentity = request.GET.get("typeAmenity")
-    
-    if selected_option_amentity == None:
-        return HttpResponse("Error 404 Amenity not found")
-    print(selected_option_amentity)
-    
-    selected_option_shop = ""
-    if selected_option_amentity == "shop":
-        selected_option_shop = request.GET.get("typeShop")
-        if selected_option_shop == None:
-            return HttpResponse("Error 404 Shop not found")
-        print(selected_option_shop)
-
-    # radius = request.GET.get("radius")
-    # if radius != None:
-    return HttpResponse(selected_option_amentity+" - "+selected_option_shop)
+def mapByFilter(request):
+    listResult = _myFilter(request)
+    return render(request, "map.html", {"items": listResult})
 
 def testMap(request):
     return render(request, "testMap.html")

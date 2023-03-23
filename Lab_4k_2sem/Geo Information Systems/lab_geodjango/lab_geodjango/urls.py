@@ -28,7 +28,6 @@ urlpatterns = [
     path("mapAllShops/", views.mapAllShops),
     path("mapAllAmenity/", views.mapAllAmenity),
 
-    path("getByFilter/", views.getByFilter),
-    
-    # path("showMap/", views.showMap),
+    path("getByFilter/", views.getByFilter),    
+    path("mapByFilter/", views.mapByFilter),
 ]
