@@ -22,10 +22,10 @@
 </style>
 {% endblock %} {% block content %}
 <div id="header">
-  <form>
+  <form action="/searchByRadius/" method="get">
     <button><a href="/">На головну</a></button>
-    <input type="text" value="" disabled>
-    <input type="number" placeholder="Радіус">
+    <input type="text" id="pointInfo" name="pointInfo" required>
+    <input type="number" id="radius" name="radius" placeholder="Радіус в метрах" required>
     <button type="submit">Пошук в радіусі</button>
   </form>
 </div>
@@ -43,19 +43,16 @@
 
   // Завантажуємо точки геометрії з сервера та додаємо їх на карту  
   '{% for item in items %}'
-  marker = L.marker(['{{ item.geometry.y }}', '{{ item.geometry.x}}'])
+  L.marker(['{{ item.geometry.y }}', '{{ item.geometry.x}}'])
     .addTo(map)
-    .bindPopup(String('{{item}}'));
-  marker.on('click', function(e) {
+    .bindPopup(String('{{item}}'))
+    .on('click', function(e) {
     var lat = e.latlng.lat;
     var lng = e.latlng.lng;
     console.log("Клікнуто на точку з координатами (" + lat + ", " + lng + ")");
-    marker.setIcon(
-      L.icon({
-        iconUrl: 'ico.png', // todo add ico
-        iconSize: [38, 95]
-      })
-    );
+    var myInput = document.getElementById("pointInfo");
+    model_type = '{{model_type}}';
+    myInput.value = [lat,lng,model_type].join(", ");
   }); 
   '{% endfor %}'
 
@@ -63,6 +60,9 @@
     var lat = e.latlng.lat;
     var lng = e.latlng.lng;
     console.log("Клікнуто на мапу з координатами (" + lat + ", " + lng + ")");
+    var myInput = document.getElementById("pointInfo");
+    model_type = '{{model_type}}';
+    myInput.value = [lat,lng,model_type].join(", ");
   });
 
 </script>

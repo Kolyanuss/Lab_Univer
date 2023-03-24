@@ -28,4 +28,5 @@ urlpatterns = [
     path("mapAllAmenity/", views.mapAllAmenity),
 
     path("searchByFilter/", views.searchByFilter),
+    path("searchByRadius/", views.searchByRadius),
 ]
