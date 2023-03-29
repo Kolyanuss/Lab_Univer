@@ -64,7 +64,9 @@ def arrToRelation(arr):
                 result.append([i+1,j+1])
     return result
 
+  
 while True:
+    print("----------Start----------")
     typeOfInput = input("""Виберіть тип вводу даних:
     1 - ввід з файлу
     2 - ввід вручну
@@ -76,18 +78,42 @@ while True:
         VAR2 = readFile(fileInName2)
         break
     elif typeOfInput == "2":
+        # Перша множина
         myRange = input(
-            "Введіть множину для першого бін. відношення(наприклад: 1-5)>")
+            "Введіть елементи вхідної множини(наприклад: 1-5)>")
         rangeStart, rangeEnd = re.split("[ ,-]", myRange)
-        set = [*range(int(rangeStart), int(rangeEnd))]
+        
+        try:
+            rangeStart, rangeEnd = int(rangeStart), int(rangeEnd)    
+        except:
+            print("Помилка читання вхідних даних, поторіть спробу!")
+            continue
+        
+        if rangeStart >= rangeEnd:
+            print("Почткове значення не може бути більшим або рівним за кінцеве, повторіть спробу")
+            continue
+
+        set = [*range(rangeStart, rangeEnd)]
         for item1 in set:
             for item2 in set:
                 VAR1.append([item1,item2])
 
+        # друга множина
         myRange = input(
-            "Введіть множину для другого бін. відношення(наприклад: 2 4)>")
+            "Введіть елементи вхідної множини(наприклад: 2 4)>")
         rangeStart, rangeEnd = re.split("[ ,-]", myRange)
-        set = [*range(int(rangeStart), int(rangeEnd))]
+
+        try:
+            rangeStart, rangeEnd = int(rangeStart), int(rangeEnd)    
+        except:
+            print("Помилка читання вхідних даних, поторіть спробу!")
+            continue
+        
+        if rangeStart >= rangeEnd:
+            print("Почткове значення не може бути більшим або рівним за кінцеве, повторіть спробу")
+            continue
+
+        set = [*range(rangeStart, rangeEnd)]
         for item1 in set:
             for item2 in set:
                 VAR2.append([item1,item2])
