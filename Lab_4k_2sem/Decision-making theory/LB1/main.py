@@ -1,6 +1,8 @@
 import re
-VAR1 = []
-VAR2 = []
+BIN_VAR1 = [] # змінна яка зберігає бінарне відношення
+BIN_VAR2 = [] # змінна яка зберігає бінарне відношення
+PLURAL1 = [] # множина яку вводить користувач
+PLURAL2 = [] # множина яку вводить користувач
 fileInName1 = "in1.txt"
 fileInName2 = "in2.txt"
 fileOutName1 = "out1.txt"
@@ -64,67 +66,47 @@ def arrToRelation(arr):
                 result.append([i+1,j+1])
     return result
 
-  
-while True:
-    print("----------Start----------")
-    typeOfInput = input("""Виберіть тип вводу даних:
-    1 - ввід з файлу
-    2 - ввід вручну
-    >""")
-    if typeOfInput == "1":
-        print(
-            f"Дані будуть зчитані з файлів '{fileInName1}' та '{fileInName2}'")
-        VAR1 = readFile(fileInName1)
-        VAR2 = readFile(fileInName2)
-        break
-    elif typeOfInput == "2":
-        # Перша множина
-        myRange = input(
-            "Введіть елементи вхідної множини(наприклад: 1-5)>")
-        rangeStart, rangeEnd = re.split("[ ,-]", myRange)
-        
-        try:
-            rangeStart, rangeEnd = int(rangeStart), int(rangeEnd)    
-        except:
-            print("Помилка читання вхідних даних, поторіть спробу!")
-            continue
-        
-        if rangeStart >= rangeEnd:
-            print("Почткове значення не може бути більшим або рівним за кінцеве, повторіть спробу")
-            continue
+def readPlural():
+    myRange = input(
+        "Введіть елементи вхідної множини(наприклад: 1-5)>")
+    rangeStart, rangeEnd = re.split("[ ,-]", myRange)
 
-        set = [*range(rangeStart, rangeEnd)]
-        for item1 in set:
-            for item2 in set:
-                VAR1.append([item1,item2])
+    try:
+        rangeStart, rangeEnd = int(rangeStart), int(rangeEnd)    
+    except:
+        raise Exception("Помилка читання вхідних даних, поторіть спробу!")
 
-        # друга множина
-        myRange = input(
-            "Введіть елементи вхідної множини(наприклад: 2 4)>")
-        rangeStart, rangeEnd = re.split("[ ,-]", myRange)
+    if rangeStart >= rangeEnd:
+        raise Exception("Почткове значення не може бути більшим або рівним за кінцеве, повторіть спробу!")
 
-        try:
-            rangeStart, rangeEnd = int(rangeStart), int(rangeEnd)    
-        except:
-            print("Помилка читання вхідних даних, поторіть спробу!")
-            continue
-        
-        if rangeStart >= rangeEnd:
-            print("Почткове значення не може бути більшим або рівним за кінцеве, повторіть спробу")
-            continue
+    set = [*range(rangeStart, rangeEnd)]
+    result = []
+    for item1 in set:
+        for item2 in set:
+            result.append([item1,item2])
+    return result
 
-        set = [*range(rangeStart, rangeEnd)]
-        for item1 in set:
-            for item2 in set:
-                VAR2.append([item1,item2])
-        break
 
-    print("Виберіть один із двох запропонованих варіантів ввівши цифру 1 або 2 в терміналі")
+
+print("----------Start----------")
+print(f"Дані будуть зчитані з файлів '{fileInName1}' та '{fileInName2}'")
+BIN_VAR1 = readFile(fileInName1)
+BIN_VAR2 = readFile(fileInName2)
 
 print("Перше вхідне бінарне відношення:")
-printArr(VAR1)
+printArr(BIN_VAR1)
 print("Друге вхідне бінарне відношення:")
-printArr(VAR2)
+printArr(BIN_VAR2)
+    
+# while True:
+#     try:
+#         PLURAL1 = readPlural()
+#         PLURAL2 = readPlural()
+#     except Exception as e:
+#         print(e)
+#         continue
+#     break
+# немає перевірки на відповідність бінарного відношення до введеної множини
 
 while True:
     typeAction = input("""Виберіть дію:
@@ -134,14 +116,14 @@ while True:
     >""")
 
     if typeAction == "1":
-        result = str(binaryAction1(VAR1, VAR2))
+        result = str(binaryAction1(BIN_VAR1, BIN_VAR2))
         print(f"Результат записаний у файл '{fileOutName1}'")
         file = open(fileOutName1, "w")
         file.write(result)
         file.close()
 
     elif typeAction == "2":
-        result = binaryAction2(VAR1, VAR2)
+        result = binaryAction2(BIN_VAR1, BIN_VAR2)
         print(f"Дію успішно виконано, результат буде записаний у файл '{fileOutName2}'")
         file = open(fileOutName2, "w")
         file.write(result)
