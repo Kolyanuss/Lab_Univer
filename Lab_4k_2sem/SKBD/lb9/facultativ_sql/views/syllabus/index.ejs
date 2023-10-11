@@ -1,0 +1,46 @@
+<%- include ("../partials/header")%>
+
+<h1>Grades List</h1>
+
+<a href="/syllabus/createform">Create a New grade record</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>id student</th>
+      <th>id predmet</th>
+      <th>Оцінка</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.forEach(function(item) { %>
+    <tr>
+      <td><%= item.id_student %></td>
+      <td><%= item.id_predmet %></td>
+      <td><%= item.grade %></td>
+      <td>
+        <form
+          method="GET"
+          action="/syllabus/editform/<%= item.id %>"
+          style="display: inline"
+        >
+          <button type="submit">Edit</button>
+        </form>
+      </td>
+      <td>
+        <form
+          method="POST"
+          action="/syllabus/delete/<%= item.id %>"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include ("../partials/footer") %>

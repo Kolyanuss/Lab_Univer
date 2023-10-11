@@ -1,0 +1,50 @@
+<%- include ("../partials/header")%>
+
+<h1>Students List</h1>
+
+<a href="/students/createform">Create a New Student record</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ім'я</th>
+      <th>Прізвище</th>
+      <th>Побатькові</th>
+      <th>Адреса</th>
+      <th>Телефон</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.forEach(function(item) { %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.surname %></td>
+      <td><%= item.lastname %></td>
+      <td><%= item.address %></td>
+      <td><%= item.phone %></td>
+      <td>
+        <form
+          method="GET"
+          action="/students/editform/<%= item.id %>"
+          style="display: inline"
+        >
+          <button type="submit">Edit</button>
+        </form>
+      </td>
+      <td>
+        <form
+          method="POST"
+          action="/students/delete/<%= item.id %>"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include ("../partials/footer") %>

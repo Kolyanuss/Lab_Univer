@@ -1,0 +1,22 @@
+<%- include ("../partials/header")%>
+
+<h1>Edit <%= item.name %></h1>
+
+<form method="POST" action="/predmets/edit/<%= item.id %>">
+  <div>    
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="<%= item.name %>" required>
+    
+    <label for="lecturesize">lecturesize</label>
+    <input type="number" id="lecturesize" name="lecturesize" value="<%= item.lecturesize %>" required>
+    
+    <label for="practicesize">practicesize</label>
+    <input type="number" id="practicesize" name="practicesize" value="<%= item.practicesize %>" required>
+    
+    <label for="labsize">labsize</label>
+    <input type="number" id="labsize" name="labsize" value="<%= item.labsize %>" required>
+  </div>
+  <button type="submit">Save</button>
+</form>
+
+<%- include ("../partials/footer") %>

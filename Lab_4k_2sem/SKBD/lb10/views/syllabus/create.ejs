@@ -1,0 +1,19 @@
+<%- include ("../partials/header")%>
+
+<h1>Create a new grade record</h1>
+
+<form method="POST" action="/syllabus">
+  <div>
+    <label for="id_predmet">id_predmet</label>
+    <input type="number" id="id_predmet" name="id_predmet" required>
+
+    <label for="id_student">id_student</label>
+    <input type="number" id="id_student" name="id_student" required>
+    
+    <label for="grade">Оцінка</label>
+    <input type="number" id="grade" name="grade" required>
+  </div>
+  <button type="submit">Create</button>
+</form>
+
+<%- include ("../partials/footer") %>
