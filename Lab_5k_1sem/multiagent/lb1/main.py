@@ -1,7 +1,7 @@
 import random
 
-SIZE_FIELD_X = 100
-SIZE_FIELD_Y = 100
+SIZE_FIELD_X = 10
+SIZE_FIELD_Y = 10
 NUMBER_VICTIMS = 5000
 NUMBER_PREDATOR = 200
 
@@ -12,7 +12,7 @@ REPRODUCTION_DELAY_PREDATOR = 9
 
 PREDATOR_DYING_TIME = 4 # Хижак живе без їжі
 
-FIELD = []
+FIELD = [[None for _ in range(SIZE_FIELD_X)] for _ in range(SIZE_FIELD_Y)]
 
 class Fish:
     age = None
@@ -89,13 +89,15 @@ class Fish:
             return
         self.move_to(free_x,free_y)
         
-
-
+    
 class Victim(Fish):
-    None
+    def print(self):
+        print(1,end='')
 
 
 class Predator(Fish):
+    def print(self):
+        print(2,end='')
     last_eat_time = 0
 
     def find_prey(self):
@@ -106,7 +108,7 @@ class Predator(Fish):
 
         if preys.count() == 0:
             return None,None
-        return preys[random.randint(0,preys.count())]
+        return preys[random.randint(0,preys.count()-1)]
 
     def move(self):
         to_x,to_y = self.find_prey()
@@ -124,31 +126,41 @@ class Predator(Fish):
 def get_free_cell():
     rand_x = None
     rand_y = None
-    for i in range(5): # max 5 random search
-        rand_x = random.randint(0, SIZE_FIELD_X)
-        rand_y = random.randint(0, SIZE_FIELD_Y)
+    for _ in range(5): # max 5 random search
+        rand_x = random.randint(0, SIZE_FIELD_X-1)
+        rand_y = random.randint(0, SIZE_FIELD_Y-1)
         if FIELD[rand_x][rand_y] is None:
             return rand_x,rand_y
     # if failed random search - start sequential search
     for y in range(rand_y,SIZE_FIELD_Y):
         for x in range(rand_x,SIZE_FIELD_X):
-            if FIELD[rand_x][rand_y] is None:
+            if FIELD[rand_y][rand_x] is None:
                 return x,y
     for y in range(rand_y,0,-1):
         for x in range(rand_x,0,-1):
-            if FIELD[rand_x][rand_y] is None:
+            if FIELD[rand_y][rand_x] is None:
                 return x,y
-    return None
+    return None,None
 
 def main():
     for _ in range(NUMBER_VICTIMS):
-        x,y = get_free_cell()
+        x,y = get_free_cell() # debug this
+        if x == None or y == None:
+            break
         FIELD[x][y] = Victim(x,y,REPRODUCTION_DELAY_VICTIM,random.randint(0, ADULTHOOD_VICTIM))
     for _ in range(NUMBER_PREDATOR):
         x,y = get_free_cell()
+        if x == None or y == None:
+            break
         FIELD[x][y] = Predator(x,y,REPRODUCTION_DELAY_PREDATOR,random.randint(0, ADULTHOOD_PREDATOR))
 
-    
+    for line in FIELD:
+        for item in line:
+            if item is not None:
+                item.print()
+            else: print(0,end='')
+        print("")
+    # start main loop
     
 
     print("--------")
