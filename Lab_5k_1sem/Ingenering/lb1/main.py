@@ -50,4 +50,5 @@ result_df = result_df.drop("message")
 result_df.printSchema()
 result_df.show()
 
-result_df.write.csv("result", header=True, mode='overwrite') # errrooorrrr
+# result_df.write.csv("result.csv", header=True, mode='overwrite') # errrooorrrr
+result_df.repartition(1).write.csv("address")
