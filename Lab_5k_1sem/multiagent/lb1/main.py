@@ -1,7 +1,7 @@
 import random
 
-SIZE_FIELD_X = 10
-SIZE_FIELD_Y = 10
+SIZE_FIELD_X = 100
+SIZE_FIELD_Y = 100
 NUMBER_VICTIMS = 5000
 NUMBER_PREDATOR = 200
 
@@ -124,22 +124,22 @@ class Predator(Fish):
             FIELD[self.x][self.y] = None
 
 def get_free_cell():
-    rand_x = None
-    rand_y = None
+    rnd_i = None
+    rnd_j = None
     for _ in range(5): # max 5 random search
-        rand_x = random.randint(0, SIZE_FIELD_X-1)
-        rand_y = random.randint(0, SIZE_FIELD_Y-1)
-        if FIELD[rand_x][rand_y] is None:
-            return rand_x,rand_y
+        rnd_i = random.randint(0, SIZE_FIELD_Y-1)
+        rnd_j = random.randint(0, SIZE_FIELD_X-1)
+        if FIELD[rnd_i][rnd_j] is None:
+            return rnd_i,rnd_j
     # if failed random search - start sequential search
-    for y in range(rand_y,SIZE_FIELD_Y):
-        for x in range(rand_x,SIZE_FIELD_X):
-            if FIELD[rand_y][rand_x] is None:
-                return x,y
-    for y in range(rand_y,0,-1):
-        for x in range(rand_x,0,-1):
-            if FIELD[rand_y][rand_x] is None:
-                return x,y
+    for i in range(rnd_i,SIZE_FIELD_Y):
+        for j in range(rnd_j,SIZE_FIELD_X):
+            if FIELD[i][j] is None:
+                return i,j
+    for i in range(rnd_i,0,-1):
+        for j in range(rnd_j,0,-1):
+            if FIELD[i][j] is None:
+                return i,j
     return None,None
 
 def main():
