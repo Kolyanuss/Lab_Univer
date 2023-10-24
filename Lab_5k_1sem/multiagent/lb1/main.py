@@ -1,4 +1,6 @@
 import random
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 
 SIZE_FIELD_X = 100
 SIZE_FIELD_Y = 100
@@ -12,6 +14,7 @@ REPRODUCTION_DELAY_PREDATOR = 9
 
 PREDATOR_DYING_TIME = 4 # Хижак живе без їжі
 
+NUM_EVOLUTION = 300
 FIELD = [[None for _ in range(SIZE_FIELD_X)] for _ in range(SIZE_FIELD_Y)]
 
 class Fish:
@@ -21,18 +24,13 @@ class Fish:
     reproduction_delay = None
     last_reproduction = None
 
-    def __init__(self,x,y,reproduction_delay):
-        self.x = x
-        self.y = y
-        self.reproduction_delay = reproduction_delay
-        self.age = 0
 
-    def __init__(self,x,y,reproduction_delay,age):
+    def __init__(self,x,y,reproduction_delay,age): # for random create
         self.x = x
         self.y = y
         self.reproduction_delay = reproduction_delay
         self.age = age
-
+        self.last_reproduction = self.age
 
     def get_nearest_cells(self):
         nearest_cells = []
@@ -61,109 +59,155 @@ class Fish:
     def get_nearest_random_free_place(self):
         free_cell = []
         for x,y in self.get_nearest_cells():
-            if FIELD[x][y] is None:
+            if FIELD[y][x] is None:
                 free_cell.append((x,y))
-        if free_cell.count() == 0:
+        if len(free_cell) == 0:
             return None,None
-        return free_cell[random.randint(0,free_cell.count()-1)]
+        return free_cell[random.randint(0,len(free_cell)-1)]
             
     def reproduce(self):
-        if self.last_reproduction <= self.reproduction_delay:
-            self.last_reproduction += 1 # little crutch)
-            return # dont reproduce
-        free_x,free_y = self.get_nearest_random_free_place()
-        if free_x or free_y is None:
-            return # dont reproduce
-        FIELD[free_x][free_y] = self.__class__(free_x, free_y, self.reproduction_delay)
-        self.last_reproduction = 0
+        self.last_reproduction += 1
+        if self.last_reproduction >= self.reproduction_delay:
+            free_x,free_y = self.get_nearest_random_free_place()
+            if free_x is not None and free_y is not None:
+                FIELD[free_y][free_x] = self.__class__(free_x, free_y, self.reproduction_delay,0)
+                self.last_reproduction = 0
 
-    def move_to(self,x,y):
-        FIELD[x][y] = self
-        FIELD[self.x][self.y] = None
-        self.x = x
-        self.y = y
+    def move_to(self,new_x,new_y):
+        FIELD[new_y][new_x] = self
+        FIELD[self.y][self.x] = None
+        self.x = new_x
+        self.y = new_y
 
     def move(self):
         free_x,free_y = self.get_nearest_random_free_place()
-        if free_x is None or free_y is None: # if no space - dont move
-            return
-        self.move_to(free_x,free_y)
+        if free_x is not None and free_y is not None:
+            self.move_to(free_x,free_y)
         
     
 class Victim(Fish):
-    def print(self):
-        print(1,end='')
-
+    None
 
 class Predator(Fish):
-    def print(self):
-        print(2,end='')
     last_eat_time = 0
 
     def find_prey(self):
         preys = []
         for x,y in self.get_nearest_cells():           
-            if FIELD[x][y].__class__ is Victim:
+            if FIELD[y][x].__class__ is Victim:
                 preys.append((x,y))
 
-        if preys.count() == 0:
+        if len(preys) == 0:
             return None,None
-        return preys[random.randint(0,preys.count()-1)]
+        return preys[random.randint(0,len(preys)-1)]
 
     def move(self):
         to_x,to_y = self.find_prey()
-        if to_x or to_y is None: # if no prey - just move
-            super().move()
-            self.last_eat_time += 1
-        else: 
+        if to_x is not None and to_y is not None: 
             self.move_to(to_x,to_y) # move to prey
             self.last_eat_time = 0 
+        else: # if no prey - just move
+            super().move()
+            self.last_eat_time += 1
 
         if self.last_eat_time >= PREDATOR_DYING_TIME:
-            # die
-            FIELD[self.x][self.y] = None
+            FIELD[self.y][self.x] = None # die
 
-def get_free_cell():
+def get_random_free_cell():
     rnd_i = None
     rnd_j = None
-    for _ in range(5): # max 5 random search
+    for _ in range(10): # max 10 random search
         rnd_i = random.randint(0, SIZE_FIELD_Y-1)
         rnd_j = random.randint(0, SIZE_FIELD_X-1)
         if FIELD[rnd_i][rnd_j] is None:
-            return rnd_i,rnd_j
+            return rnd_j,rnd_i
     # if failed random search - start sequential search
-    for i in range(rnd_i,SIZE_FIELD_Y):
-        for j in range(rnd_j,SIZE_FIELD_X):
+    for i in range(0,SIZE_FIELD_Y):
+        for j in range(0,SIZE_FIELD_X):
             if FIELD[i][j] is None:
-                return i,j
-    for i in range(rnd_i,0,-1):
-        for j in range(rnd_j,0,-1):
-            if FIELD[i][j] is None:
-                return i,j
+                return j,i
     return None,None
 
-def main():
-    for _ in range(NUMBER_VICTIMS):
-        x,y = get_free_cell() # debug this
-        if x == None or y == None:
-            break
-        FIELD[x][y] = Victim(x,y,REPRODUCTION_DELAY_VICTIM,random.randint(0, ADULTHOOD_VICTIM))
-    for _ in range(NUMBER_PREDATOR):
-        x,y = get_free_cell()
-        if x == None or y == None:
-            break
-        FIELD[x][y] = Predator(x,y,REPRODUCTION_DELAY_PREDATOR,random.randint(0, ADULTHOOD_PREDATOR))
-
+def get_victim_num():
+    num = 0
     for line in FIELD:
-        for item in line:
-            if item is not None:
-                item.print()
-            else: print(0,end='')
-        print("")
-    # start main loop
-    
+        for fish in line:
+            if fish.__class__ == Victim:
+                num+=1
+    return num
 
-    print("--------")
+def get_predator_num():
+    num = 0
+    for line in FIELD:
+        for fish in line:
+            if fish.__class__ == Predator:
+                num+=1
+    return num
+
+def plot_graph(x,y1,y2):
+    plt.plot(x, y1,label='жертви')
+    plt.plot(x, y2,label='хижаки')
+
+    # Додавання заголовка та підписів до осей
+    plt.title('Результат еволюції')
+    plt.xlabel('ксть ітерацій еволюції')
+    plt.ylabel('Чисельність')
+    plt.legend()
+
+    # Відображення графіка
+    plt.show()
+
+def convert_myclass_to_int():
+    return [[(1 if item.__class__ == Victim else (2 if item.__class__ == Predator else 0)) for item in line] for line in FIELD]
+
+def plot_items():
+    colors = ListedColormap(['white', 'green', 'red'])
+    plt.imshow(convert_myclass_to_int(), cmap=colors)
+    plt.colorbar()
+    plt.show()
+
+def main():
+    # init
+    # i = 0
+    # while i < NUMBER_VICTIMS:
+    for i in range(NUMBER_VICTIMS):
+        x,y = get_random_free_cell()
+        if x == None or y == None:
+            print("No more space for Victim ",i)
+            break
+        FIELD[y][x] = Victim(x,y,REPRODUCTION_DELAY_VICTIM,random.randint(0, ADULTHOOD_VICTIM))        
+        # i+=1
+    
+    for i in range(NUMBER_PREDATOR):
+        x,y = get_random_free_cell()
+        if x == None or y == None:
+            print("No more space for Predator ",i)
+            break
+        FIELD[y][x] = Predator(x,y,REPRODUCTION_DELAY_PREDATOR, random.randint(0, ADULTHOOD_PREDATOR))
+    
+    plot_items()
+    
+    list_victim_num = [get_victim_num()]
+    list_predator_num = [get_predator_num()]
+    i=0
+    # start main loop
+    while i < NUM_EVOLUTION:
+        for line in FIELD:
+            for fish in line:
+                if fish is not None:
+                    fish.move()
+        for line in FIELD:
+            for fish in line:
+                if fish is not None:
+                    fish.reproduce()
+
+        list_victim_num.append(get_victim_num())
+        list_predator_num.append(get_predator_num())
+        
+        i+=1
+    
+    plot_items()
+    plot_graph(range(NUM_EVOLUTION+1), list_victim_num, list_predator_num)
 
 
 if __name__ == "__main__":
