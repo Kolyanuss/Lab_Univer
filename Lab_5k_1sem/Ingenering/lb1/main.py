@@ -51,4 +51,4 @@ result_df.printSchema()
 result_df.show()
 
 # result_df.write.csv("result.csv", header=True, mode='overwrite') # errrooorrrr
-result_df.repartition(1).write.csv("address")
+result_df.toPandas().to_csv("output_file.csv", index=False)
