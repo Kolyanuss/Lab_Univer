@@ -64,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'django.template.context_processors.settings'
+                'django_settings_export.settings_export',
             ],
         },
     },
@@ -124,3 +126,7 @@ STATIC_URL = '/static/'
 ML_MODEL = "new_model.pickle"
 IRIS_CSV = "iris.csv"
 ACTIVE_FEATURE = [True,True,True,True]
+
+SETTINGS_EXPORT = [
+    'ACTIVE_FEATURE'
+]
