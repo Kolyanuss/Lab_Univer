@@ -91,15 +91,9 @@ class Agent():
         self.prev_action = (self.curState, max_state["next_state"])
         self.curState = max_state["next_state"]
 
-
-def main():
-    global LABIRINT, STATE_NUM
-    LABIRINT = createForm()
-    STATE_NUM = sum([line.count(0) + line.count(2) for line in LABIRINT])
-    makeRQMatrix()
-    for i in range(100):
+def move_consistently(num_agent):
+    for i in range(num_agent):
         myAgent = Agent(random.randint(0, STATE_NUM-1))
-        # myAgent1 = Agent(2)
         print("Агент -",i," Послідовність станів: ", myAgent.curState, "", end="")
 
         while FINAL_STATE is not None:
@@ -109,6 +103,21 @@ def main():
                 break
         print()
 
+def move_simultaneously(num_agent):    
+    agent_list = [Agent(random.randint(0, STATE_NUM-1)) for _ in range(num_agent)]
+    if FINAL_STATE is not None:
+        while len(agent_list) > 0:
+            for agent in agent_list:
+                agent.move()
+                if agent.curState == FINAL_STATE:
+                    agent_list.remove(agent)
+
+def main():
+    global LABIRINT, STATE_NUM
+    LABIRINT = createForm()
+    STATE_NUM = sum([line.count(0) + line.count(2) for line in LABIRINT])
+    makeRQMatrix()    
+    move_simultaneously(100)
     printMatrix(Q_MATRIX)
 
 
