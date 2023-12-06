@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession, Row, functions as F
 from pyspark.sql.window import Window
 from io import TextIOWrapper
 import zipfile, csv, os, shutil
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 SPARK = None
 
@@ -138,7 +138,6 @@ def main():
             shutil.rmtree(folder)
         os.makedirs(folder)
         make_csv_reports(os.path.join(folder,file_name), info)
-        break
 
     print("End")
 
