@@ -5,6 +5,7 @@ import zipfile, csv, os, shutil
 from datetime import timedelta
 
 SPARK = None
+REQUIRED_HEADER = {"start_time","end_time","from_station_name","gender","birthyear","tripduration"}
 
 def create_sparkSession():
     global SPARK
@@ -30,8 +31,10 @@ def make_DF_from_file(file):
     # Читаємо вміст файлу у пам'ять
     reader = csv.reader(TextIOWrapper(file))
     header = next(reader)
-    rows = [Row(*line) for line in reader]
-    return SPARK.createDataFrame(rows, header)
+    if REQUIRED_HEADER.issubset(header):
+        rows = [Row(*line) for line in reader]
+        return SPARK.createDataFrame(rows, header)
+    return None
 
 def get_average_trip_duration(df) -> int:
     df2 = df.withColumn("time_diff", F.col("end_time").cast("long") - F.col("start_time").cast("long"))    
@@ -127,9 +130,11 @@ def main():
 
     for file in csv_files:        
         file_name = file.name
+        print(f"Data from {file_name}")
         df = make_DF_from_file(file)
         file.close()
-        print(f"Data from {file_name}:")
+        if df is None:
+            break
         # df.show(5)
         info = collect_info_from_DF(df)
 
