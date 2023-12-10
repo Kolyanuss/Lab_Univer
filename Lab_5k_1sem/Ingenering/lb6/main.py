@@ -3,7 +3,7 @@ import os
 import glob
 import shutil
 
-FILE_PATH = "data/Electric_Vehicle_Population_Data.csv"
+FILE_PATH = os.path.join("data","Electric_Vehicle_Population_Data.csv")
 TABLE_NAME = "electric_cars"
 REPORT_FOLDER = "report"
 
@@ -60,6 +60,7 @@ def calculate_analytics(conn):
     """).fetchdf().to_parquet(os.path.join(REPORT_FOLDER,'4count_cars_by_year.parquet'))
 
 def main():
+    print("Start")
     conn = duckdb.connect()
     create_table_with_csv(conn, FILE_PATH)
     print_record(conn)
