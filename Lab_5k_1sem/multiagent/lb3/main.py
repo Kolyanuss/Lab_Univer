@@ -89,7 +89,7 @@ class Agent:
 def make_prediction_with_NN(*predictions):
     x = []
     y = []
-    for i in range(2,len(mydata)):
+    for i in range(2,len(mydata)-1):
         pred1,pred2,pred3 = [*zip(*predictions)][:-1][i-2]
         x.append([mydata[i-2], mydata[i-1], pred1, pred2, pred3])
         y.append(mydata[i])
@@ -99,12 +99,20 @@ def make_prediction_with_NN(*predictions):
     model = tf.keras.Sequential()
     model.add(tf.keras.layers.Dense(units=1, activation=tf.keras.activations.relu, input_shape=(5,),
                                     kernel_initializer=tf.keras.initializers.GlorotUniform(seed=11) ))
+    # model.add(tf.keras.layers.Dense(units=9, activation=tf.keras.activations.relu,
+    #                             kernel_initializer=tf.keras.initializers.GlorotUniform(seed=11) ))
+    # model.add(tf.keras.layers.Dense(units=1, activation=tf.keras.activations.relu,
+    #                             kernel_initializer=tf.keras.initializers.GlorotUniform(seed=11) ))
     model.compile(optimizer=tf.keras.optimizers.RMSprop(0.001), loss=tf.keras.losses.mean_squared_error, metrics=[tf.keras.metrics.mean_squared_error])
 
-    model.fit(x, y, epochs=300, verbose=False)
-    pred1,pred2,pred3 = [*zip(*predictions)][-1]
+    model.fit(x[:-1], y[:-1], epochs=300, verbose=False)
 
     full_prediction = model.predict(x)
+    # 8
+    pred1,pred2,pred3 = [*zip(*predictions)][-2]
+    full_prediction = np.append(full_prediction, model.predict(np.array([[ mydata[-3], mydata[-2], pred1, pred2, pred3]]))[0])
+    #9
+    pred1,pred2,pred3 = [*zip(*predictions)][-1]
     full_prediction = np.append(full_prediction, model.predict(np.array([[ mydata[-2], mydata[-1], pred1, pred2, pred3]]))[0])
     print(full_prediction)
     return full_prediction
