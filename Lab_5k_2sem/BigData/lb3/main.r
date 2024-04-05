@@ -29,14 +29,11 @@ train_data <- data[train_index, ]
 test_data <- data[-train_index, ]
 
 # Створення моделі логістичної регресії
-model <- train(Species ~ ., data = train_data, method = "glm",
+model <- train(Species ~ ., data = train_data, method = "rf",
                family = "binomial", trControl = trainControl(method = "cv", summaryFunction = multiClassSummary))
 
 # Перевірка моделі на тестовому наборі
 predictions <- predict(model, newdata = test_data)
 print("predictions:")
 print(head(predictions))
-# Обчислення RMSE
-actual_values <- test_data$Species
-rmse <- sqrt(mean((predictions - actual_values)^2))
-print(paste("RMSE:", rmse))
+# accurasy
