@@ -37,3 +37,16 @@ predictions <- predict(model, newdata = test_data)
 print("predictions:")
 print(head(predictions))
 # accurasy
+accuracy <- sum(predictions == test_data$Species) / nrow(test_data)
+print(paste0("Accuracy: ", accuracy))
+
+
+# Завантаження необхідних бібліотек
+# library(bigrf) # Warning message: package 'bigrf' is not available for this version of R
+library(wsrf)
+
+# Побудова ансамблевої моделі з використанням wsrf
+wsrf_model <- wsrf(Species ~ ., data = train_data, ntree = 500, mtry = 2)
+wsrf_predictions <- predict(wsrf_model, newdata = test_data)
+wsrf_accuracy <- sum(wsrf_predictions$class == test_data$Species) / nrow(test_data)
+print(paste0("Accuracy of wsrf model: ", wsrf_accuracy))
