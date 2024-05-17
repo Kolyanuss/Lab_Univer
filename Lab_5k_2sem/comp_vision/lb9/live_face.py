@@ -26,7 +26,7 @@ def rect_to_bb(rect):
     return (x, y, w, h)
     
 # Define a video capture object
-vid = cv2.VideoCapture(2)
+vid = cv2.VideoCapture(0)
   
 while(True):
       
