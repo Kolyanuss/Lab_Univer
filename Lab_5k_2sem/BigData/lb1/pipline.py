@@ -6,7 +6,7 @@ from tensorflow.keras.layers import Input, Dense, Flatten, Reshape, Conv2D, MaxP
 
 class myReducePipline():
     lat_dim_ae = 50
-    lat_dim_svd = 80
+    lat_dim_svd = 70
 
     def __init__(self) -> None:
         self.create_ae()
@@ -59,10 +59,9 @@ class myReducePipline():
         (n, 28, 28) \n
         Return dimm reshaped to 784 (28*28)
         '''
-        x_train = x_train.reshape(
-            (-1, 28, 28, 1))  # -1 for batch size (infer from data)
-        # -1 for batch size (infer from data)
+        x_train = x_train.reshape((-1, 28, 28, 1))
         x_test = x_test.reshape((-1, 28, 28, 1))
+        # -1 for batch size (infer from data)
 
         self.autoencoder.fit(x_train, x_train, epochs=10)
         x_train_ae = self.autoencoder.predict(x_train)
