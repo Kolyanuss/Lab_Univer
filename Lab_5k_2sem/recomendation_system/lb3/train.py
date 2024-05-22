@@ -18,7 +18,7 @@ from datetime import datetime
 from MF import *
 
 # Load preprocessed data
-path = '../../ml-1m/'
+path = './ml-1m/'
 full_data = np.load(path + 'dataset.npz')
 
 # We have a bunch of feature columns and last column is the y-target
@@ -40,7 +40,7 @@ k = 10  # Number of dimensions per user, item
 c_vector = 1e-6  # regularization constant
 
 # Setup TensorBoard logging
-log_dir = 'runs/simple_mf_01_' + str(datetime.now()).replace(' ', '_')
+log_dir = 'runs/simple_mf_01_' + str(datetime.now()).replace(' ', '_').replace(':', '_')
 writer = SummaryWriter(log_dir=log_dir)
 
 # Instantiate the MF class object
@@ -96,4 +96,4 @@ trainer.add_event_handler(event_name=Events.EPOCH_COMPLETED, handler=log_validat
 trainer.run(train_loader, max_epochs=50)
 
 # Save the model to a separate folder
-torch.save(model.state_dict(), '../models/vanilla_mf.pth')
+torch.save(model.state_dict(), './models/vanilla_mf.pth')
