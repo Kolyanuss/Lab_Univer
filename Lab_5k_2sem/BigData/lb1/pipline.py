@@ -5,7 +5,7 @@ from tensorflow.keras.layers import Input, Dense, Flatten, Reshape, Conv2D, MaxP
 
 
 class myReducePipline():
-    lat_dim_ae = 50
+    lat_dim_ae = 32
     lat_dim_svd = 70
 
     def __init__(self) -> None:
@@ -15,10 +15,6 @@ class myReducePipline():
     def create_ae(self):
         # Input shape (assuming MNIST data)
         input_shape = (28, 28, 1)
-
-        # Latent dimension
-        latent_dim = 32
-
         # Encoder
         inputs = Input(shape=input_shape)
         x = Conv2D(32, (3, 3), activation='relu', padding='same')(
@@ -28,7 +24,7 @@ class myReducePipline():
             x)  # Output: 14x14 (avoid information loss)
         x = MaxPooling2D((2, 2), padding='valid')(x)  # Output: 7x7
         x = Flatten()(x)
-        encoded = Dense(latent_dim)(x)
+        encoded = Dense(self.lat_dim_ae)(x)
 
         # Decoder (adjusted based on encoder output)
         # Match the number of channels in the next Conv2D layer
